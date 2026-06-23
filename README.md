@@ -4,41 +4,59 @@ This repository stores and version-controls your personal configurations, instru
 
 ---
 
-## 🚀 Quick Start (Apply Customizations)
+## 🎯 Rationale
 
-To load and enable customizations on your current machine:
+This project structure is designed around three core principles:
 
-1. Run the interactive installer:
+1. Have a proper backup method for all of the skills I built and use frequently.
+2. Have it be deployed to Linux/macOS host with no prerequisite and through a single command.
+
+---
+
+## 🚀 Quick Start (How to Use)
+
+To load and enable these customizations on your current machine:
+
+1. Open your terminal inside this repository folder.
+2. Run the interactive installer:
    ```bash
    ./apply
    ```
-2. The installer will scan all skills in the `skills/` directory, present a list in the terminal, and let you select which ones to activate:
+3. The installer scans all available skills in the `skills/` directory, lists them in your terminal, and lets you select which ones to activate:
    * **Toggle a skill**: Enter the corresponding list number.
    * **Select all / none**: Enter `a` or `n`.
    * **Apply & Confirm**: Press `Enter` (or enter `y`).
    * **Quit**: Enter `q`.
 
-This registers the active skills under your `~/.agents/skills.json` and symlinks your workspace rules (`AGENTS.md`) without fragile directory symlinks.
+The installer script will:
+* Copy your workspace rules (**[AGENTS.md](file:///home/kaoru/projects/skills/AGENTS.md)**) to your local agent configuration directory (`~/.agents/AGENTS.md`).
+* Copy the selected skill folders directly into **`~/.agents/skills/`**, enabling the agent to automatically discover and load them. (This also cleans up any old `skills.json` or symlinks from previous configurations).
 
 ---
 
-## 📁 Repository Structure
+## 🛠️ Skills
 
-```
-├── skills/
-│   ├── idea-consultant/   # Refine & evaluate project ideas
-│   │   ├── SKILL.md       # Core grilling and verdict logic
-│   │   └── resources/
-│   │       └── templates/
-│   │           └── idea-dump.md  # Standard template for raw idea ingestion
-│   └── thinking-partner/  # Dedicated research and log writer
-│       └── SKILL.md
-├── AGENTS.md              # Workspace-wide system rules & constraints
-├── apply                  # Interactive installer shell script
-└── README.md              # Project documentation
-```
+Use this guide to decide which skills to select during installation:
 
----
+### 1. [idea-consultant](file:///home/kaoru/projects/skills/skills/idea-consultant/SKILL.md)
+*   **Purpose**: Validates and refines software/app ideas before coding.
+*   **Categorization**:
+    *   **GO (`[TODO]`)** ➔ Stored in `ideas/ok/` (High stack alignment, low friction, high yield).
+    *   **NO-GO (`[X]`)** ➔ Stored in `ideas/cancelled/` (Redundant, high friction, or high run cost).
+    *   **PIVOT (`[?]`)** ➔ Stored in `ideas/reassess/` (Tech is viable, but needs a redirect or OS contribution).
+*   **What Happens**:
+    *   Grills you on alternatives and scopes features (MVP vs. V1).
+    *   Generates a 7-factor quantitative scoring matrix and narrative story.
+    *   Prepends a status block below the H1 title using templates: **[verdict-go.md](file:///home/kaoru/projects/skills/skills/idea-consultant/resources/templates/verdict-go.md)**, **[verdict-nogo.md](file:///home/kaoru/projects/skills/skills/idea-consultant/resources/templates/verdict-nogo.md)**, or **[verdict-pivot.md](file:///home/kaoru/projects/skills/skills/idea-consultant/resources/templates/verdict-pivot.md)**.
+    *   Defaults to creating new notes with **[idea-template.md](file:///home/kaoru/projects/skills/skills/idea-consultant/resources/templates/idea-template.md)**. Offers to add ZenNotes-optimized **[idea-dump.md](file:///home/kaoru/projects/skills/skills/idea-consultant/resources/templates/idea-dump.md)** to your vault templates if ZenNotes is active.
 
-## 🛠️ Development & Updates
-Since this repository uses a dependency-free shell script, you don't need compilation tools or Go. Any changes you make to the skills or rules files inside this directory are immediately active (via symlinks and direct file references). You only need to run `./apply` again if you add new skill directories or want to toggle specific skills.
+### 2. [thinking-partner](file:///home/kaoru/projects/skills/skills/thinking-partner/SKILL.md)
+*   **Purpose**: Logs technical plans, architecture, and general research.
+*   **Categorization**:
+    *   **General Thought Log** ➔ Stored in `thoughts/Thought Log YYYY-MM-DD HHMM.md`.
+    *   **Project Plan / Roadmap** ➔ Stored in `projects/[project-name].md`.
+*   **What Happens**:
+    *   **Context Preservation**: Injects conversation history logs (ID, Date, Repository Links) at the top.
+    *   **Architecture Flow**: Renders a Mermaid flowchart showing inter-module data flow.
+    *   **⚡ Task Matrix**: Builds an Atomic Habits matrix mapping file paths, estimated hours, activation energy (1-10), dopamine yield (1-10), and habit loop strategies (Temptation Bundling, rewards) to kickstart your work friction-free.
+
