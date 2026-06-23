@@ -71,4 +71,24 @@ Use this guide to decide which skills to select during installation:
     *   **Action Driver**: Cuts loops by forcing stack decisions based on lowest activation energy.
     *   **Cold-Start Reconnect Block**: Automatically appends a resume log with the last file line, next git command, and a <2min micro-step at the end of every session.
 
+### 4. [hackathon-idea-generator](file:///home/kaoru/projects/skills/skills/hackathon-idea-generator/SKILL.md)
+*   **Purpose**: Analyzes hackathon briefs to generate high-yield, competitive project ideas.
+*   **Categorization**: Organizes project suggestions by hackathon tracks and judges' rubrics.
+*   **What Happens**: Generates 5+ ideas with confidence scores, detailed risk/mitigation tables, effort/hour breakdowns (parallelized team paths), and maps features into MVP vs. nice-to-have roadmaps. Supports exporting directly to Google Docs when a URL is supplied.
+
+### 5. [code-yagni](file:///home/kaoru/projects/skills/skills/code-yagni/SKILL.md)
+*   **Purpose**: Prevents premature optimization and over-engineered abstractions.
+*   **Categorization**: Prunes code and tracks deferred shortcuts via `yagni:` comments.
+*   **What Happens**: Applies a 6-tier "YAGNI Decision Ladder" to skip features, prefer standard library, and minimize custom code. Generates deletion lists for code reviews to prune bloat.
+
+### 6. [token-compressor](file:///home/kaoru/projects/skills/skills/token-compressor/SKILL.md)
+*   **Purpose**: Saves context window space and cuts response latency.
+*   **Categorization**: Strips conversational filler and condenses answers into high-density technical summaries.
+*   **What Happens**: Activates "Caveman Mode", removing greetings/pleasantries/verbose explanations. Limits code blocks to concise diffs and outputs action-to-rationale mappings.
+
+### 7. [spec-builder](file:///home/kaoru/projects/skills/skills/spec-builder/SKILL.md)
+*   **Purpose**: Enforces spec-driven development (SDD) using a single source of truth.
+*   **Categorization**: Synchronizes design contracts and checklists inside `SPEC.md`.
+*   **What Happens**: Generates specs, runs autonomous implementation loops, checks for feature drift, and conducts adversarial reviews to catch loopholes/scope creep.
+
 
