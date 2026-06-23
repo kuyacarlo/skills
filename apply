@@ -29,7 +29,7 @@ if [ ${#skills[@]} -eq 0 ]; then
 fi
 
 while true; do
-  clear
+  clear 2>/dev/null || true
   echo -e "\033[1;36m✨ Antigravity Skill Installer ✨\033[0m"
   echo "---------------------------------"
   echo "Toggle skills to enable:"
@@ -85,46 +85,64 @@ while true; do
   fi
 done
 
-# Write config
+# Install files locally
 TARGET_DIR="$HOME/.agents"
 mkdir -p "$TARGET_DIR"
 
-# Clean out old enabled-skills directory if it exists from previous installations
+# Clean up any old external path registrations and enabled-skills directories
+rm -f "$TARGET_DIR/skills.json"
 rm -rf "$TARGET_DIR/enabled-skills"
 
-entries=()
+# Create skills directory if it doesn't exist
+mkdir -p "$TARGET_DIR/skills"
+
 for i in "${!skills[@]}"; do
   if [ "${enabled[$i]}" -eq 1 ]; then
-    entries+=("    { \"path\": \"${paths[$i]}\" }")
-    echo "✓ Enabled skill: ${skills[$i]}"
+    dest_path="$TARGET_DIR/skills/${skills[$i]}"
+    if [ -d "$dest_path" ]; then
+      # Check if files in destination match the source exactly
+      if diff -r "${paths[$i]}" "$dest_path" >/dev/null 2>&1; then
+        echo "✓ Skill '${skills[$i]}' is already up to date."
+      else
+        echo -e "\033[1;33m⚠️ Skill '${skills[$i]}' already exists in destination and has differences.\033[0m"
+        read -p "Overwrite target? [y/N]: " overwrite
+        if [[ "$overwrite" =~ ^[yY]$ ]]; then
+          rm -rf "$dest_path"
+          cp -r "${paths[$i]}" "$dest_path"
+          echo "✓ Overwrote and updated skill: ${skills[$i]}"
+        else
+          echo "Skipping update of skill: ${skills[$i]}"
+        fi
+      fi
+    else
+      cp -r "${paths[$i]}" "$dest_path"
+      echo "✓ Installed skill: ${skills[$i]}"
+    fi
   fi
 done
 
-# Format JSON entries joining with commas
-json_entries=""
-for i in "${!entries[@]}"; do
-  if [ $i -eq 0 ]; then
-    json_entries="${entries[$i]}"
-  else
-    json_entries="${json_entries},"$'\n'"${entries[$i]}"
-  fi
-done
-
-cat <<EOF > "$TARGET_DIR/skills.json"
-{
-  "entries": [
-$json_entries
-  ]
-}
-EOF
-echo "✓ Updated config at $TARGET_DIR/skills.json"
-
-# Symlink AGENTS.md
+# Copy AGENTS.md rules locally with differences check
 repo_dir=$(pwd)
 if [ -f "$repo_dir/AGENTS.md" ]; then
-  rm -f "$TARGET_DIR/AGENTS.md"
-  ln -sf "$repo_dir/AGENTS.md" "$TARGET_DIR/AGENTS.md"
-  echo "✓ Symlinked AGENTS.md rules"
+  dest_agents="$TARGET_DIR/AGENTS.md"
+  if [ -f "$dest_agents" ]; then
+    if cmp -s "$repo_dir/AGENTS.md" "$dest_agents"; then
+      echo "✓ AGENTS.md rules are already up to date."
+    else
+      echo -e "\033[1;33m⚠️ AGENTS.md rules already exist in destination and have differences.\033[0m"
+      read -p "Overwrite target? [y/N]: " overwrite
+      if [[ "$overwrite" =~ ^[yY]$ ]]; then
+        cp "$repo_dir/AGENTS.md" "$dest_agents"
+        echo "✓ Overwrote and updated AGENTS.md rules"
+      else
+        echo "Skipping update of AGENTS.md rules"
+      fi
+    fi
+  else
+    cp "$repo_dir/AGENTS.md" "$dest_agents"
+    echo "✓ Copied AGENTS.md rules"
+  fi
 fi
 
-echo -e "\n\033[1;32m✓ Customizations successfully applied!\033[0m"
+echo -e "\n\033[1;32m✓ Customizations successfully processed!\033[0m"
+echo "You can now safely delete this installer/repository folder if desired."
