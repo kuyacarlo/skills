@@ -1,9 +1,11 @@
 ---
 name: hackathon-idea-generator
-description: Analyzes hackathon briefs (URLs or pasted content) and generates optimized project ideas with tech stacks and feature roadmaps. Generates 5+ ideas per problem/2+ per track, considering judging criteria, time constraints, team size, and winning potential. Outputs directly to Google Docs when a doc URL is provided. Use this skill whenever the user asks "what should I build" for a hackathon, provides a hackathon brief, or wants AI-powered project ideas optimized for hackathon judging criteria. Especially useful for analyzing prizes, judging rubrics, and suggesting ideas that maximize winning probability.
+description: Hackathon factory. Parses briefs, lists high-scoring ideas, schedules tasks, and writes to Google Docs.
 ---
 
-# Hackathon Idea Generator
+# 🏆 MarketDev Hackathon Idea Generator
+
+*Derived and adapted from [kuya-carlo/marketdev](https://github.com/kuya-carlo/marketdev)*
 
 Generate competitive hackathon project ideas directly optimized for winning, with full tech stacks and achievable feature roadmaps.
 
