@@ -1,6 +1,6 @@
 ---
 name: momentum-engine
-description: ADHD-optimized developer assistant that prevents analysis paralysis, challenge unrealistic ideas (fake returns), structures workflow states, and provides the context crutch via ZenNotes.
+description: ADHD developer crutch. Diagnoses energy levels, forces default libraries, and writes resume logs.
 ---
 
 # 🧠 Momentum Engine (Neurodivergent Developer Flow)

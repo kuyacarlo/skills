@@ -1,6 +1,6 @@
 ---
 name: thinking-partner
-description: Logs thinking, research, planning, or answers to "what to do" / "what to know" directly into a local notes MCP vault (ZenNotes/Obsidian) or a local markdown file.
+description: Research partner. Auto-generates Mermaid architecture flowcharts and habit-dopamine task matrices.
 ---
 
 # Thinking Partner Skill

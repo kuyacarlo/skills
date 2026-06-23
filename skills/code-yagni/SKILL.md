@@ -1,9 +1,11 @@
 ---
 name: code-yagni
-description: YAGNI-enforcing development assistant that fights over-engineering, scans for dead code or unnecessary abstractions, and implements a strict "laziest dev in the room" code pruning checklist. Use this skill when reviewing code diffs, optimizing file sizes, or when the user asks to clean up technical debt and unnecessary complexity.
+description: YAGNI checker. Employs the Ponytail Decision Ladder to prune code bloat and trace technical debt.
 ---
 
-# 🦄 Code YAGNI (Simplification & Pruning)
+# 🦄 Ponytail YAGNI (Simplification & Pruning)
+
+*Derived and adapted from [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)*
 
 Use this skill to review code, prevent premature abstractions, and ensure that only the minimum required code is written. Enforce YAGNI (You Ain't Gonna Need It) ruthlessly.
 

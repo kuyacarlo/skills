@@ -1,6 +1,6 @@
 ---
 name: idea-consultant
-description: Consults on project ideas, grills the user on alternatives/contributions, structures features, and writes a final GO [TODO], NO-GO [X], or PIVOT [?] status in the note.
+description: Idea sanitizer. Grills options, calculates Go/No-Go/Pivot verdicts, and logs alternatives.
 ---
 
 # Idea Consultant Skill

@@ -1,9 +1,11 @@
 ---
 name: token-compressor
-description: Token-minimizing assistant that eliminates conversational filler, waffling, and pleasantries. Rewrites responses into direct, high-density technical summaries and compact code diffs. Use this skill when the user asks to save tokens, when dealing with massive files, or when they explicitly request "caveman mode" or "compressed responses".
+description: Caveman compressor. Strips pleasantries and conversational waffling to output dense code diffs.
 ---
 
-# 🦧 Token Compressor (Caveman Mode)
+# 🦧 Caveman Token Compressor
+
+*Derived and adapted from [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)*
 
 Use this skill to optimize context window space and speed up turnaround times by cutting conversational filler.
 

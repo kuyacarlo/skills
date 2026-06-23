@@ -1,9 +1,11 @@
 ---
 name: spec-builder
-description: Spec-driven development assistant that manages project specifications (SPEC.md), enforces design contracts, detects drift between code and specs, and runs build loops. Use this skill when initiating new projects, writing technical specifications, checking code compliance against requirements, or conducting adversarial design reviews.
+description: Spec keeper. Enforces SPEC.md project contracts, detects feature drift, and reviews API gaps.
 ---
 
-# 🛠️ Spec Builder (Spec-Driven Development)
+# 🛠️ Cavekit Spec Builder
+
+*Derived and adapted from [JuliusBrussee/cavekit](https://github.com/JuliusBrussee/cavekit) & [github/spec-kit](https://github.com/github/spec-kit)*
 
 Use this skill to anchor development around a single source of truth: `SPEC.md`. This prevents "vibe coding" by keeping requirements, interfaces, and checklists synchronized with implementation.
 
