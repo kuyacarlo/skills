@@ -60,3 +60,15 @@ Use this guide to decide which skills to select during installation:
     *   **Architecture Flow**: Renders a Mermaid flowchart showing inter-module data flow.
     *   **⚡ Task Matrix**: Builds an Atomic Habits matrix mapping file paths, estimated hours, activation energy (1-10), dopamine yield (1-10), and habit loop strategies (Temptation Bundling, rewards) to kickstart your work friction-free.
 
+### 3. [momentum-engine](file:///home/kaoru/projects/skills/skills/momentum-engine/SKILL.md)
+*   **Purpose**: ADHD-optimized executive function crutch that prevents analysis paralysis, challenges unrealistic ideas, and restores context.
+*   **Categorization**: Adapts behavior dynamically across three workflow states:
+    *   **Prepping / Ingestion** ➔ Challenges ideas via `idea-consultant` to cut losses fast.
+    *   **Coding / One-Shotting** ➔ Enforces standard `MarketDev` execution steps to build the MVP with zero-prompt/minimal interaction.
+    *   **Vibe-Shifting** ➔ Updates and reads your ZenNotes index (`ideas/Project Index.md`) to jump between homelab, web dev, and cybersecurity.
+*   **What Happens**:
+    *   **State Diagnostics**: Monitors conversation pivots to gauge focus/energy state objectively.
+    *   **Action Driver**: Cuts loops by forcing stack decisions based on lowest activation energy.
+    *   **Cold-Start Reconnect Block**: Automatically appends a resume log with the last file line, next git command, and a <2min micro-step at the end of every session.
+
+
