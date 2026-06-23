@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -e
+
+# Scan skills
+skills=()
+descriptions=()
+paths=()
+enabled=()
+
+for dir in skills/*/; do
+  if [ -f "${dir}SKILL.md" ]; then
+    # Extract name from frontmatter
+    name=$(grep -m1 '^name:' "${dir}SKILL.md" | sed 's/name://' | tr -d '"'\'' ')
+    [ -z "$name" ] && name=$(basename "$dir")
+    
+    # Extract description from frontmatter
+    desc=$(grep -m1 '^description:' "${dir}SKILL.md" | sed 's/description://' | sed 's/^[[:space:]]*//' | tr -d '"'\''')
+    
+    skills+=("$name")
+    descriptions+=("$desc")
+    paths+=("$(cd "$dir" && pwd)")
+    enabled+=(1) # Enabled by default
+  fi
+done
+
+if [ ${#skills[@]} -eq 0 ]; then
+  echo "No skills found in skills/ directory."
+  exit 0
+fi
+
+while true; do
+  clear
+  echo -e "\033[1;36m✨ Antigravity Skill Installer ✨\033[0m"
+  echo "---------------------------------"
+  echo "Toggle skills to enable:"
+  echo
+
+  for i in "${!skills[@]}"; do
+    status="[ ]"
+    if [ "${enabled[$i]}" -eq 1 ]; then
+      status="[\033[1;32m✓\033[0m]"
+    fi
+    echo -e " $status  $((i+1)). \033[1m${skills[$i]}\033[0m"
+    if [ -n "${descriptions[$i]}" ]; then
+      echo -e "        \033[3m${descriptions[$i]}\033[0m"
+    fi
+    echo
+  done
+
+  echo "Commands:"
+  echo "  • [Number] to toggle selection"
+  echo "  • 'a' to select all | 'n' to select none"
+  echo "  • 'Enter' (or 'y') to confirm"
+  echo "  • 'q' to quit"
+  echo
+  
+  read -p "Action [number/a/n/y/q]: " action
+  action=$(echo "$action" | tr -d '[:space:]')
+  
+  if [ "$action" = "q" ]; then
+    echo "Exiting without making changes."
+    exit 0
+  fi
+  if [ "$action" = "y" ] || [ -z "$action" ]; then
+    break
+  fi
+  if [ "$action" = "a" ]; then
+    for i in "${!skills[@]}"; do enabled[$i]=1; done
+    continue
+  fi
+  if [ "$action" = "n" ]; then
+    for i in "${!skills[@]}"; do enabled[$i]=0; done
+    continue
+  fi
+  
+  if [[ "$action" =~ ^[0-9]+$ ]] && [ "$action" -ge 1 ] && [ "$action" -le ${#skills[@]} ]; then
+    idx=$((action - 1))
+    if [ "${enabled[$idx]}" -eq 1 ]; then
+      enabled[$idx]=0
+    else
+      enabled[$idx]=1
+    fi
+  else
+    read -p "Invalid option. Press Enter to try again."
+  fi
+done
+
+# Write config
+TARGET_DIR="$HOME/.agents"
+mkdir -p "$TARGET_DIR"
+
+# Clean out old enabled-skills directory if it exists from previous installations
+rm -rf "$TARGET_DIR/enabled-skills"
+
+entries=()
+for i in "${!skills[@]}"; do
+  if [ "${enabled[$i]}" -eq 1 ]; then
+    entries+=("    { \"path\": \"${paths[$i]}\" }")
+    echo "✓ Enabled skill: ${skills[$i]}"
+  fi
+done
+
+# Format JSON entries joining with commas
+json_entries=""
+for i in "${!entries[@]}"; do
+  if [ $i -eq 0 ]; then
+    json_entries="${entries[$i]}"
+  else
+    json_entries="${json_entries},"$'\n'"${entries[$i]}"
+  fi
+done
+
+cat <<EOF > "$TARGET_DIR/skills.json"
+{
+  "entries": [
+$json_entries
+  ]
+}
+EOF
+echo "✓ Updated config at $TARGET_DIR/skills.json"
+
+# Symlink AGENTS.md
+repo_dir=$(pwd)
+if [ -f "$repo_dir/AGENTS.md" ]; then
+  rm -f "$TARGET_DIR/AGENTS.md"
+  ln -sf "$repo_dir/AGENTS.md" "$TARGET_DIR/AGENTS.md"
+  echo "✓ Symlinked AGENTS.md rules"
+fi
+
+echo -e "\n\033[1;32m✓ Customizations successfully applied!\033[0m"
