@@ -27,12 +27,3 @@ These guidelines apply to all project scoping, roadmaps, and code generation wit
 *   **Scoping & Implementation**: Target the full defined project scope, but prioritize simple, understandable code. Pragmatic shortcuts are acceptable as long as code readability is maintained.
 *   **Comments & Documentation**: Keep comments as a high-level supplement rather than verbose line-by-line annotations. Aim for approximately one clear comment per functional block (e.g., explaining "this part does x, does y") to avoid code noise.
 *   **Comment Integrity**: Proactively preserve pre-existing comments and docstrings in edited files.
-
----
-
-## 🧭 Spec-Kit Automations & Pipeline Flow
-*   **Automatic Workflow Chaining**: When executing any Spec-Kit command or phase (`/speckit.*` or related workspace task planning):
-    1.  **Constitution Check**: Check for `.specify/memory/constitution.md` (or the templates) first. Read it, present a 1-2 sentence gist of it to the user, ask for any overrides/improvements, and ensure the task conforms to it.
-    2.  **Task Context & Outline**: Outlines the task/problem context before writing any files.
-    3.  **Phase Transitions**: Automatically chain the subsequent phases (`specify` → `clarify` → `plan` → `implement`) without stopping to wait for slash commands, using sensible defaults to resolve minor ambiguities, unless a major design fork requires an explicit user choice.
-

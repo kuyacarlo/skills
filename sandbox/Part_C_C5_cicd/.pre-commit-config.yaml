@@ -1,0 +1,27 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+        files: ^sandbox/Part_C_C5_cicd/
+      - id: ruff-format
+        files: ^sandbox/Part_C_C5_cicd/
+
+  - repo: local
+    hooks:
+      - id: gpg-verify
+        name: Check GPG Signatures
+        entry: uv --directory sandbox/Part_C_C5_cicd run python src/gpg_verify.py
+        language: system
+        pass_filenames: false
+        files: ^sandbox/Part_C_C5_cicd/
+        stages: [pre-push, manual]
+
+      - id: run-tests
+        name: Run Unit Tests
+        entry: uv --directory sandbox/Part_C_C5_cicd run pytest
+        language: system
+        pass_filenames: false
+        files: ^sandbox/Part_C_C5_cicd/
+        stages: [pre-commit, pre-push, manual]

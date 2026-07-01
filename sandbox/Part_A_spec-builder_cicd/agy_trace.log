@@ -1,0 +1,189 @@
+I0624 23:11:40.746328 51472 server.go:1349] Starting language server process with pid 51472
+I0624 23:11:40.747312 51472 server.go:502] Language server will attempt to listen on host localhost
+I0624 23:11:40.747767 51472 server.go:517] Language server listening on random port at 36419 for HTTPS (gRPC)
+I0624 23:11:40.747903 51472 server.go:525] Language server listening on random port at 45585 for HTTP
+W0624 23:11:41.046978 51472 launchmanager.go:69] Entering local chrome mode! This is WRONG unless you are running tests or in eval mode on Linux.
+I0624 23:11:41.047761 51472 manager.go:93] Creating trajectory store manager with proto store and SQLite store
+W0624 23:11:41.051105 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.051214 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.051258 51472 log.go:398] Failed to poll ListExperiments: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.051974 51472 log_context.go:117] Cache(fetchAdminControls): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.052046 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.052141 51472 log_context.go:117] Cache(availableModels): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.052201 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.052675 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.052732 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.053034 51472 log.go:398] Failed to poll FetchAvailableModels: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.053248 51472 log_context.go:117] Cache(fetchAdminControls): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.053299 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.054876 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.054977 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.056565 51472 log_context.go:117] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.056693 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.057857 51472 server.go:644] Failed to get OAuth token: error getting token source from auth provider: You are not logged into Antigravity.
+W0624 23:11:41.057928 51472 client.go:82] failed to set auth token
+I0624 23:11:41.064815 51472 server.go:2429] Auth succeeded, refreshing features and managers
+E0624 23:11:41.064947 51472 log.go:398] Failed to poll ListExperiments: error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.065367 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.065410 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.065898 51472 log_context.go:117] Cache(availableModels): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.065957 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.066631 51472 log.go:398] Failed to poll FetchAvailableModels: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+I0624 23:11:41.067102 51472 server.go:2435] State refresh took 2ms
+I0624 23:11:41.067123 51472 server.go:2548] [RemoteControl] Resolved proxyServerURL: ""
+I0624 23:11:41.067383 51472 server.go:2067] initialized server successfully in 320.973721ms
+W0624 23:11:41.067756 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.067844 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+I0624 23:11:41.067886 51472 auto_updater.go:207] Last check was less than 15 minutes ago, skipping update
+I0624 23:11:41.067924 51472 common.go:106] Launching CLI mode
+E0624 23:11:41.067955 51472 common.go:125] Failed to resolve GeminiDir ".gemini": .gemini must be an absolute path: path is not absolute, falling back to default
+I0624 23:11:41.067985 51472 common.go:156] CLI app data directory: /home/kaoru/.gemini/antigravity-cli
+I0624 23:11:41.068049 51472 server.go:217] Creating CLI server backend: product=antigravity workspaceDirs=[/home/kaoru/projects/skills/sandbox/Part_A_spec-builder_cicd] appDataDir=/home/kaoru/.gemini/antigravity-cli cascadeManager=true codeAssist=true
+W0624 23:11:41.068407 51472 log_context.go:117] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.068450 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+I0624 23:11:41.068596 51472 project.go:162] project: discovered project "/home/kaoru/projects/skills/sandbox/Part_A_spec-builder_cicd" (id=e8aa2e56-7964-4629-86ec-8c5de252f092) via cache
+I0624 23:11:41.068630 51472 server.go:1403] Backend project ID updated dynamically to: e8aa2e56-7964-4629-86ec-8c5de252f092
+E0624 23:11:41.068881 51472 server.go:644] Failed to get OAuth token: error getting token source from auth provider: You are not logged into Antigravity.
+W0624 23:11:41.068907 51472 client.go:82] failed to set auth token
+W0624 23:11:41.069038 51472 log_context.go:117] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.069083 51472 log.go:398] error getting token source: You are not logged into Antigravity.
+W0624 23:11:41.069514 51472 log_context.go:117] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.069556 51472 log.go:398] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0624 23:11:41.069934 51472 server.go:644] Failed to get OAuth token: error getting token source from auth provider: You are not logged into Antigravity.
+W0624 23:11:41.069958 51472 client.go:82] failed to set auth token
+E0624 23:11:41.070009 51472 server.go:644] Failed to get OAuth token: error getting token source from auth provider: You are not logged into Antigravity.
+W0624 23:11:41.070044 51472 client.go:82] failed to set auth token
+I0624 23:11:41.071182 51472 printmode.go:85] Print mode: starting (promptLength=386, model="", conversationID="")
+I0624 23:11:41.071235 51472 manager.go:303] Initializing CLI store manager for workspace /home/kaoru/projects/skills/sandbox/Part_A_spec-builder_cicd
+I0624 23:11:41.071599 51472 cli_setting_manager.go:68] config.json not found or unreadable, using CLI settings only: open /home/kaoru/.gemini/config/config.json: no such file or directory
+I0624 23:11:41.071642 51472 cli_setting_manager.go:667] Skipping telemetry propagation because user is not logged in
+I0624 23:11:41.071672 51472 cli_setting_manager.go:80] CLI settings initialized: permissions=&{Allow:[command(resolvectl) command(ping) command(dig) command(ip) command(ss) command(grep) command(ls) command(mkdir) command(git) command(npm) command(pnpm) command(uv) command(git config) command(git status) command(podman system) command(podman build) command(sleep) command(podman logs) command(podman stop) command(command) command(act) command(gh) command(rpm) command(cat) command(grep -rn "zen" ~/\.gemini/antigravity-cli/ 2>/dev/null) command(find ~ -maxdepth 4 -name "\*mcp\*\.json" -o -name "\*config\*\.json" 2>/dev/null) command(cat ~/\.gemini/antigravity/mcp_config\.json ~/\.gemini/config/mcp_config\.json 2>/dev/null) mcp(zennotes/list_folders) mcp(zennotes/list_notes) mcp(zennotes/read_note) mcp(zennotes/list_assets) mcp(zennotes/vault_info) command(cat <<'EOF' >/home/kaoru/\.agents/skills/idea-consultant/SKILL\.md) mcp(zennotes/write_note) mcp(zennotes/move_to_trash) mcp(zennotes/move_note) command(curl -sL https://api\.github\.com/users/kuyacarlo/repos) command(jq) command(nvim) mcp(zennotes/create_note) mcp(zennotes/search_text) mcp(zennotes/search_by_title) mcp(zennotes/replace_in_note) command(cp) command(yes) command(which) command(echo)] Deny:[command(git merge) command(git rebase) command(git reset)] Ask:[]}, toolPermission=proceed-in-sandbox
+I0624 23:11:41.072322 51472 manager.go:457] CLI store manager initialized successfully
+I0624 23:11:41.072355 51472 printmode.go:190] Print mode: not authenticated, trying silent auth
+I0624 23:11:41.075629 51472 keyring.go:59] keyringAuth: loaded token, expiry=2026-06-25 00:09:09.941138277 +0800 +08 expired=false
+I0624 23:11:41.208527 51472 auth.go:132] ChainedAuth: authenticated via keyring (effective: keyring)
+I0624 23:11:41.208563 51472 server_oauth.go:212] applyAuthResult: email=sjc.71415@gmail.com, authMethod=consumer, quotaProject=
+I0624 23:11:41.208574 51472 server_oauth.go:217] OAuth: authenticated successfully as sjc.71415@gmail.com
+I0624 23:11:41.208583 51472 server_oauth.go:223] b.codeAssistClient.AuthProvider (0x2ade7c99f500) is same as b.cliAuth (0x2ade7c99f500)
+I0624 23:11:41.899461 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist Trace: 0x4fa1838a7d0de507
+I0624 23:11:42.481417 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:fetchAvailableModels Trace: 0xe44ca0b0eec8d226
+I0624 23:11:42.483007 51472 model_config_manager.go:157] Propagating selected model override to backend: label="Gemini 3.5 Flash (Medium)"
+I0624 23:11:42.483127 51472 quota_manager.go:72] quotaRefreshLoop: starting reload (force=true)
+I0624 23:11:43.099779 51472 printmode.go:192] Print mode: silent auth succeeded
+I0624 23:11:43.099860 51472 input_loop.go:518] Auth done received, triggering experiment refresh
+I0624 23:11:43.099923 51472 experiment_manager.go:35] Starting experiment refresh after login
+I0624 23:11:43.184553 51472 experiment_manager.go:39] Experiments refreshed after login
+I0624 23:11:43.184655 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:43.184684 51472 conversation_manager.go:306] Starting new conversation (agent=false)
+I0624 23:11:43.184711 51472 server.go:768] Creating new cascade trajectory (agentScript=false)
+I0624 23:11:43.184727 51472 server.go:771] Conversation using project ID: e8aa2e56-7964-4629-86ec-8c5de252f092
+I0624 23:11:43.199690 51472 server.go:800] Created conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a
+I0624 23:11:43.199823 51472 server.go:2118] GetConversationDetail: found conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a (active=true)
+I0624 23:11:43.200999 51472 server.go:2118] GetConversationDetail: found conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a (active=true)
+I0624 23:11:43.201092 51472 conversation_manager.go:353] project: switching to conversation belonging to project ID: e8aa2e56-7964-4629-86ec-8c5de252f092
+I0624 23:11:43.201155 51472 server.go:1403] Backend project ID updated dynamically to: e8aa2e56-7964-4629-86ec-8c5de252f092
+I0624 23:11:43.201181 51472 cli_setting_manager.go:199] ApplyProjectPermissionGrants: no grants for project "/home/kaoru/projects/skills/sandbox/Part_A_spec-builder_cicd", cleared project permissions
+I0624 23:11:43.201464 51472 manager.go:1313] Reloading system slash commands and skills
+I0624 23:11:43.201486 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:43.201869 51472 conversation_manager.go:409] project: synced active project to "/home/kaoru/projects/skills/sandbox/Part_A_spec-builder_cicd" (id=e8aa2e56-7964-4629-86ec-8c5de252f092) and updated workspace cache
+I0624 23:11:43.201896 51472 conversation_manager.go:525] Streaming conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a
+I0624 23:11:43.201995 51472 manager.go:1313] Reloading system slash commands and skills
+I0624 23:11:43.202031 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:43.202233 51472 server.go:809] Starting conversation update stream for b774c6c3-2a75-4e88-b6dd-25d45d8af31a
+I0624 23:11:43.202281 51472 printmode.go:156] Print mode: conversation=b774c6c3-2a75-4e88-b6dd-25d45d8af31a, sending message
+I0624 23:11:43.202308 51472 conversation_manager.go:449] Forwarding user message to conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a (items=1, media=0)
+I0624 23:11:43.202324 51472 server.go:1104] Sending user message to conversation b774c6c3-2a75-4e88-b6dd-25d45d8af31a (items=1, media=0)
+I0624 23:11:43.202907 51472 manager.go:390] Ignoring IDLE update because we are waiting for RUNNING
+I0624 23:11:43.203244 51472 manager.go:1293] Slash commands unchanged, skipping update
+I0624 23:11:43.203673 51472 manager.go:1293] Slash commands unchanged, skipping update
+E0624 23:11:43.222104 51472 repo.go:340] failed to create patch for untracked file hackathon-idea-generator.skill: bytes are not valid utf8
+E0624 23:11:43.222346 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_android/.gradle/8.5-rc-4/checksums/checksums.lock: bytes are not valid utf8
+E0624 23:11:43.222421 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_android/.gradle/8.5-rc-4/fileHashes/fileHashes.lock: bytes are not valid utf8
+E0624 23:11:43.222699 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_android/gradle/wrapper/gradle-wrapper.jar: bytes are not valid utf8
+E0624 23:11:43.223243 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_cicd/src/__pycache__/gpg_verify.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.223299 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_cicd/tests/__pycache__/test_gpg_verify.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.223876 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_desktop/__pycache__/disk_monitor.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.223928 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_desktop/__pycache__/test_disk_monitor.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.223973 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_desktop/__pycache__/test_disk_monitor.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.224709 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_code-yagni_hardware/test_runner: bytes are not valid utf8
+E0624 23:11:43.226610 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_android/.gradle/8.5-rc-4/checksums/checksums.lock: bytes are not valid utf8
+E0624 23:11:43.226686 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_android/.gradle/8.5-rc-4/fileHashes/fileHashes.lock: bytes are not valid utf8
+E0624 23:11:43.227481 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_cicd/src/__pycache__/gpg_verify.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.227575 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_cicd/tests/__pycache__/test_gpg_verify.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.228089 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_desktop/__pycache__/app.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.228142 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_desktop/__pycache__/monitor.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.228182 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_desktop/__pycache__/settings.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.228229 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_desktop/__pycache__/test_app.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.228279 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_desktop/__pycache__/test_monitor.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.229294 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/4.3.0/CMakeDetermineCompilerABI_CXX.bin: bytes are not valid utf8
+E0624 23:11:43.229498 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/4.3.0/CompilerIdCXX/a.out: bytes are not valid utf8
+E0624 23:11:43.230817 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_app.dir/src/controller.cpp.o: bytes are not valid utf8
+E0624 23:11:43.230903 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_app.dir/src/encoder.cpp.o: bytes are not valid utf8
+E0624 23:11:43.230991 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_app.dir/src/main.cpp.o: bytes are not valid utf8
+E0624 23:11:43.231343 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_tests.dir/src/controller.cpp.o: bytes are not valid utf8
+E0624 23:11:43.231433 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_tests.dir/src/encoder.cpp.o: bytes are not valid utf8
+E0624 23:11:43.231559 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/CMakeFiles/run_tests.dir/test/test_main.cpp.o: bytes are not valid utf8
+E0624 23:11:43.231739 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/run_app: bytes are not valid utf8
+E0624 23:11:43.231799 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_spec-builder_hardware/build/run_tests: bytes are not valid utf8
+E0624 23:11:43.235778 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_desktop/__pycache__/config.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.235874 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_desktop/__pycache__/monitor.cpython-314.pyc: bytes are not valid utf8
+E0624 23:11:43.235950 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_desktop/__pycache__/test_monitor.cpython-314-pytest-9.1.1.pyc: bytes are not valid utf8
+E0624 23:11:43.238402 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_hardware/build/CMakeFiles/4.3.0/CMakeDetermineCompilerABI_CXX.bin: bytes are not valid utf8
+E0624 23:11:43.238815 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_hardware/build/CMakeFiles/4.3.0/CompilerIdCXX/a.out: bytes are not valid utf8
+E0624 23:11:43.239952 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_hardware/build/test/CMakeFiles/unit_tests.dir/__/src/AppController.cpp.o: bytes are not valid utf8
+E0624 23:11:43.240513 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_hardware/build/test/CMakeFiles/unit_tests.dir/test_main.cpp.o: bytes are not valid utf8
+E0624 23:11:43.240837 51472 repo.go:340] failed to create patch for untracked file sandbox/Part_A_token-compressor_hardware/build/test/unit_tests: bytes are not valid utf8
+I0624 23:11:43.782370 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist Trace: 0xe728bb5e7ac5c75c
+I0624 23:11:44.184291 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x6b804cb55e8dddd0 ResponseID: r_M7araNGK_71e8P1vOMoAw
+I0624 23:11:44.209225 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:44.643169 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist Trace: 0x4d7041de5ceadc5d
+I0624 23:11:44.778750 51472 model_config_manager.go:157] Propagating selected model override to backend: label="Gemini 3.5 Flash (Medium)"
+I0624 23:11:44.778840 51472 model_config_manager.go:157] Propagating selected model override to backend: label="Gemini 3.5 Flash (Medium)"
+I0624 23:11:44.778879 51472 quota_manager.go:72] quotaRefreshLoop: starting reload (force=true)
+I0624 23:11:45.020212 51472 quota_manager.go:72] quotaRefreshLoop: starting reload (force=true)
+I0624 23:11:45.295437 51472 input_loop.go:518] Auth done received, triggering experiment refresh
+I0624 23:11:45.295480 51472 experiment_manager.go:35] Starting experiment refresh after login
+I0624 23:11:45.314213 51472 input_loop.go:518] Auth done received, triggering experiment refresh
+I0624 23:11:45.314271 51472 experiment_manager.go:35] Starting experiment refresh after login
+I0624 23:11:45.342368 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x3054ef7c63a2a1ad ResponseID: sPM7auSgL4zo2roP4LmC8AQ
+I0624 23:11:45.361774 51472 experiment_manager.go:39] Experiments refreshed after login
+I0624 23:11:45.361857 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:45.362808 51472 manager.go:1293] Slash commands unchanged, skipping update
+I0624 23:11:45.384088 51472 experiment_manager.go:39] Experiments refreshed after login
+I0624 23:11:45.384180 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:45.385068 51472 manager.go:1293] Slash commands unchanged, skipping update
+I0624 23:11:45.470454 51472 model_config_manager.go:157] Propagating selected model override to backend: label="Gemini 3.5 Flash (Medium)"
+I0624 23:11:45.470558 51472 quota_manager.go:72] quotaRefreshLoop: starting reload (force=true)
+I0624 23:11:45.909318 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist Trace: 0x7169ba0e2118e9fd
+I0624 23:11:46.118073 51472 input_loop.go:518] Auth done received, triggering experiment refresh
+I0624 23:11:46.118114 51472 experiment_manager.go:35] Starting experiment refresh after login
+I0624 23:11:46.169625 51472 experiment_manager.go:39] Experiments refreshed after login
+I0624 23:11:46.169749 51472 manager.go:1289] Reloading system slash commands
+I0624 23:11:46.170758 51472 manager.go:1293] Slash commands unchanged, skipping update
+I0624 23:11:47.559620 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xa801d132e83ee393 ResponseID: svM7aqKMOvy40-kPwY-OwQI
+I0624 23:11:47.616637 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:49.463510 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xe51377e4ee28cefa ResponseID: tPM7ariLKJ_Yvr0PsumG2AM
+I0624 23:11:49.622278 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:51.996657 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x3d105647d7419819 ResponseID: tfM7aqrKJt3L2roPhJ2MyAs
+I0624 23:11:52.027724 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:53.371933 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xb9d2a3d3bc53978 ResponseID: uPM7apDLFbrbvr0Py7LvsQs
+I0624 23:11:53.432150 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:54.215724 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x833b289ccc7dd15f ResponseID: ufM7aqWZIvSK0-kPgr24yQU
+I0624 23:11:54.234676 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:55.167533 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xf5e48df883a03fcc ResponseID: uvM7av6wF9eL0-kPoYfCqQQ
+I0624 23:11:55.237084 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:56.223875 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x9d44415904ae6aff ResponseID: u_M7avmMFYzo2roP4LmC8AQ
+I0624 23:11:56.441301 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:57.171447 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x2d68abe52199471f ResponseID: vPM7aoGlJpfP1e8P0o-NsAQ
+I0624 23:11:57.444236 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:11:58.654435 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xf2b37219ff0881b0 ResponseID: vfM7av7aHcXMrfcPkJixMQ
+I0624 23:11:58.847949 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:12:00.766885 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x1a1426cd795f79d7 ResponseID: vvM7avuMNduV9tMPkdubwAI
+I0624 23:12:00.851615 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:12:04.991026 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xfb110c7ce5cc6637 ResponseID: wPM7avuAOeue0-kPyI2k8QE
+I0624 23:12:05.064681 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:12:06.363115 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x4bfa0ae5203a9d53 ResponseID: xfM7apinJoCZ0-kP25PRmAU
+I0624 23:12:06.468329 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:12:08.305724 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xc226a5616f34c5cc ResponseID: xvM7aoHnIZnZ2roP54TLgAQ
+I0624 23:12:09.879731 51472 printmode_manager.go:90] PlannerResponse without ModifiedResponse encountered
+I0624 23:12:12.484360 51472 http_helpers.go:198] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xa468e5163c6b30ca ResponseID: y_M7atiVB_Cm2roP-fLvoQg
