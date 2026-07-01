@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+# Parse arguments for verbosity
+VERBOSE=0
+for arg in "$@"; do
+  if [ "$arg" = "-v" ] || [ "$arg" = "--verbose" ]; then
+    VERBOSE=1
+  fi
+done
+
 # Scan skills
 skills=()
 descriptions=()
@@ -12,10 +20,10 @@ for dir in skills/*/; do
     # Extract name from frontmatter
     name=$(grep -m1 '^name:' "${dir}SKILL.md" | sed 's/name://' | tr -d '"'\'' ')
     [ -z "$name" ] && name=$(basename "$dir")
-    
+
     # Extract description from frontmatter
     desc=$(grep -m1 '^description:' "${dir}SKILL.md" | sed 's/description://' | sed 's/^[[:space:]]*//' | tr -d '"'\''')
-    
+
     skills+=("$name")
     descriptions+=("$desc")
     paths+=("$(cd "$dir" && pwd)")
@@ -28,6 +36,7 @@ if [ ${#skills[@]} -eq 0 ]; then
   exit 0
 fi
 
+# 1. Interactive Menu to Toggle Skills
 while true; do
   clear 2>/dev/null || true
   echo -e "\033[1;36m✨ Antigravity Skill Installer ✨\033[0m"
@@ -53,10 +62,10 @@ while true; do
   echo "  • 'Enter' (or 'y') to confirm"
   echo "  • 'q' to quit"
   echo
-  
+
   read -p "Action [number/a/n/y/q]: " action
   action=$(echo "$action" | tr -d '[:space:]')
-  
+
   if [ "$action" = "q" ]; then
     echo "Exiting without making changes."
     exit 0
@@ -72,7 +81,7 @@ while true; do
     for i in "${!skills[@]}"; do enabled[$i]=0; done
     continue
   fi
-  
+
   if [[ "$action" =~ ^[0-9]+$ ]] && [ "$action" -ge 1 ] && [ "$action" -le ${#skills[@]} ]; then
     idx=$((action - 1))
     if [ "${enabled[$idx]}" -eq 1 ]; then
@@ -85,64 +94,81 @@ while true; do
   fi
 done
 
-# Install files locally
-TARGET_DIR="$HOME/.agents"
-mkdir -p "$TARGET_DIR"
+# 2. Automatic CLI & Target Folder Detection (No Prompts)
+if [ "$VERBOSE" -eq 1 ]; then
+  echo -e "\n🔍 Detecting installed CLI tools..."
+fi
 
-# Clean up any old external path registrations and enabled-skills directories
-rm -f "$TARGET_DIR/skills.json"
-rm -rf "$TARGET_DIR/enabled-skills"
+detected_clis=()
+if command -v agy >/dev/null 2>&1; then
+  detected_clis+=("agy")
+fi
+if command -v antigravity >/dev/null 2>&1; then
+  detected_clis+=("antigravity")
+fi
 
-# Create skills directory if it doesn't exist
-mkdir -p "$TARGET_DIR/skills"
+if [ ${#detected_clis[@]} -gt 0 ] && [ "$VERBOSE" -eq 1 ]; then
+  echo "✓ Detected CLI tools: ${detected_clis[*]}"
+fi
 
-for i in "${!skills[@]}"; do
-  if [ "${enabled[$i]}" -eq 1 ]; then
-    dest_path="$TARGET_DIR/skills/${skills[$i]}"
-    if [ -d "$dest_path" ]; then
-      # Check if files in destination match the source exactly
-      if diff -r "${paths[$i]}" "$dest_path" >/dev/null 2>&1; then
-        echo "✓ Skill '${skills[$i]}' is already up to date."
-      else
-        echo -e "\033[1;33m⚠️ Skill '${skills[$i]}' already exists in destination and has differences.\033[0m"
-        read -p "Overwrite target? [y/N]: " overwrite
-        if [[ "$overwrite" =~ ^[yY]$ ]]; then
-          rm -rf "$dest_path"
-          cp -r "${paths[$i]}" "$dest_path"
-          echo "✓ Overwrote and updated skill: ${skills[$i]}"
-        else
-          echo "Skipping update of skill: ${skills[$i]}"
-        fi
-      fi
-    else
-      cp -r "${paths[$i]}" "$dest_path"
-      echo "✓ Installed skill: ${skills[$i]}"
+# Define target paths automatically
+targets=()
+targets+=("$HOME/.agents")
+if [ -d "$HOME/.gemini/config" ]; then
+  targets+=("$HOME/.gemini/config")
+fi
+if [ -d "$HOME/.copilot" ]; then
+  targets+=("$HOME/.copilot")
+fi
+if [ -d "$HOME/.claude" ]; then
+  targets+=("$HOME/.claude")
+fi
+
+# 3. Softlink Enabled Skills (No Prompts)
+repo_dir=$(pwd)
+for target in "${targets[@]}"; do
+  if [ "$VERBOSE" -eq 1 ]; then
+    echo -e "\nDeploying to $target..."
+  fi
+  mkdir -p "$target/skills"
+  
+  # Clean up old metadata files in destination
+  rm -f "$target/skills.json"
+  rm -rf "$target/enabled-skills"
+
+  linked_count=0
+  for i in "${!skills[@]}"; do
+    dest_path="$target/skills/${skills[$i]}"
+    
+    # Remove existing folder or symlink
+    if [ -e "$dest_path" ] || [ -L "$dest_path" ]; then
+      rm -rf "$dest_path"
     fi
+
+    if [ "${enabled[$i]}" -eq 1 ]; then
+      ln -s "${paths[$i]}" "$dest_path"
+      linked_count=$((linked_count + 1))
+      if [ "$VERBOSE" -eq 1 ]; then
+        echo "  ✓ Linked skill: ${skills[$i]}"
+      fi
+    fi
+  done
+
+  # Link AGENTS.md rules
+  if [ -f "$repo_dir/AGENTS.md" ]; then
+    dest_agents="$target/AGENTS.md"
+    if [ -e "$dest_agents" ] || [ -L "$dest_agents" ]; then
+      rm -f "$dest_agents"
+    fi
+    ln -sf "$repo_dir/AGENTS.md" "$dest_agents"
+    if [ "$VERBOSE" -eq 1 ]; then
+      echo "  ✓ Linked AGENTS.md"
+    fi
+  fi
+
+  if [ "$VERBOSE" -eq 0 ]; then
+    echo "✓ Linked $linked_count skills and AGENTS.md rules to $target"
   fi
 done
 
-# Copy AGENTS.md rules locally with differences check
-repo_dir=$(pwd)
-if [ -f "$repo_dir/AGENTS.md" ]; then
-  dest_agents="$TARGET_DIR/AGENTS.md"
-  if [ -f "$dest_agents" ]; then
-    if cmp -s "$repo_dir/AGENTS.md" "$dest_agents"; then
-      echo "✓ AGENTS.md rules are already up to date."
-    else
-      echo -e "\033[1;33m⚠️ AGENTS.md rules already exist in destination and have differences.\033[0m"
-      read -p "Overwrite target? [y/N]: " overwrite
-      if [[ "$overwrite" =~ ^[yY]$ ]]; then
-        cp "$repo_dir/AGENTS.md" "$dest_agents"
-        echo "✓ Overwrote and updated AGENTS.md rules"
-      else
-        echo "Skipping update of AGENTS.md rules"
-      fi
-    fi
-  else
-    cp "$repo_dir/AGENTS.md" "$dest_agents"
-    echo "✓ Copied AGENTS.md rules"
-  fi
-fi
-
-echo -e "\n\033[1;32m✓ Customizations successfully processed!\033[0m"
-echo "You can now safely delete this installer/repository folder if desired."
+echo -e "\n\033[1;32m✨ Automatic symlink deployment complete!\033[0m"
