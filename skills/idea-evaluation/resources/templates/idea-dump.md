@@ -35,4 +35,3 @@ category: Custom
 *   **Platform**: (e.g., Android, iOS, Web, Desktop)
 *   **Data Lifecycle**: (e.g., offline-first local cache, periodic background sync, local-only encrypted)
 *   **Key APIs**: (e.g., local audio player, background playback, system notifications)
-

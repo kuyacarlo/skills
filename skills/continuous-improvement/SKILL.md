@@ -37,6 +37,10 @@ After code is verified and unit tests pass:
 
 ## 🛡️ Integration Guidelines
 
-*   **With `spec-builder`:** If a test failure requires a design change, update both `SPEC.md` and `.agents/LEARNINGS.md` to keep documentation and memory synced.
-*   **With `code-yagni`:** Ensure refactored code remains minimal. Do not add wrappers, utilities, or abstractions that are not explicitly requested by the specs or required to fix an error.
-*   **With `token-compressor`:** Format `LEARNINGS.md` compactly. Use brief bullet points, lists, and direct trace citations to preserve context tokens.
+*   **With `specification-compliance`:** If a test failure requires a design change, update both `SPEC.md` and `.agents/LEARNINGS.md` to keep documentation and memory synced.
+*   **With `code-simplification`:** Ensure refactored code remains minimal. Do not add wrappers, utilities, or abstractions that are not explicitly requested by the specs or required to fix an error.
+*   **With `output-compression`:** Format `LEARNINGS.md` compactly. Use brief bullet points, lists, and direct trace citations to preserve context tokens.
+
+### 4. Output Configuration
+Check the user context or connected MCP servers to see if note-taking tools or personal vaults are available. If so, automatically log or copy lessons learned to those databases. By default, output learnings directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
+

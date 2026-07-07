@@ -27,13 +27,13 @@ PROMPTS = {
     "cicd": "Write a project specification and implement a .pre-commit-config.yaml and a GitHub Actions workflow .github/workflows/ci.yml to lint, format, check GPG signatures, and run tests."
 }
 
-SKILLS = ["code-yagni", "token-compressor", "spec-builder", "hackathon-idea-generator"]
+SKILLS = ["code-simplification", "output-compression", "specification-compliance", "idea-generator"]
 
 COMBINATIONS = {
-    "C1": ["code-yagni", "token-compressor"],
-    "C2": ["spec-builder", "token-compressor"],
-    "C3": ["code-yagni", "spec-builder"],
-    "C4": ["spec-builder", "hackathon-idea-generator"],
+    "C1": ["code-simplification", "output-compression"],
+    "C2": ["specification-compliance", "output-compression"],
+    "C3": ["code-simplification", "specification-compliance"],
+    "C4": ["specification-compliance", "idea-generator"],
     "C5": SKILLS
 }
 

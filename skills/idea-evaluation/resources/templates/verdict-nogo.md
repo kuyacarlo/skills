@@ -14,5 +14,5 @@
 >
 > ### 📖 The Story
 > [Narrative story detailing why this project is not viable. Explain blockers, friction points, adoption barriers, maintenance costs, and details about target audience limits.]
-> 
+>
 > **Recommended Action**: [Actionable alternative, e.g. "Do not build a custom application. If you want to contribute to the space, write plugins or contribute to existing open-source projects like [Project Name]"]

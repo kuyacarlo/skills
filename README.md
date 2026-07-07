@@ -58,5 +58,3 @@ Use this guide to decide which skills to select during installation:
 
 ### 7. [spec-builder](file:///home/kaoru/projects/skills/skills/spec-builder/SKILL.md)
 *   **Spec keeper**: Governs projects with `SPEC.md` contracts, detects implementation drift, and reviews API gaps. *(Adapted from JuliusBrussee/cavekit & github/spec-kit).*
-
-

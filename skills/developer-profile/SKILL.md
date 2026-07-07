@@ -1,11 +1,13 @@
 ---
-name: developer-context-profile
-description: Generate a quantified developer profile that integrates with AGY, Cursor rules, Aider conventions, and Spec-Kit. Captures actual capability across three modes (no AI / with AI / architecting with AI), code patterns, and decision matrix. Prevents agents from asking "do you have X experience?" by providing complete upfront context. Outputs JSON, YAML, and Markdown.
+name: developer-profile
+description: Generates a quantified developer profile to integrate with active AI tools, CLI agents, and IDEs. Captures developer capabilities, stacks, and constraints to prevent repetitive questions. Default to outputting to the chat.
 ---
 
-# Developer Context Profile Skill
+# Developer Profile Skill
 
-**Purpose:** Build a one-shot, composable profile that agents (AGY, Cursor, Aider, chatbots) can read once and make intelligent recommendations without filler questions.
+**Purpose:** Build a one-shot, composable profile that active agents, IDEs, and CLI tools can read to make intelligent recommendations without repetitive context questions.
+
+**Dynamic Tooling Check & Default Output:** You must check the user context and environment dynamically to identify what AI tools, IDEs, or CLI tools are in use (e.g. VSCode, Cursor, Aider, standard CLI agents). If specific profiles or conventions files are supported, automatically generate files matching those formats. Otherwise, default to outputting the profile directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
 
 ---
 

@@ -1,11 +1,9 @@
 ---
-name: code-yagni
-description: YAGNI checker. Employs the Ponytail Decision Ladder to prune code bloat and trace technical debt.
+name: code-simplification
+description: Simplification checker. Employs a decision ladder to prune code bloat and trace technical debt.
 ---
 
-# 🦄 Ponytail YAGNI (Simplification & Pruning)
-
-*Derived and adapted from [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)*
+# 🦄 Code Simplification (Simplification & Pruning)
 
 Use this skill to review code, prevent premature abstractions, and ensure that only the minimum required code is written. Enforce YAGNI (You Ain't Gonna Need It) ruthlessly.
 
@@ -45,4 +43,11 @@ When reviewing code or git diffs (either automatically or when asked for a revie
 
 *   When you deliberately defer a feature, take a shortcut, or leave a stub to maintain momentum, insert a comment:
     `// yagni: [Short explanation of why it was skipped and what the bare minimum fallback is]`
-*   Use this tag to compile a quick "debt ledger" file (e.g., `DEBT.md` or a ZenNotes log) when the user asks to review codebase health.
+*   Use this tag to compile a quick "debt ledger" file (e.g., `DEBT.md` or a markdown log file) when the user asks to review codebase health.
+*   **Context Check & Default Output:** Check the user context or connected MCP servers to see if note-taking tools, personal vaults, or databases are available. If so, automatically log the technical debt ledger there. By default, output the ledger directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
+
+---
+
+## 🔗 Collaboration & Loop Directives
+*   **Compression Link:** While refactoring, generating delete lists, or rewriting code blocks, utilize the `output-compression` skill to format recommended deletions and edits in highly compressed, direct diff syntax.
+
