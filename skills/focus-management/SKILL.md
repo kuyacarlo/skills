@@ -1,6 +1,10 @@
 ---
 name: focus-management
-description: Developer focus and state management. Diagnoses energy levels, manages cognitive load, and writes session reconnect logs. Defaults to outputting in the chat.
+description: >-
+  Developer focus and state management. Diagnoses energy levels, manages cognitive
+  load, and writes session reconnect logs. Use when the user is demotivated, stuck,
+  overwhelmed, avoiding work, choice-paralyzed, low energy, or asks what to do next
+  / how to start. Defaults to outputting in the chat.
 ---
 
 # 🧠 Focus Management Skill

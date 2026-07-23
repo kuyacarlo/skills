@@ -1,6 +1,10 @@
 ---
 name: idea-generator
-description: Project idea generator. Parses problem briefs, lists high-scoring project ideas, and organizes milestones. Defaults to outputting in the chat.
+description: >-
+  Hackathon ideation only: parse a problem brief, score 5+ ideas, stacks, and
+  effort. Does not build products or run a full factory pipeline. Use when the
+  user wants ideas, pitches options, or hackathon brainstorming — not end-to-end
+  implementation.
 ---
 
 # 🏆 Project Idea Generator
