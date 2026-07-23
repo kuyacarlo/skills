@@ -1,60 +1,80 @@
-# ⚙️ Antigravity Customizations: Rules & Skills
+# Skills
 
-This repository stores and version-controls your personal configurations, instructions, and custom skills for the Antigravity agentic coding assistant.
+Personal + installable agent skills for Antigravity / Gemini / Cursor (and Copilot if present).
 
----
-
-## 🎯 Rationale
-
-This project structure is designed around three core principles:
-
-1. Have a proper backup method for all of the skills I built and use frequently.
-2. Have it be deployed to Linux/macOS host with no prerequisite and through a single command.
+**Claude Code is not managed by this repo.** Do not run installers that touch `~/.claude`.
 
 ---
 
-## 🚀 Quick Start (How to Use)
+## Quick start
 
-To load and enable these customizations on your current machine:
+```bash
+./apply -y        # enable all skills, deploy
+./apply           # interactive toggle (default: all on)
+./apply -y -v     # verbose
+```
 
-1. Open your terminal inside this repository folder.
-2. Run the interactive installer:
-   ```bash
-   ./apply
-   ```
-3. The installer scans all available skills in the `skills/` directory, lists them in your terminal, and lets you select which ones to activate:
-   * **Toggle a skill**: Enter the corresponding list number.
-   * **Select all / none**: Enter `a` or `n`.
-   * **Apply & Confirm**: Press `Enter` (or enter `y`).
-   * **Quit**: Enter `q`.
+Deploys symlinks into (when present):
 
-The installer script will:
-* Copy your workspace rules (**[AGENTS.md](file:///home/kaoru/projects/skills/AGENTS.md)**) to your local agent configuration directory (`~/.agents/AGENTS.md`).
-* Copy the selected skill folders directly into **`~/.agents/skills/`**, enabling the agent to automatically discover and load them. (This also cleans up any old `skills.json` or symlinks from previous configurations).
+| Target | Path |
+|--------|------|
+| Agents / Codex-style | `~/.agents/skills/` |
+| Gemini / Antigravity | `~/.gemini/config/skills/` |
+| Cursor | `~/.cursor/skills/` |
+| Copilot | `~/.copilot/skills/` |
+
+Also links `AGENTS.md` into those roots.
 
 ---
 
-## 🛠️ Skills
+## Live skills
 
-Use this guide to decide which skills to select during installation:
+| Skill | Role | Invoke |
+|-------|------|--------|
+| `architectural-planning` | Mermaid plans, milestones, task matrices | user |
+| `code-simplification` | YAGNI / decision-ladder prune (ponytail-inspired) | model |
+| `continuous-improvement` | Capture learnings from test/lint loops | model |
+| `developer-profile` | Generate portable profile artifacts for agents | user / setup |
+| `ef-starter` | Executive-function system builder (submodule) | user |
+| `email-management` | Classify / route mail + filter configs | user |
+| `focus-management` | Energy diagnosis, reconnect logs, low-activation defaults | model* |
+| `git-signed-commit` | Git identity, GPG/SSH signing, custom hosts | user / setup |
+| `idea-evaluation` | Go / No-Go / Pivot grill | model |
+| `idea-generator` | Hackathon **ideation only** (not a full product factory) | user |
+| `output-compression` | Dense replies, less waffle (caveman-inspired) | model |
+| `specification-compliance` | SPEC.md drift / contract checks | model |
+| `specification-pipeline` | specify → clarify → plan → implement chain | user |
+| `free-tier-deploy` | Cloudflare / Vercel / Fly / Railway free-tier deploy patterns | model |
+| `personal-context` | Load systems/background context; keep data out of skill bodies | model |
+| `thorough-code-review` | Exhaustive citation-style review (generalized) | user |
+| `parallel-work-planning` | Multi-engineer interface contracts (generalized) | user |
 
-### 1. [idea-consultant](file:///home/kaoru/projects/skills/skills/idea-consultant/SKILL.md)
-*   **Idea sanitizer**: Grills options against alternatives, calculates Go/No-Go/Pivot viability, and records decisions in ZenNotes.
+\* `focus-management` descriptions include demotivation / stuck triggers so agents can auto-reach for it.
 
-### 2. [thinking-partner](file:///home/kaoru/projects/skills/skills/thinking-partner/SKILL.md)
-*   **Research partner**: Documents thoughts, diagrams architectures via Mermaid, and outputs habit-inducing dopamine/friction task matrices.
+See [ORIGINS.md](ORIGINS.md) for upstream credits and submodule vs reframe policy.
 
-### 3. [momentum-engine](file:///home/kaoru/projects/skills/skills/momentum-engine/SKILL.md)
-*   **ADHD developer crutch**: Monitors focus states objectively, bypasses choice paralysis by forcing tech choices, and logs reconnect steps.
+---
 
-### 4. [hackathon-idea-generator](file:///home/kaoru/projects/skills/skills/hackathon-idea-generator/SKILL.md)
-*   **Hackathon factory**: Parses briefs, scores ideas, sets up parallelized team effort sheets, and exports to Google Docs. *(Adapted from kuya-carlo/marketdev).*
+## Naming
 
-### 5. [code-yagni](file:///home/kaoru/projects/skills/skills/code-yagni/SKILL.md)
-*   **YAGNI checker**: Applies the 6-tier Decision Ladder to prune over-engineered blocks and traces `yagni:` debt tags. *(Adapted from DietrichGebert/ponytail).*
+- **Reframes (this repo):** objective `name:` + upstream mentioned in description.
+- **Submodules:** keep **upstream** titles (e.g. `ef-starter`).
+- **Private workflows** (e.g. full hackathon factories) stay in their own repos and may **link to** this pack — they are never vendored here.
 
-### 6. [token-compressor](file:///home/kaoru/projects/skills/skills/token-compressor/SKILL.md)
-*   **Caveman compressor**: Strips polite conversational waffle to produce high-density responses and compact code diffs. *(Adapted from JuliusBrussee/caveman).*
+---
 
-### 7. [spec-builder](file:///home/kaoru/projects/skills/skills/spec-builder/SKILL.md)
-*   **Spec keeper**: Governs projects with `SPEC.md` contracts, detects implementation drift, and reviews API gaps. *(Adapted from JuliusBrussee/cavekit & github/spec-kit).*
+## Project vs workspace vs agent-wide
+
+| Scope | Where | When |
+|-------|--------|------|
+| **Agent / tool-wide** | `~/.agents/skills`, `~/.gemini/config/skills`, `~/.cursor/skills` via `./apply` | Defaults, guardrails, EF, personal context — every project |
+| **Workspace / multi-repo** | Shared rules in this repo’s `AGENTS.md` linked home-wide | Homelab + coding conventions that span projects |
+| **Project** | `.agents/skills/`, `.cursor/skills/`, or project `AGENTS.md` | Repo-specific SOPs, contest rules, private product domain |
+
+Rule of thumb: if it would be wrong in another repo, keep it **project-local**. If it prevents breakage everywhere, keep it **agent-wide**.
+
+---
+
+## License
+
+See [LICENSE](LICENSE). Submodules keep their own licenses.
