@@ -1,34 +1,72 @@
 #!/usr/bin/env bash
-set -e
+# Deploy skills to agent harnesses (Antigravity / Gemini / Cursor / Copilot).
+# NEVER touches ~/.claude (Claude Code is out of scope for this pack).
+set -euo pipefail
 
-# Parse arguments for verbosity
 VERBOSE=0
+AUTO_YES=0
 for arg in "$@"; do
-  if [ "$arg" = "-v" ] || [ "$arg" = "--verbose" ]; then
-    VERBOSE=1
-  fi
+  case "$arg" in
+    -v|--verbose) VERBOSE=1 ;;
+    -y|--yes) AUTO_YES=1 ;;
+    -h|--help)
+      cat <<'EOF'
+Usage: ./apply [-y] [-v]
+
+  -y, --yes      Non-interactive: enable all skills and deploy
+  -v, --verbose  Verbose logging
+  -h, --help     Show help
+
+Targets (if present): ~/.agents, ~/.gemini/config, ~/.cursor, ~/.copilot
+Explicitly excluded: ~/.claude (do not manage Claude Code from this repo)
+EOF
+      exit 0
+      ;;
+  esac
 done
 
-# Scan skills
+repo_dir="$(cd "$(dirname "$0")" && pwd)"
+cd "$repo_dir"
+
 skills=()
 descriptions=()
 paths=()
 enabled=()
 
+# Frontmatter helpers (name / description may be multiline with >-)
+frontmatter_field() {
+  local file="$1" field="$2"
+  awk -v f="$field" '
+    BEGIN { in_fm=0; grab=0; val="" }
+    /^---[[:space:]]*$/ {
+      if (in_fm==0) { in_fm=1; next }
+      else { exit }
+    }
+    in_fm && $0 ~ ("^" f ":") {
+      line=$0
+      sub("^[^:]+:[[:space:]]*", "", line)
+      if (line == ">" || line == ">-") { grab=1; next }
+      print line
+      exit
+    }
+    grab {
+      if ($0 ~ /^[a-zA-Z0-9_-]+:/) { exit }
+      gsub(/^[[:space:]]+/, "")
+      print
+      exit
+    }
+  ' "$file" | head -1 | tr -d '"' | sed "s/^[[:space:]]*//;s/[[:space:]]*$//;s/^'//;s/'$//"
+}
+
 for dir in skills/*/; do
-  if [ -f "${dir}SKILL.md" ]; then
-    # Extract name from frontmatter
-    name=$(grep -m1 '^name:' "${dir}SKILL.md" | sed 's/name://' | tr -d '"'\'' ')
-    [ -z "$name" ] && name=$(basename "$dir")
-
-    # Extract description from frontmatter
-    desc=$(grep -m1 '^description:' "${dir}SKILL.md" | sed 's/description://' | sed 's/^[[:space:]]*//' | tr -d '"'\''')
-
-    skills+=("$name")
-    descriptions+=("$desc")
-    paths+=("$(cd "$dir" && pwd)")
-    enabled+=(1) # Enabled by default
-  fi
+  [ -f "${dir}SKILL.md" ] || continue
+  name="$(frontmatter_field "${dir}SKILL.md" name)"
+  [ -z "$name" ] && name="$(basename "$dir")"
+  desc="$(frontmatter_field "${dir}SKILL.md" description)"
+  skills+=("$name")
+  descriptions+=("$desc")
+  paths+=("$(cd "$dir" && pwd)")
+  enabled+=(1)
 done
 
 if [ ${#skills[@]} -eq 0 ]; then
@@ -36,139 +74,174 @@ if [ ${#skills[@]} -eq 0 ]; then
   exit 0
 fi
 
-# 1. Interactive Menu to Toggle Skills
-while true; do
-  clear 2>/dev/null || true
-  echo -e "\033[1;36m✨ Antigravity Skill Installer ✨\033[0m"
-  echo "---------------------------------"
-  echo "Toggle skills to enable:"
-  echo
+# Known retired aliases / old folder names — purge from targets safely
+STALE_ALIASES=(
+  code-yagni
+  developer-context-profile
+  hackathon-idea-generator
+  idea-consultant
+  momentum-engine
+  spec-builder
+  speckit
+  speckit-analyze
+  speckit-checklist
+  speckit-clarify
+  speckit-constitution
+  speckit-implement
+  speckit-plan
+  speckit-specify
+  speckit-tasks
+  speckit-taskstoissues
+  thinking-partner
+  token-compressor
+  mail-organizer
+  git_signed_commit
+)
 
-  for i in "${!skills[@]}"; do
-    status="[ ]"
-    if [ "${enabled[$i]}" -eq 1 ]; then
-      status="[\033[1;32m✓\033[0m]"
-    fi
-    echo -e " $status  $((i+1)). \033[1m${skills[$i]}\033[0m"
-    if [ -n "${descriptions[$i]}" ]; then
-      echo -e "        \033[3m${descriptions[$i]}\033[0m"
-    fi
+if [ "$AUTO_YES" -eq 0 ]; then
+  while true; do
+    clear 2>/dev/null || true
+    echo -e "\033[1;36m✨ Skill Installer (Antigravity / Gemini / Cursor) ✨\033[0m"
+    echo "---------------------------------"
+    echo "Toggle skills to enable (default: all on):"
     echo
-  done
 
-  echo "Commands:"
-  echo "  • [Number] to toggle selection"
-  echo "  • 'a' to select all | 'n' to select none"
-  echo "  • 'Enter' (or 'y') to confirm"
-  echo "  • 'q' to quit"
-  echo
+    for i in "${!skills[@]}"; do
+      status="[ ]"
+      if [ "${enabled[$i]}" -eq 1 ]; then
+        status="[\033[1;32m✓\033[0m]"
+      fi
+      echo -e " $status  $((i+1)). \033[1m${skills[$i]}\033[0m"
+      if [ -n "${descriptions[$i]}" ]; then
+        echo -e "        \033[3m${descriptions[$i]}\033[0m"
+      fi
+      echo
+    done
 
-  read -p "Action [number/a/n/y/q]: " action
-  action=$(echo "$action" | tr -d '[:space:]')
+    echo "Commands: [number] toggle | a all | n none | y/Enter confirm | q quit"
+    echo
+    read -r -p "Action [number/a/n/y/q]: " action || true
+    action="$(echo "$action" | tr -d '[:space:]')"
 
-  if [ "$action" = "q" ]; then
-    echo "Exiting without making changes."
-    exit 0
-  fi
-  if [ "$action" = "y" ] || [ -z "$action" ]; then
-    break
-  fi
-  if [ "$action" = "a" ]; then
-    for i in "${!skills[@]}"; do enabled[$i]=1; done
-    continue
-  fi
-  if [ "$action" = "n" ]; then
-    for i in "${!skills[@]}"; do enabled[$i]=0; done
-    continue
-  fi
-
-  if [[ "$action" =~ ^[0-9]+$ ]] && [ "$action" -ge 1 ] && [ "$action" -le ${#skills[@]} ]; then
-    idx=$((action - 1))
-    if [ "${enabled[$idx]}" -eq 1 ]; then
-      enabled[$idx]=0
-    else
-      enabled[$idx]=1
+    if [ "$action" = "q" ]; then
+      echo "Exiting without making changes."
+      exit 0
     fi
-  else
-    read -p "Invalid option. Press Enter to try again."
-  fi
-done
-
-# 2. Automatic CLI & Target Folder Detection (No Prompts)
-if [ "$VERBOSE" -eq 1 ]; then
-  echo -e "\n🔍 Detecting installed CLI tools..."
+    if [ "$action" = "y" ] || [ -z "$action" ]; then
+      break
+    fi
+    if [ "$action" = "a" ]; then
+      for i in "${!skills[@]}"; do enabled[$i]=1; done
+      continue
+    fi
+    if [ "$action" = "n" ]; then
+      for i in "${!skills[@]}"; do enabled[$i]=0; done
+      continue
+    fi
+    if [[ "$action" =~ ^[0-9]+$ ]] && [ "$action" -ge 1 ] && [ "$action" -le ${#skills[@]} ]; then
+      idx=$((action - 1))
+      if [ "${enabled[$idx]}" -eq 1 ]; then enabled[$idx]=0; else enabled[$idx]=1; fi
+    else
+      read -r -p "Invalid option. Press Enter to try again." _
+    fi
+  done
+else
+  echo "Non-interactive: enabling all ${#skills[@]} skills."
 fi
 
-detected_clis=()
-if command -v agy >/dev/null 2>&1; then
-  detected_clis+=("agy")
-fi
-if command -v antigravity >/dev/null 2>&1; then
-  detected_clis+=("antigravity")
-fi
-
-if [ ${#detected_clis[@]} -gt 0 ] && [ "$VERBOSE" -eq 1 ]; then
-  echo "✓ Detected CLI tools: ${detected_clis[*]}"
-fi
-
-# Define target paths automatically
+# Targets — never Claude Code
 targets=()
 targets+=("$HOME/.agents")
-if [ -d "$HOME/.gemini/config" ]; then
-  targets+=("$HOME/.gemini/config")
-fi
-if [ -d "$HOME/.copilot" ]; then
-  targets+=("$HOME/.copilot")
-fi
-if [ -d "$HOME/.claude" ]; then
-  targets+=("$HOME/.claude")
+[ -d "$HOME/.gemini/config" ] && targets+=("$HOME/.gemini/config")
+[ -d "$HOME/.cursor" ] && targets+=("$HOME/.cursor")
+[ -d "$HOME/.copilot" ] && targets+=("$HOME/.copilot")
+
+if [ "$VERBOSE" -eq 1 ]; then
+  echo "Targets: ${targets[*]}"
+  command -v agy >/dev/null 2>&1 && echo "Detected: agy"
+  command -v antigravity >/dev/null 2>&1 && echo "Detected: antigravity"
 fi
 
-# 3. Softlink Enabled Skills (No Prompts)
-repo_dir=$(pwd)
+is_owned_name() {
+  local n="$1"
+  for s in "${skills[@]}"; do
+    [ "$s" = "$n" ] && return 0
+  done
+  for s in "${STALE_ALIASES[@]}"; do
+    [ "$s" = "$n" ] && return 0
+  done
+  return 1
+}
+
+points_into_repo() {
+  local link="$1"
+  [ -L "$link" ] || return 1
+  local resolved
+  resolved="$(readlink -f "$link" 2>/dev/null || true)"
+  case "$resolved" in
+    "$repo_dir"|"$repo_dir"/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 for target in "${targets[@]}"; do
-  if [ "$VERBOSE" -eq 1 ]; then
-    echo -e "\nDeploying to $target..."
-  fi
   mkdir -p "$target/skills"
-  
-  # Clean up old metadata files in destination
   rm -f "$target/skills.json"
   rm -rf "$target/enabled-skills"
 
-  linked_count=0
-  for i in "${!skills[@]}"; do
-    dest_path="$target/skills/${skills[$i]}"
-    
-    # Remove existing folder or symlink
-    if [ -e "$dest_path" ] || [ -L "$dest_path" ]; then
-      rm -rf "$dest_path"
+  # Purge stale / broken / owned links only (safe)
+  for entry in "$target/skills"/*; do
+    [ -e "$entry" ] || [ -L "$entry" ] || continue
+    base="$(basename "$entry")"
+    if [ -L "$entry" ] && [ ! -e "$entry" ]; then
+      rm -f "$entry"
+      [ "$VERBOSE" -eq 1 ] && echo "  purged broken: $target/skills/$base"
+      continue
     fi
-
-    if [ "${enabled[$i]}" -eq 1 ]; then
-      ln -s "${paths[$i]}" "$dest_path"
-      linked_count=$((linked_count + 1))
-      if [ "$VERBOSE" -eq 1 ]; then
-        echo "  ✓ Linked skill: ${skills[$i]}"
+    if is_owned_name "$base" || points_into_repo "$entry"; then
+      # Will re-link enabled ones below; remove first so disabled/stale go away
+      if [ -L "$entry" ] || is_owned_name "$base"; then
+        # Only remove symlinks or known stale names — never wipe foreign real dirs
+        if [ -L "$entry" ]; then
+          rm -f "$entry"
+          [ "$VERBOSE" -eq 1 ] && echo "  cleared owned link: $target/skills/$base"
+        elif [ -d "$entry" ]; then
+          # real dir with stale alias name — leave foreign content alone unless stale alias
+          for s in "${STALE_ALIASES[@]}"; do
+            if [ "$base" = "$s" ]; then
+              rm -rf "$entry"
+              [ "$VERBOSE" -eq 1 ] && echo "  purged stale dir: $target/skills/$base"
+            fi
+          done
+        fi
       fi
     fi
   done
 
-  # Link AGENTS.md rules
+  linked_count=0
+  for i in "${!skills[@]}"; do
+    dest_path="$target/skills/${skills[$i]}"
+    if [ -e "$dest_path" ] || [ -L "$dest_path" ]; then
+      if [ -L "$dest_path" ]; then
+        rm -f "$dest_path"
+      elif is_owned_name "${skills[$i]}"; then
+        # Do not delete non-symlink foreign dirs with same name
+        echo "  warn: $dest_path exists and is not a symlink; skip ${skills[$i]}"
+        continue
+      fi
+    fi
+    if [ "${enabled[$i]}" -eq 1 ]; then
+      ln -sfn "${paths[$i]}" "$dest_path"
+      linked_count=$((linked_count + 1))
+      [ "$VERBOSE" -eq 1 ] && echo "  ✓ ${skills[$i]} -> ${paths[$i]}"
+    fi
+  done
+
   if [ -f "$repo_dir/AGENTS.md" ]; then
-    dest_agents="$target/AGENTS.md"
-    if [ -e "$dest_agents" ] || [ -L "$dest_agents" ]; then
-      rm -f "$dest_agents"
-    fi
-    ln -sf "$repo_dir/AGENTS.md" "$dest_agents"
-    if [ "$VERBOSE" -eq 1 ]; then
-      echo "  ✓ Linked AGENTS.md"
-    fi
+    ln -sfn "$repo_dir/AGENTS.md" "$target/AGENTS.md"
   fi
 
-  if [ "$VERBOSE" -eq 0 ]; then
-    echo "✓ Linked $linked_count skills and AGENTS.md rules to $target"
-  fi
+  echo "✓ Linked $linked_count skills + AGENTS.md → $target"
 done
 
-echo -e "\n\033[1;32m✨ Automatic symlink deployment complete!\033[0m"
+echo -e "\n\033[1;32m✨ Deploy complete (Claude Code untouched).\033[0m"
