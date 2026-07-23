@@ -1,3 +1,12 @@
-
-
+# testing workflows
 sandbox/
+
+# downstream files(auto-generated)
+*.skill
+
+# local / personal (do not publish)
+context.json
+simulation_results_comprehensive.md
+test_run_log.jsonl
+.pytest_cache/
+.ruff_cache/
