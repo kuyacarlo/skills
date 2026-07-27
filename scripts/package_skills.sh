@@ -98,7 +98,9 @@ for skill_dir in skills/*/; do
       -x '*/.DS_Store' \
       -x '*/node_modules/*'
   )
-  mv -f "$tmp" "$out"
+  # cp+rm avoids Podman/SELinux "mv: setting attribute 'security.selinux'" noise
+  cp -f "$tmp" "$out"
+  rm -f "$tmp"
   built=$((built + 1))
   echo "build $name → dist/${name}.skill ($reason)"
 done
