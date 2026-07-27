@@ -1,8 +1,12 @@
 # testing workflows
 sandbox/
 
-# downstream files(auto-generated)
+# generated skill packages (local); CI artifacts + tracked copies live in dist/
 *.skill
+!dist/*.skill
+
+# keep dist/ in git even when empty of packages
+!dist/.gitkeep
 
 # local / personal (do not publish)
 context.json

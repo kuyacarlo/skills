@@ -1,0 +1,97 @@
+name: Package skills
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+    inputs:
+      force_all:
+        description: Rebuild every skill package
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Detect skill changes / missing packages
+        id: plan
+        env:
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          FORCE_ALL: ${{ github.event_name == 'workflow_dispatch' && inputs.force_all == 'true' && '1' || '0' }}
+        run: |
+          set -euo pipefail
+          chmod +x scripts/package_skills.sh
+
+          base="${GITHUB_EVENT_BEFORE:-}"
+          head="${GITHUB_SHA}"
+
+          if [ "$FORCE_ALL" = "1" ]; then
+            echo "mode=force-all" >> "$GITHUB_OUTPUT"
+          elif [ -z "$base" ] || [[ "$base" =~ ^0+$ ]]; then
+            echo "mode=missing-only" >> "$GITHUB_OUTPUT"
+            base=""
+          else
+            echo "mode=diff" >> "$GITHUB_OUTPUT"
+          fi
+
+          # List skill dirs that will build (preview)
+          if [ "$FORCE_ALL" = "1" ]; then
+            mapfile -t skills < <(find skills -mindepth 2 -maxdepth 2 -name SKILL.md -printf '%h\n' | xargs -I{} basename {})
+            echo "Will rebuild all: ${skills[*]}"
+          else
+            changed="$(git diff --name-only "${base:-HEAD}" "$head" -- skills 2>/dev/null || true)"
+            echo "Changed under skills/:"
+            echo "$changed" | sed '/^$/d' || true
+          fi
+
+      - name: Build .skill packages
+        env:
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          FORCE_ALL: ${{ github.event_name == 'workflow_dispatch' && inputs.force_all == 'true' && '1' || '0' }}
+        run: |
+          if [ "$FORCE_ALL" = "1" ]; then
+            FORCE_ALL=1 scripts/package_skills.sh
+            exit 0
+          fi
+
+          base="${GITHUB_EVENT_BEFORE:-}"
+          if [ -z "$base" ] || [[ "$base" =~ ^0+$ ]]; then
+            MISSING_ONLY=1 scripts/package_skills.sh
+          else
+            scripts/package_skills.sh "$base" "${GITHUB_SHA}"
+          fi
+
+      - name: Summarize
+        run: |
+          {
+            echo "## Skill packages"
+            echo
+            if compgen -G "dist/*.skill" > /dev/null; then
+              ls -la dist/*.skill | while read -r line; do echo "- \`$line\`"; done
+            else
+              echo "_No packages in dist/ (nothing changed or nothing missing)._"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload .skill artifacts
+        if: hashFiles('dist/*.skill') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-packages-${{ github.sha }}
+          path: dist/*.skill
+          if-no-files-found: ignore
+          retention-days: 30
