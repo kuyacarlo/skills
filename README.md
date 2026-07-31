@@ -1,8 +1,6 @@
 # Skills
 
-Personal + installable agent skills for Antigravity / Gemini / Cursor (and Copilot if present).
-
-**Claude Code is not managed by this repo.** Do not run installers that touch `~/.claude`.
+Personal + installable agent skills for Antigravity / Gemini / Cursor / Copilot / Claude / Codex / and other local harnesses when present.
 
 ---
 
@@ -18,12 +16,37 @@ Deploys symlinks into (when present):
 
 | Target | Path |
 |--------|------|
-| Agents / Codex-style | `~/.agents/skills/` |
+| Agents | `~/.agents/skills/` |
 | Gemini / Antigravity | `~/.gemini/config/skills/` |
 | Cursor | `~/.cursor/skills/` |
 | Copilot | `~/.copilot/skills/` |
+| Claude Code | `~/.claude/skills/` |
+| Codex | `~/.codex/skills/` |
+| Qwen | `~/.qwen/skills/` |
+| Kiro | `~/.kiro/skills/` |
+| Agent | `~/.agent/skills/` |
 
-Also links `AGENTS.md` into those roots.
+Also links `AGENTS.md` into those roots. Pack default `simplified-technical-english` always deploys.
+
+---
+
+## Skill packages (`.skill`)
+
+Each skill can be shipped as a zip renamed to `.skill` (SKILL.md at archive root).
+
+```bash
+FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild all → dist/*.skill
+./scripts/package_skills.sh               # only changed skills, or missing packages
+```
+
+CI (`.github/workflows/package-skills.yml`) runs on every push:
+
+1. Detect changes under `skills/<name>/`
+2. Rebuild `dist/<name>.skill` when that skill changed
+3. If unchanged, skip — unless `dist/<name>.skill` is missing
+4. Upload built packages as workflow artifacts
+
+Manual full rebuild: Actions → **Package skills** → Run workflow → `force_all=true`.
 
 ---
 
@@ -33,23 +56,19 @@ Also links `AGENTS.md` into those roots.
 |-------|------|--------|
 | `architectural-planning` | Mermaid plans, milestones, task matrices | user |
 | `code-simplification` | YAGNI / decision-ladder prune (ponytail-inspired) | model |
-| `continuous-improvement` | Capture learnings from test/lint loops | model |
+| `simplified-technical-english` | Default technical prose (ASD-STE100 Issue 9 practice) | model* |
 | `developer-profile` | Generate portable profile artifacts for agents | user / setup |
 | `ef-starter` | Executive-function system builder (submodule) | user |
-| `email-management` | Classify / route mail + filter configs | user |
 | `focus-management` | Energy diagnosis, reconnect logs, low-activation defaults | model* |
-| `git-signed-commit` | Git identity, GPG/SSH signing, custom hosts | user / setup |
 | `idea-evaluation` | Go / No-Go / Pivot grill | model |
 | `idea-generator` | Hackathon **ideation only** (not a full product factory) | user |
-| `output-compression` | Dense replies, less waffle (caveman-inspired) | model |
 | `specification-compliance` | SPEC.md drift / contract checks | model |
 | `specification-pipeline` | specify → clarify → plan → implement chain | user |
 | `free-tier-deploy` | Cloudflare / Vercel / Fly / Railway free-tier deploy patterns | model |
 | `personal-context` | Load systems/background context; keep data out of skill bodies | model |
 | `thorough-code-review` | Exhaustive citation-style review (generalized) | user |
-| `parallel-work-planning` | Multi-engineer interface contracts (generalized) | user |
 
-\* `focus-management` descriptions include demotivation / stuck triggers so agents can auto-reach for it.
+\* Auto-reach / always-on: `simplified-technical-english` is the pack default (always deployed by `./apply`). `focus-management` triggers on demotivation / stuck language.
 
 See [ORIGINS.md](ORIGINS.md) for upstream credits and submodule vs reframe policy.
 

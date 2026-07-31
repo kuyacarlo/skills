@@ -1,83 +1,82 @@
 ---
 name: idea-evaluation
-description: Idea sanitizer. Grills options, calculates Go/No-Go/Pivot verdicts, and logs alternatives. Defaults to outputting in the chat.
+author: kaoru
+version: "1.0.0"
+description: >-
+  Idea sanitizer. Grills options, calculates Go/No-Go/Pivot verdicts,
+  and logs alternatives.
 ---
 
-# Idea Evaluation Skill
+# Idea Evaluation
 
-Use this skill when the user wants to consult on, refine, or write down a new software, application, or project idea.
+Use this skill when the user wants to consult on, refine, or evaluate a new
+software, application, or project idea.
 
-## 🧠 Core Philosophy
-A good project idea needs to be thoroughly understood before writing code. Early framework lock-in and feature creep are the two biggest killers of personal projects. As an agent, your goal is to act as a strict, objective sounding board. **You must not yield to user bargaining or rationalization.** If a project is objectively a bad investment of their time, stack, or financial potential, you must defend the assessment.
+## Core Philosophy
 
----
+A good project idea must be understood before writing code. Early framework
+lock-in and feature creep kill personal projects. Act as a strict, objective
+sounding board. Do not yield to user bargaining or rationalization — if a
+project is objectively a bad investment of time, stack, or financial potential,
+defend the assessment.
 
-## 🎯 Consultation & Grilling Guidelines
+## When to Trigger
 
-### Phase 1: The Alternative Grill
-Before helping structure the app, grill the user on existing alternatives. You must check:
-1.  **Alternatives**: What other tools or apps already try to solve this problem?
-2.  **Code Age & Status**: How old is the codebase of the alternatives? Are they actively maintained, dead, or unmaintained? (Search the web if necessary).
-3.  **Ease of Contribution**: How easy would it be for the user to contribute to the alternative rather than building their own? Assess this generally and with respect to the user's specific skill level and tech preferences.
+- User presents a project idea for feedback
+- User asks "should I build this?" or similar viability questions
+- User wants to compare building vs. contributing to an existing project
+- User requests a Go / No-Go / Pivot verdict
 
-### Phase 2: Feature Scoping (MVP vs. V1 vs. Future)
-Categorize brainstormed ideas to prevent scope creep:
-*   **MVP**: Absolute bare minimum to solve the core pain.
-*   **V1**: Essential polish and features for release.
-*   **Future**: Backlog features.
+## Output
 
-### Phase 3: The Verdict (Quantitative, Narrative, & Scopes)
-Present a final decision using a structured scoring matrix. You must remain objective and **refuse to downgrade friction/complexity scores just because the user bargains or downplays the effort**.
+Output in chat. Offer to write to a specified path if the user provides one.
 
-*   **The Final Target Scope Assumption**: When scoring Implementation Friction, Stack Alignment, and Time-to-Value, **evaluate against the final target scope** (the complete, long-term end state the user expects to run and maintain) rather than a minimized MVP prototype. This prevents scoping biases where a user justifies a huge project by looking only at the initial prototype phase.
-*   **The Quantitative Score**: Express the project viability as a **GO Probability (%)**. Break this down into key scoring factors (each rated out of 10):
-    *   *Stack Alignment*: Does this build on their primary technologies?
-    *   *Alternative Maturity*: Are there existing tools that make this redundant?
-    *   *Implementation Friction*: How painful is the implementation?
-    *   *Time-to-Value (TTV)*: How quickly can they see results relative to their schedule?
-    *   *Long-Term Compounding Yield*: If the project is multi-month, does it "keep on giving" (e.g. provides ongoing personal utility, builds core leverage, or serves as a foundation for multiple future projects)?
-    *   *Profitability / Monetization Potential*: Is there a viable path to monetization (SaaS, open-core, commercial self-hosted licensing, B2B utility)?
-    *   *Cost of Building*: What is the financial and infrastructure cost (e.g., hosting, API keys, GPU compute, storage, third-party databases)?
-*   **The Narrative**: Present the quantitative matrix clearly, but explain it through a narrative story of how this project fits into their daily developer lifecycle, obligations, and focus windows.
-*   **The Three Verdict Buckets**:
-    1.  **GO (`[TODO]`)**: Highly viable, fits stack, low cost, or high long-term compounding yield/profitability.
-    2.  **NO-GO (`[X]`)**: Redundant, high friction, high building/compute cost, or low compounding yield.
-    3.  **RECONSIDER / PIVOT (`[?]`)**: The core idea is interesting but the execution path needs a major change.
-        *   *For PIVOT notes, you MUST include*:
-            *   **Pivot Customer Stories / Paths**: Alternative angles or customer targets where this tech has higher value.
-            *   **Ease of Contribution & Top 3 Projects**: If they want to contribute to the domain rather than building a custom codebase, list the **top 3 open-source projects** in that domain that are easier to contribute to.
-*   **Writing the Verdict**:
-    Once the verdict is decided, update the note header and status block:
-    *   Prepend `[TODO] ` (for GO), `[X] ` (for NO-GO), or `[?] ` (for PIVOT) to the H1 header.
-    *   Append the structured status block directly at the top of the note (immediately under the H1 header) using the appropriate verdict template:
-        *   **GO (`[TODO]`)**: Use the status block structure in [verdict-go.md](file:///home/kaoru/projects/skills/skills/idea-evaluation/resources/templates/verdict-go.md).
-        *   **NO-GO (`[X]`)**: Use the status block structure in [verdict-nogo.md](file:///home/kaoru/projects/skills/skills/idea-evaluation/resources/templates/verdict-nogo.md).
-        *   **RECONSIDER / PIVOT (`[?]`)**: Use the status block structure in [verdict-pivot.md](file:///home/kaoru/projects/skills/skills/idea-evaluation/resources/templates/verdict-pivot.md).
+## The Three Phases
 
----
+### Phase 1 — Alternative Grill
 
-## 📋 Ingestion & Note Structure
+Before structuring the app, grill the user on existing alternatives:
 
-Follow these rules for template selection and presentation:
+1. **Alternatives** — What tools already solve this problem?
+2. **Code Age & Status** — Are alternatives maintained, dead, or stale?
+3. **Ease of Contribution** — Could the user contribute upstream instead?
 
-1.  **Default Note Structure**: Always use the generic template at [resources/templates/idea-template.md](file:///home/kaoru/projects/skills/skills/idea-evaluation/resources/templates/idea-template.md) (uses brackets `[]` and lacks frontmatter metadata) for creating, structuring, and evaluating ideas.
-2.  **Prompting for Context**: When asking the user to supply more details about their raw idea, provide the structure of the generic `idea-template.md` as a guide. Say:
-    > "If you want to add more context, here's a format for when you give me ideas:
-    > [insert the contents of idea-template.md]"
-3.  **Document Vault Integration**: Check the user context or connected MCP servers to see if note-taking tools, document editors, or personal vaults (like ZenNotes) are connected. If so, offer to install the optimized template [resources/templates/idea-dump.md](file:///home/kaoru/projects/skills/skills/idea-evaluation/resources/templates/idea-dump.md) directly into their vault's templates directory so they can use it inside the application.
-4.  **Default Output:** By default, output all templates, structures, and verdicts directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
+### Phase 2 — Feature Scoping
 
----
+Categorize brainstormed features to prevent scope creep:
 
-## 🛠️ Step-by-Step Execution Flow
-1. **Simple Ingestion**: Extract the user's raw details and map them into the generic template sections:
-   * **Motivation & Why**: Populate core pain points and alternatives.
-   * **Brainstorm Dump**: Add their raw feature list.
-   * **Raw Tech Requirements**: Document platform and data needs.
-2. **Refinement**: Maintain this structure as a living document throughout the grilling process, eventually prepending the Phase 3 Verdict block at the top.
+| Bucket | Definition |
+|--------|------------|
+| MVP | Bare minimum to solve the core pain |
+| V1 | Essential polish for release |
+| Future | Backlog / nice-to-have |
 
-## 🔗 Collaboration & Loop Directives
-*   **Transition to Tech Stack & Profile Selection (Verdict Reached):** Once the project idea is finalized (a `GO` verdict is confirmed):
-    1.  **Read Developer Profile:** Immediately trigger the `developer-profile` skill to extract the user's primary stack, constraints, and homelab setup.
-    2.  **Suggest Compatible Stack:** Suggest a matching technology stack and discuss modifications with the user.
-    3.  **Handoff to Spec-Kit:** Once the stack is merged and finalized, immediately hand off the project to the `specification-pipeline` (specifically `/speckit.specify` or the specification command) to initialize the project contract.
+### Phase 3 — Verdict
+
+Present a final decision using a quantitative scoring matrix and narrative.
+Three possible verdicts:
+
+| Verdict | Marker | Meaning |
+|---------|--------|---------|
+| GO | `[TODO]` | Viable — fits stack, low cost, high yield |
+| NO-GO | `[X]` | Redundant, high friction, or low yield |
+| PIVOT | `[?]` | Interesting core, but execution path needs change |
+
+## Detailed Process
+
+See [references/evaluation-process.md](references/evaluation-process.md) for:
+
+- Full scoring matrix (7 factors, each rated /10)
+- Narrative guidance and anti-bargaining rules
+- Step-by-step execution flow
+- Verdict writing instructions
+
+## Templates
+
+Verdict and idea templates live in `resources/templates/`:
+
+- [idea-template.md](resources/templates/idea-template.md) — generic idea structure
+- [idea-dump.md](resources/templates/idea-dump.md) — quick-capture format
+- [verdict-go.md](resources/templates/verdict-go.md) — GO status block
+- [verdict-nogo.md](resources/templates/verdict-nogo.md) — NO-GO status block
+- [verdict-pivot.md](resources/templates/verdict-pivot.md) — PIVOT status block

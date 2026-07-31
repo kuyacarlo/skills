@@ -1,28 +1,47 @@
 ---
 name: specification-pipeline
-description: The complete specification pipeline. Automates project specification, design, and execution. Defaults to outputting in the chat.
+author: kaoru
+version: "1.0.0"
+description: >-
+  The complete specification pipeline. Automates project specification, design,
+  and execution through structured phases: specify, clarify, plan, checklist,
+  tasks, implement, analyze, and constitution sync. Produces SPEC.md contracts,
+  requirement clarifications, implementation plans, validation checklists,
+  dependency-ordered task lists, and artifact analysis. Chains phases
+  automatically using sensible defaults for minor ambiguities.
 ---
 
-# 🧭 Specification Pipeline
+# Specification Pipeline
 
-This skill houses the complete specification pipeline guidelines. When any specification command or phase is triggered, refer to the detailed instructions in the `references/` subdirectory:
-
-*   **Specify:** [specify.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/specify.md) - Creates the initial feature branch, outline, and drafts the `SPEC.md` contract.
-*   **Clarify:** [clarify.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/clarify.md) - Identifies gaps in requirements and resolves them with structured options.
-*   **Plan:** [plan.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/plan.md) - Estimates task durations and establishes implementation plans.
-*   **Checklist:** [checklist.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/checklist.md) - Generates validation check matrices.
-*   **Tasks:** [tasks.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/tasks.md) - Creates dependency-ordered `tasks.md`.
-*   **Tasks to Issues:** [taskstoissues.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/taskstoissues.md) - Converts tasks to tracking issues.
-*   **Implement:** [implement.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/implement.md) - Iterates through implementation checks.
-*   **Analyze:** [analyze.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/analyze.md) - Reviews and validates artifacts for consistency.
-*   **Constitution:** [constitution.md](file:///home/kaoru/projects/skills/skills/specification-pipeline/references/constitution.md) - Syncs project core principles.
+This skill houses the complete specification pipeline. When any specification
+phase is triggered, refer to the detailed instructions in the `references/`
+subdirectory.
 
 ---
 
-## 🧭 Automations Flow
-As defined in `AGENTS.md`, you must automatically chain these commands in sequence (specify → clarify → plan → implement) whenever possible, utilizing sensible defaults to resolve minor ambiguities instead of stopping the pipeline.
+## Phases
 
-## 🔗 Collaboration & Loop Directives
-*   **Architecture Flow (Specify & Plan Phases):** Run hand-in-hand with the `architectural-planning` skill. While drafting specs and plans, utilize it to generate visual Mermaid system flowcharts, database schemas, and data flow diagrams.
-*   **Implementation Hand-off (Tasks & Implement Phases):** When transitioning tasks to coding, use `specification-compliance` to verify API contract boundaries, `code-simplification` to prune speculative code wrappers, and `output-compression` to enforce concise, waffle-free diff outputs.
-*   **Default Output:** By default, output all spec updates, tasks, and checklists directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
+| Phase | Reference | Purpose |
+|-------|-----------|---------|
+| Specify | [references/specify.md](references/specify.md) | Create feature branch, outline, and draft the SPEC.md contract |
+| Clarify | [references/clarify.md](references/clarify.md) | Identify requirement gaps and resolve with structured options |
+| Plan | [references/plan.md](references/plan.md) | Estimate task durations and establish implementation plans |
+| Checklist | [references/checklist.md](references/checklist.md) | Generate validation check matrices |
+| Tasks | [references/tasks.md](references/tasks.md) | Create dependency-ordered tasks.md |
+| Tasks to Issues | [references/taskstoissues.md](references/taskstoissues.md) | Convert tasks to tracking issues |
+| Implement | [references/implement.md](references/implement.md) | Iterate through implementation checks |
+| Analyze | [references/analyze.md](references/analyze.md) | Review and validate artifacts for consistency |
+| Constitution | [references/constitution.md](references/constitution.md) | Sync project core principles |
+
+---
+
+## Execution Rules
+
+1. Chain phases in sequence (specify → clarify → plan → implement) automatically
+   when possible.
+2. Use sensible defaults to resolve minor ambiguities instead of halting the
+   pipeline.
+3. Stop and ask only when a major design fork requires an explicit user choice.
+4. Output all spec updates, tasks, and checklists directly in the chat unless a
+   target path is specified.
+5. Prefer compact diffs over full-file dumps when reporting changes.
