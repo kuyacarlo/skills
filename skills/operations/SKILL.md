@@ -46,6 +46,15 @@ story: "added auth middleware", "modernized all skills", "fixed DNS config."
 2. Signing fails: stop and report. Do not commit unsigned.
 3. Never `--no-verify` unless user says to skip hooks.
 
+## Authentication
+
+The user authenticates via SSH and GPG. Do not change these:
+
+- **Git remote**: SSH (`git@github.com:...`). Do not switch to HTTPS.
+- **Commit signing**: GPG (ed25519 key). Auto-signs via global config.
+- **Push**: requires SSH agent with loaded key. If push fails with permission
+  error, report — do not attempt HTTPS fallback or credential helpers.
+
 ## Guardrails
 
 1. Never force-push without explicit permission.
