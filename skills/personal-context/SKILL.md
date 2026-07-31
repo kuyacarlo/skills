@@ -22,8 +22,10 @@ Resolve in order:
 3. `~/.config/karlo/INVENTORY.md` (canonical profile + tools + hosts)
 4. `~/.config/karlo/AGENTS.md` (interaction preferences)
 5. `~/.config/karlo/SKILLS.md` (global vs scoped skill boundaries)
-6. `~/.config/karlo/agy-context.json` (machine profile)
-7. Repo `context/CONTEXT.md` only if the user said this project owns it
+6. `~/.config/karlo/OPERATIONS.md` (commit discipline, signing, session protocol)
+7. `~/.config/karlo/AUDIT.md` (session log — read last 1-3 entries only)
+8. `~/.config/karlo/agy-context.json` (machine profile)
+9. Repo `context/CONTEXT.md` only if the user said this project owns it
 
 If none exist: run `developer-profile` to generate artifacts, then write `CONTEXT.md`.
 
@@ -35,6 +37,8 @@ From context, extract and apply:
 - Primary stack + hard skips (e.g. Podman not Docker, self-hosted > SaaS)
 - Time/energy constraints (student schedule, ADHD protocols)
 - Homelab / infra defaults (thinkpad / idea / andromeda — see INVENTORY)
+- Operational rules: commit discipline, signing, guardrails (see OPERATIONS)
+- Session continuity: last audit entries for what happened recently (see AUDIT)
 - "When demotivated" protocol (hand off to `focus-management`)
 - Skills scope: never load Millia/work skills outside `~/work/millia/`
 
