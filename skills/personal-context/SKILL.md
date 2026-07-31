@@ -15,17 +15,18 @@ Keep who the user is out of skill bodies. Skills stay portable; context stays lo
 
 ## Locate context
 
+Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
+
 Resolve in order:
 
-1. `$PERSONAL_CONTEXT_PATH` if set
-2. `~/.config/karlo/CONTEXT.md` (short identity + defaults)
-3. `~/.config/karlo/INVENTORY.md` (canonical profile + tools + hosts)
-4. `~/.config/karlo/AGENTS.md` (interaction preferences)
-5. `~/.config/karlo/SKILLS.md` (global vs scoped skill boundaries)
-6. `~/.config/karlo/OPERATIONS.md` (commit discipline, signing, session protocol)
-7. `~/.config/karlo/AUDIT.md` (session log — read last 1-3 entries only)
-8. `~/.config/karlo/agy-context.json` (machine profile)
-9. Repo `context/CONTEXT.md` only if the user said this project owns it
+1. `$AGENT_CONFIG_HOME/CONTEXT.md` (short identity + defaults)
+2. `$AGENT_CONFIG_HOME/INVENTORY.md` (canonical profile + tools + hosts)
+3. `$AGENT_CONFIG_HOME/AGENTS.md` (interaction preferences)
+4. `$AGENT_CONFIG_HOME/SKILLS.md` (global vs scoped skill boundaries)
+5. `$AGENT_CONFIG_HOME/OPERATIONS.md` (commit discipline, signing, session protocol)
+6. `$AGENT_CONFIG_HOME/AUDIT.md` (session log — read last 1-3 entries only)
+7. `$AGENT_CONFIG_HOME/agy-context.json` (machine profile)
+8. Repo `context/CONTEXT.md` only if the user said this project owns it
 
 If none exist: run `developer-profile` to generate artifacts, then write `CONTEXT.md`.
 

@@ -1,6 +1,6 @@
 # Audit log format
 
-Append one entry to `~/.config/karlo/AUDIT.md` at the end of every session.
+Append one entry to `$AGENT_CONFIG_HOME/AUDIT.md` at the end of every session.
 
 ## Template
 

@@ -12,62 +12,69 @@ description: >-
 
 # Operations
 
-Persistent operational baseline for all agent sessions. These rules prevent
-work loss, enforce signing, and maintain an audit trail. They apply regardless
-of project, agent, or model.
+Operational baseline for all agent sessions. Prevents work loss, enforces
+signing, maintains an audit trail. Applies regardless of project, agent,
+or model.
 
-## Session start protocol
+Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
 
-1. Run `git status` in the working directory. Report if dirty.
-2. If uncommitted changes exist from a prior session, commit them before new work.
-3. Read the last 1-3 entries of `~/.config/karlo/AUDIT.md` for continuity.
-4. If HEAD is detached or the branch is >1 week stale, mention it.
-5. Run inventory checks (see below) if the repo is unfamiliar or after a long gap.
+## Session start
+
+1. Run `git status`. Report if dirty.
+2. Uncommitted changes from a prior session: commit before new work.
+3. Read last 1-3 entries of `$AGENT_CONFIG_HOME/AUDIT.md` for continuity.
+4. HEAD detached or branch >1 week stale: mention it.
+5. Unfamiliar repo or long gap: run inventory checks.
 
 ## Commit discipline
 
-1. Commit after every meaningful unit: file created, function complete, test passing, config changed.
-2. Never accumulate more than 3 modified files without committing.
-3. Never go more than 15 minutes of active work without a checkpoint commit.
-4. Stage specific files only. Never `git add .` or `git add -A` unless explicitly told to.
-5. Concise single-line messages. Body only for multi-file changes.
-6. If a commit message needs two topics, it should have been two commits.
+Group related changes into one cohesive commit. One commit should tell one
+story: "added auth middleware", "modernized all skills", "fixed DNS config."
+
+1. Batch 3-5 related file changes into a single commit.
+2. Each commit has one clear purpose. If the message needs "and" to describe
+   two unrelated things, split it.
+3. Stage specific files. Never `git add .` or `git add -A` unless told to.
+4. Concise subject line (under 72 chars). Add body for multi-file context.
+5. Do not leave dirty state for more than one logical task. Finish the unit,
+   commit, move on.
+6. Context about to be lost (restart, token limit): commit immediately as WIP.
 
 ## Signing
 
-1. All commits are signed. `commit.gpgsign = true` is global — do not override.
-2. If signing fails, stop and report. Do not commit unsigned.
-3. Never use `--no-verify` unless the user explicitly says to skip hooks.
+1. All commits signed. `commit.gpgsign = true` is global. Do not override.
+2. Signing fails: stop and report. Do not commit unsigned.
+3. Never `--no-verify` unless user says to skip hooks.
 
 ## Guardrails
 
 1. Never force-push without explicit permission.
 2. Never amend a pushed commit.
-3. Before destructive operations (reset, clean, branch -D, drop table), stash or confirm.
+3. Destructive operations (reset, clean, branch -D, drop): stash or confirm.
 4. Never commit secrets, tokens, or .env files.
 5. Do not modify files outside the working project unless the task requires it.
 
 ## Inventory checks
 
-Run when starting in an unfamiliar repo or after a long gap:
+Run on unfamiliar repo or after a long gap:
 
-1. Build/test config: `package.json`, `Makefile`, `Cargo.toml`, `pyproject.toml`, etc.
-2. CI presence: `.github/workflows/`, `.gitlab-ci.yml`.
-3. Contract file: `SPEC.md`, `AGENTS.md`, or similar.
-4. Branch protection: are we on main? Should we branch first?
+1. Build/test config: `package.json`, `Makefile`, `Cargo.toml`, `pyproject.toml`.
+2. CI: `.github/workflows/`, `.gitlab-ci.yml`.
+3. Contract: `SPEC.md`, `AGENTS.md`.
+4. Branch: on main? Should we branch first?
 
-## Session end protocol
+## Session end
 
-1. Commit all pending work. Do not leave dirty state.
-2. Append an entry to `~/.config/karlo/AUDIT.md` (see [references/audit-format.md](references/audit-format.md)).
-3. If work is incomplete, note it in the audit entry and leave a TODO in code.
+1. Commit all pending work. No dirty state left.
+2. Append entry to `$AGENT_CONFIG_HOME/AUDIT.md` (format: [references/audit-format.md](references/audit-format.md)).
+3. Incomplete work: note in audit entry and leave TODO in code.
 
-## When things break
+## Recovery
 
-1. Build fails after your change — fix before moving on.
-2. Cannot fix in 2 attempts — revert last commit and explain.
-3. Context about to be lost (restart, token limit) — commit immediately. WIP is better than lost.
+1. Build fails: fix before moving on.
+2. Cannot fix in 2 attempts: revert and explain.
+3. Context dying: commit WIP immediately.
 
 ## Priority
 
-These rules override agent defaults. If built-in behavior conflicts (e.g., wanting to batch changes), these rules win.
+These rules override agent defaults.
