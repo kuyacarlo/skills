@@ -28,40 +28,49 @@ Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
 
 ## Commit discipline
 
-Group related changes into one cohesive commit. One commit should tell one
-story: "added auth middleware", "modernized all skills", "fixed DNS config."
+Group related changes into one cohesive commit. One commit tells one story.
 
 1. Batch 3-5 related file changes into a single commit.
-2. Each commit has one clear purpose. If the message needs "and" to describe
-   two unrelated things, split it.
+2. One clear purpose per commit. If the message needs "and" for two unrelated
+   things, split it.
 3. Stage specific files. Never `git add .` or `git add -A` unless told to.
-4. Concise subject line (under 72 chars). Add body for multi-file context.
-5. Do not leave dirty state for more than one logical task. Finish the unit,
-   commit, move on.
-6. Context about to be lost (restart, token limit): commit immediately as WIP.
-
-## Signing
-
-1. All commits signed. `commit.gpgsign = true` is global. Do not override.
-2. Signing fails: stop and report. Do not commit unsigned.
-3. Never `--no-verify` unless user says to skip hooks.
-
-## Authentication
-
-The user authenticates via SSH and GPG. Do not change these:
-
-- **Git remote**: SSH (`git@github.com:...`). Do not switch to HTTPS.
-- **Commit signing**: GPG (ed25519 key). Auto-signs via global config.
-- **Push**: requires SSH agent with loaded key. If push fails with permission
-  error, report — do not attempt HTTPS fallback or credential helpers.
+4. Subject line under 72 chars. Body for multi-file context.
+5. Finish the logical unit, commit, move on. Do not leave dirty state across
+   unrelated tasks.
+6. Context about to be lost (restart, token limit): commit WIP immediately.
 
 ## Guardrails
 
-1. Never force-push without explicit permission.
-2. Never amend a pushed commit.
-3. Destructive operations (reset, clean, branch -D, drop): stash or confirm.
-4. Never commit secrets, tokens, or .env files.
-5. Do not modify files outside the working project unless the task requires it.
+Check these once at session start. Note findings silently and follow throughout.
+
+### Auth and signing
+
+- Git remotes use SSH (`git@github.com:...`). Do not switch to HTTPS.
+- Commits are GPG-signed (ed25519). `commit.gpgsign = true` is global.
+- If signing or push fails: stop and report. Do not commit unsigned. Do not
+  attempt HTTPS fallback or credential helpers.
+- Never `--no-verify` unless user says to skip hooks.
+
+### Destructive operations
+
+- Never force-push without explicit permission.
+- Never amend a pushed commit.
+- Destructive ops (reset, clean, branch -D, drop): stash or confirm first.
+- Never commit secrets, tokens, or .env files.
+- Do not modify files outside the working project unless the task requires it.
+
+### Workflow hygiene
+
+- Branch naming: use `feat/`, `fix/`, `chore/` prefixes.
+- Lockfiles: commit `pnpm-lock.yaml` in the same commit as `package.json`
+  changes. Never regenerate without cause.
+- Submodules: do not accidentally commit a submodule pointer bump. If a
+  submodule is dirty, report it separately.
+- Container engine: use `podman`, not `docker`, in commands and generated config.
+- Package manager: use `pnpm` exclusively. Never fall back to `npm` or `npx`.
+- Test before push: run the project's test suite or build before pushing.
+  If `act` is available, prefer a dry-run to catch CI errors locally.
+- After PR merges: prompt to delete local and remote branch.
 
 ## Inventory checks
 
