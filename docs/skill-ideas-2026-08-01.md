@@ -81,6 +81,8 @@ handoff protocol, student+CTO+intern competing deadlines, ADHD completion dropou
 
 ## Your call
 
+**Started 2026-08-01:** `1` context-handoff — skill at `skills/context-handoff/`.
+
 Reply with numbers. Examples:
 - "1, 5, 6, 13 — hit" 
 - "8, 19 — not so much"
