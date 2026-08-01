@@ -1,11 +1,9 @@
 # testing workflows
 sandbox/
 
-# generated skill packages (local); CI artifacts + tracked copies live in dist/
-*.skill
-!dist/*.skill
-
-# keep dist/ in git even when empty of packages
+# generated skill packages — build artifacts, not tracked
+# CI uploads them via actions/upload-artifact
+dist/*
 !dist/.gitkeep
 
 # local / personal (do not publish)
