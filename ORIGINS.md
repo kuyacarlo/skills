@@ -4,28 +4,36 @@ Policy:
 
 - **Works well as-is and not heavy** → git submodule (keep upstream title).
 - **Can be smaller / renamed for clarity** → local reframe + credit here.
-- **Private end-to-end factories** → stay in their own repos; they may depend on *this* pack. Never copy them into `skills/`.
+- **Private end-to-end factories** → stay in their own repos; never vendor into `skills/`.
 
 | Local skill | Kind | Upstream / source |
 |-------------|------|-------------------|
 | `ef-starter` | submodule | [DoxxedDoxie/ef-skill](https://github.com/DoxxedDoxie/ef-skill) |
 | `code-simplification` | reframe | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) |
-| `output-compression` | reframe | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) |
 | `specification-compliance` | reframe | [JuliusBrussee/cavekit](https://github.com/JuliusBrussee/cavekit) |
-| `specification-pipeline` | reframe | [github/spec-kit](https://github.com/github/spec-kit) (thin wrapper + refs) |
-| `idea-generator` | reframe | Personal ideation slice (not a product factory) |
+| `specification-pipeline` | reframe | [github/spec-kit](https://github.com/github/spec-kit) |
+| `free-tier-deploy` | reframe | Fly / CF / Vercel / Railway patterns |
+| `thorough-code-review` | reframe | Process generalized |
+| `idea-generator` | reframe | Personal ideation slice |
 | `idea-evaluation` | original | — |
 | `focus-management` | original | — |
 | `architectural-planning` | original | — |
 | `continuous-improvement` | original | — |
-| `developer-profile` | original | Generator only; personal data lives outside the skill |
-| `personal-context` | original | Points at `~/.config/karlo/` (or `PERSONAL_CONTEXT_PATH`) |
-| `email-management` | original | — |
+| `developer-profile` | original | Data outside skill |
+| `personal-context` | original | `~/.config/karlo/` |
 | `git-signed-commit` | original | — |
-| `free-tier-deploy` | reframe | Generalized from Fly ops patterns + CF Workers / Vercel / Railway |
-| `thorough-code-review` | reframe | Process generalized; no product-domain content |
-| `parallel-work-planning` | reframe | Process generalized; no product-domain content |
+| `operations` | original | — |
+| `agent-fleet` | original | — |
+| `context-handoff` | original | — |
+| `engineering-rulebook` | original | — |
+| `simplified-technical-english` | original | ASD-STE100 practice |
 
-Optional installs (not vendored):
+## Retired (2026-08-10)
 
-- [mattpocock/skills](https://github.com/mattpocock/skills) via `npx skills add mattpocock/skills`
+| Skill | Why removed |
+|-------|-------------|
+| `output-compression` | Overlaps STE; thin caveman reframe |
+| `email-management` | Niche, unused |
+| `parallel-work-planning` | Superseded by `agent-fleet` + `context-handoff` |
+
+Optional external: [mattpocock/skills](https://github.com/mattpocock/skills).
