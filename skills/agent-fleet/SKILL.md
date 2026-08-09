@@ -1,8 +1,21 @@
 ---
 name: agent-fleet
 author: kaoru
-version: "1.0.0"
-description: Use when several AI coding agents work one repository in parallel git worktrees and someone must answer "what is the true state?" — who holds which branch, what is actually pushed, which claims are stale, what work is invisible. Also covers running a TREE of agents, where each worker spawns its own sub-fleet. Triggers on "who is working on what", "reconcile the claims", "is that branch done", "what is blocked", "did that agent push anything", "coordination folder", "orchestrator", "fan out subagents", "prune merged worktrees", "why is the issue still open after we merged". Covers the file-based coordination protocol, recursive delegation, the measurement bugs that silently under-report work, shared-resource hazards, and PR grain and linking.
+version: "1.1.0"
+description: >-
+  Use when several AI coding agents work one repository in parallel git
+  worktrees and someone must answer "what is the true state?" — who holds which
+  branch, what is actually pushed, which claims are stale, what work is
+  invisible. Also covers running a TREE of agents, where each worker spawns its
+  own sub-fleet, and a file-based cross-agent work queue (claim/lease/handoff)
+  for agy, Cursor, Kiro, and similar CLIs. Triggers on "who is working on what",
+  "reconcile the claims", "is that branch done", "what is blocked", "did that
+  agent push anything", "coordination folder", "orchestrator", "fan out
+  subagents", "prune merged worktrees", "why is the issue still open after we
+  merged", "agent work queue", "taskboard", "claim the next job", "ticket rail".
+  Covers the file-based coordination protocol, recursive delegation, the
+  measurement bugs that silently under-report work, shared-resource hazards, PR
+  grain and linking, and when to escalate to Orca orchestration vs file claims.
 ---
 
 # Agent Fleet Coordination
@@ -37,6 +50,21 @@ look inside the repo. State the absolute path when handing over.
 
 **Claim a path glob before editing it.** Two agents editing one file is the
 failure this whole directory exists to prevent.
+
+## Cross-agent work queue
+
+When jobs must move between **different tools or sessions** (agy ↔ Cursor ↔
+Kiro), keep a small file queue under `.coordination/queue/` — inbox → claimed →
+blocked → done — with claim tokens and short leases. Same mental model as a
+ticket rail; no server required.
+
+Full protocol, job frontmatter, optional `tb` shim, and **when to use Orca
+instead**: [references/work-queue.md](references/work-queue.md).  
+Job stub: [templates/queue-job.md](templates/queue-job.md).  
+Session/branch survival docs: skill `context-handoff`.
+
+**Do not** stand up a Taskboard HTTP service unless the human asked for one.
+Files first.
 
 ## Running a TREE, not a flat fleet
 
@@ -246,11 +274,14 @@ templates/decisions.md          the append-only log, with format and examples
 templates/VERIFICATION.md       the testing contract — FILL THIS IN FIRST
 templates/claim.md              one per agent
 templates/HANDOFF.md            blackout-survival doc, one per agent
+templates/queue-job.md          one job in .coordination/queue/{inbox,…}/
+references/work-queue.md        cross-agent queue protocol + Orca boundary
 scripts/fleet-monitor.sh        the watchdog described below
 ```
 
-Copy the five templates into `<workspace>/.coordination/` when standing up a
-fleet. They encode the shape; the comments in them encode the mistakes.
+Copy the templates into `<workspace>/.coordination/` when standing up a
+fleet (add `queue/inbox` etc. when using the work queue). They encode the
+shape; the comments in them encode the mistakes.
 
 **Fill in `VERIFICATION.md` before the first agent starts.** It is the only one
 that must be complete up front — the others accumulate as work proceeds.

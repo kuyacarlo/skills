@@ -65,6 +65,10 @@ Model/effort if relevant. Open questions.
 
 ## Related skills
 
+- `agent-fleet` — multi-agent claims, trees, and file work queue
+  (`references/work-queue.md`); use handoff *inside* a claimed job or branch
 - `operations` — session start/end, commit discipline
 - `specification-pipeline` — SPEC before big features
-- `personal-context` — who Karlo is / stack defaults
+- `personal-context` — identity / stack defaults (local context files)
+- Orca orchestration — live DAG / supervise only when inside Orca; otherwise
+  prefer agent-fleet files + this handoff
