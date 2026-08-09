@@ -12,7 +12,7 @@ Sources:
 | # | Skill | What it does | Why | Source |
 |---|-------|-------------|-----|--------|
 | 1 | ~~`context-handoff`~~ | **Shipped** — `skills/context-handoff` (+ fleet work-queue) | — | context |
-| 2 | `homelab-watchdog` | **Skipped** — not wanted | — | context |
+| 2 | `homelab-watchdog` | Monitoring / health / alert loop for Podman fleet | Still open (not decided) | context |
 | 3 | `backup-rotation` | **Deferred** — no budget for backup infra yet | — | context |
 | 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | Unsure — park | context |
 | 5 | ~~`branch-lifecycle`~~ | **Shipped** — `skills/branch-lifecycle` | — | ecosystem |
