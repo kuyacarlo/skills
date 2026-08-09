@@ -20,6 +20,8 @@ Pack default: **`simplified-technical-english`** always deploys.
 |-------|------|
 | `agent-fleet` | Multi-agent claims, trees, file work queue |
 | `context-handoff` | HANDOFF.md across agent/tool switches |
+| `branch-lifecycle` | Start → PR → merge → delete/prune WIP |
+| `verification-before-completion` | Done-gate: your lane + local hooks, not all-CI |
 | `engineering-rulebook` | When to act alone; proof; silent failure |
 | `operations` | Commits, signing, session start/end |
 | `personal-context` | Load `~/.config/karlo` (data stays outside skills) |

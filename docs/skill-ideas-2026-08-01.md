@@ -12,11 +12,11 @@ Sources:
 | # | Skill | What it does | Why | Source |
 |---|-------|-------------|-----|--------|
 | 1 | ~~`context-handoff`~~ | **Shipped** — `skills/context-handoff` (+ fleet work-queue) | — | context |
-| 2 | `homelab-watchdog` | Monitoring checks, health dashboards, alerting for Podman containers | 51 containers with no observability = silent death. | context |
-| 3 | `backup-rotation` | 3-2-1 strategy, restic/borgmatic configs, scheduled verification | One disk failure away from losing everything. | context |
-| 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | "Patch Tuesday" for 51 containers is tedious manual work. | context |
-| 5 | `branch-lifecycle` | Full arc: checkout → commits → PR → merge → cleanup | ADHD WIP branch accumulation. Closes the loop. | ecosystem |
-| 6 | `verification-before-completion` | Final checklist gate before marking done: tests, types, spec | ADHD brains skip the last 10% when dopamine drops. | ecosystem |
+| 2 | `homelab-watchdog` | **Skipped** — not wanted | — | context |
+| 3 | `backup-rotation` | **Deferred** — no budget for backup infra yet | — | context |
+| 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | Unsure — park | context |
+| 5 | ~~`branch-lifecycle`~~ | **Shipped** — `skills/branch-lifecycle` | — | ecosystem |
+| 6 | ~~`verification-before-completion`~~ | **Shipped** — scoped done-gate (not all-CI) | — | ecosystem |
 
 ## Tier 2: Strong fit, solves recurring annoyances
 

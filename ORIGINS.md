@@ -25,6 +25,8 @@ Policy:
 | `operations` | original | — |
 | `agent-fleet` | original | — |
 | `context-handoff` | original | — |
+| `branch-lifecycle` | original | — |
+| `verification-before-completion` | reframe | obra/superpowers-style gate + rulebook baselines |
 | `engineering-rulebook` | original | — |
 | `simplified-technical-english` | original | ASD-STE100 practice |
 
