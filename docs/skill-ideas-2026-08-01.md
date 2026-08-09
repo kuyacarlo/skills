@@ -11,7 +11,7 @@ Sources:
 
 | # | Skill | What it does | Why | Source |
 |---|-------|-------------|-----|--------|
-| 1 | `context-handoff` | Structured handoff docs when switching agents mid-task | You use 4+ agents daily. Context evaporates at every switch. | context |
+| 1 | ~~`context-handoff`~~ | **Shipped** — `skills/context-handoff` (+ fleet work-queue) | — | context |
 | 2 | `homelab-watchdog` | Monitoring checks, health dashboards, alerting for Podman containers | 51 containers with no observability = silent death. | context |
 | 3 | `backup-rotation` | 3-2-1 strategy, restic/borgmatic configs, scheduled verification | One disk failure away from losing everything. | context |
 | 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | "Patch Tuesday" for 51 containers is tedious manual work. | context |

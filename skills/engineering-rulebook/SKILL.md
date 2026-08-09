@@ -363,7 +363,7 @@ These are owned elsewhere in this pack. Go to them; do not restate them here.
 | Git profiles, signing keys, sign-offs, SSH host aliases | **`git-signed-commit`** |
 | The build/test/lint iteration loop, and project-scoped lessons in `.agents/LEARNINGS.md` | **`continuous-improvement`** |
 | Many agents on one repository: claim files, worktree reconciliation, measuring what an agent actually pushed, PR grain, why a merged PR failed to close its issue | **`agent-fleet`** |
-| Splitting work across people or agents: interface contracts, streams, handoff order | **`parallel-work-planning`** |
+| Splitting work across agents / worktrees / queues | **`agent-fleet`** (+ `context-handoff`) |
 | Reviewing someone else's diff with file:line citations and severity ranking | **`thorough-code-review`** |
 | Drift between code and `SPEC.md`, scope creep, contract audits | **`specification-compliance`** |
 | Pruning bloat, YAGNI ladder, delete lists | **`code-simplification`** |

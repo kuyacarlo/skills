@@ -1,46 +1,32 @@
 ---
 name: continuous-improvement
-description: Continuous improvement and self-reinforcing iteration loop. Parses test/lint outputs, records lessons learned to .agents/LEARNINGS.md, and optimizes code structure incrementally.
+author: kaoru
+version: "1.1.0"
+description: >-
+  Build/test/lint iteration loop with a project blackboard at
+  `.agents/LEARNINGS.md`. Use when fixing failures, refactoring under tests, or
+  recording lessons that die with the task. Triggers on LEARNINGS.md, patch
+  failures, self-reinforcing loop, record what broke.
 ---
 
-# 🔄 Continuous Improvement & Self-Reinforcing Loop
+# Continuous improvement
 
-Use this skill when you need to run compilation checks, patch test failures, lint code, or perform refactoring on an existing codebase. This skill enforces a self-reinforcing feedback loop via a shared blackboard file: `.agents/LEARNINGS.md`.
+Project-scoped lessons only. Durable cross-repo rules go to
+`engineering-rulebook` (see that skill’s three-way route).
 
----
+## Workflow
 
-## 📋 The Self-Reinforcing Workflow
+1. **Load** — If `.agents/LEARNINGS.md` exists, treat it as constraints alongside
+   SPEC/AGENTS.
+2. **Patch** — Parse tool output for file/line/error. Change one contiguous
+   block; re-run tests after each change. Check LEARNINGS before repeating a
+   known trap.
+3. **Record** — After green: append learnings, refactor stats, next cautions.
+   Use `resources/LEARNINGS_template.md` when present. Keep entries short
+   (bullets + paths). Prefer STE density over prose.
 
-### 1. Startup: Load Existing Constraints
-Before writing any code or updating specifications:
-1. Check if `.agents/LEARNINGS.md` exists in the active workspace.
-2. Read it to load historical failure modes, rules, and guidelines accumulated from previous runs.
-3. Treat those guidelines as strict project constraints (in addition to `SPEC.md` and `AGENTS.md`).
+## Boundaries
 
-### 2. Execution: Parse & Patch Failures Incremental
-When running unit tests or linters:
-1. Parse the command output to identify the exact file, line number, and error type (do not guess).
-2. Apply modifications in small, contiguous blocks.
-3. Run tests/builds *after every single change* to isolate variables.
-4. If a test fails, verify that the failure is not a regression of a previously resolved item in `LEARNINGS.md`.
-
-### 3. Closure: Update the Blackboard
-After code is verified and unit tests pass:
-1. Create or update `.agents/LEARNINGS.md` in the project root.
-2. Structure it using the layout in `resources/LEARNINGS_template.md`.
-3. Document:
-   * **Learnings:** Critical edge cases or compiler traps found (e.g., "Vitest fails if React is imported but unused when noUnusedLocals is enabled").
-   * **Refactor Stats:** LOC changed, tests added, and build performance changes.
-   * **Next Guidelines:** Actions or cautions for the next agent/session.
-
----
-
-## 🛡️ Integration Guidelines
-
-*   **With `specification-compliance`:** If a test failure requires a design change, update both `SPEC.md` and `.agents/LEARNINGS.md` to keep documentation and memory synced.
-*   **With `code-simplification`:** Ensure refactored code remains minimal. Do not add wrappers, utilities, or abstractions that are not explicitly requested by the specs or required to fix an error.
-*   **With `output-compression`:** Format `LEARNINGS.md` compactly. Use brief bullet points, lists, and direct trace citations to preserve context tokens.
-
-### 4. Output Configuration
-Check the user context or connected MCP servers to see if note-taking tools or personal vaults are available. If so, automatically log or copy lessons learned to those databases. By default, output learnings directly in the chat, creating a markdown artifact only when necessary (in lieu of chat).
-
+- Design change required → update SPEC + LEARNINGS (`specification-compliance`).
+- Stay minimal when refactoring (`code-simplification`).
+- Do not invent vault/MCP logging unless the user asked.
