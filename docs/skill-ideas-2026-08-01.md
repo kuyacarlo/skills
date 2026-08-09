@@ -83,6 +83,10 @@ handoff protocol, student+CTO+intern competing deadlines, ADHD completion dropou
 
 **Started 2026-08-01:** `1` context-handoff — skill at `skills/context-handoff/`.
 
+**2026-08-10:** Primer + open grill (answer anytime) →
+[skill-backlog-grill-2026-08-10.md](./skill-backlog-grill-2026-08-10.md).
+Do not fan out Tier 2–4 skills until that grill has answers.
+
 Reply with numbers. Examples:
 - "1, 5, 6, 13 — hit" 
 - "8, 19 — not so much"
