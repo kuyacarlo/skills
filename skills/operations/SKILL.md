@@ -20,13 +20,14 @@ Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
 
 ## Session start
 
-1. Run `git status`. Report if dirty.
-2. Uncommitted changes from a prior session: commit before new work.
-3. Read last 1-3 entries of `$AGENT_CONFIG_HOME/AUDIT.md` for continuity.
-4. Load `$AGENT_CONFIG_HOME` via `personal-context` (STACK, DECISIONS, AGENTS
+1. Run `$AGENT_CONFIG_HOME/bin/karlo-sync pull` (skip if dirty; never force).
+2. Run `git status` in the project worktree. Report if dirty.
+3. Uncommitted changes from a prior session: commit before new work.
+4. Read last 1-3 entries of `$AGENT_CONFIG_HOME/AUDIT.md` for continuity.
+5. Load `$AGENT_CONFIG_HOME` via `personal-context` (STACK, DECISIONS, AGENTS
    precedence). Repo lockfiles override greenfield defaults.
-5. HEAD detached or branch >1 week stale: mention it.
-6. Unfamiliar repo or long gap: run inventory checks.
+6. HEAD detached or branch >1 week stale: mention it.
+7. Unfamiliar repo or long gap: run inventory checks.
 
 ## Commit discipline
 
