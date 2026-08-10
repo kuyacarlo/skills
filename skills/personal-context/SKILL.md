@@ -21,14 +21,15 @@ Resolve in order:
 
 1. `$AGENT_CONFIG_HOME/CONTEXT.md` (short identity + greenfield defaults)
 2. `$AGENT_CONFIG_HOME/AGENTS.md` (precedence, tone, delivery, loop closure)
-3. `$AGENT_CONFIG_HOME/STACK.md` (what works / fails / quirks)
-4. `$AGENT_CONFIG_HOME/DECISIONS.md` (why X not Y — last 5–10 entries if long)
-5. `$AGENT_CONFIG_HOME/INVENTORY.md` (host and tool gotchas)
-6. `$AGENT_CONFIG_HOME/SKILLS.md` (when to load which skill)
-7. `$AGENT_CONFIG_HOME/OPERATIONS.md` (commit discipline, signing, session protocol)
-8. `$AGENT_CONFIG_HOME/AUDIT.md` (session log — read last 1-3 entries only)
-9. `$AGENT_CONFIG_HOME/agy-context.json` (machine profile)
-10. Repo `context/CONTEXT.md` only if the user said this project owns it
+3. `$AGENT_CONFIG_HOME/MODELS.md` (which seat/model for which job — all vendors)
+4. `$AGENT_CONFIG_HOME/STACK.md` (what works / fails / quirks)
+5. `$AGENT_CONFIG_HOME/DECISIONS.md` (why X not Y — last 5–10 entries if long)
+6. `$AGENT_CONFIG_HOME/INVENTORY.md` (host and tool gotchas)
+7. `$AGENT_CONFIG_HOME/SKILLS.md` (when to load which skill)
+8. `$AGENT_CONFIG_HOME/OPERATIONS.md` (commit discipline, signing, session protocol)
+9. `$AGENT_CONFIG_HOME/AUDIT.md` (session log — read last 1-3 entries only)
+10. `$AGENT_CONFIG_HOME/agy-context.json` (machine profile)
+11. Repo `context/CONTEXT.md` only if the user said this project owns it
 
 If none exist: run `developer-profile` to generate artifacts, then write `CONTEXT.md`.
 
