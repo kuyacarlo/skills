@@ -1,7 +1,7 @@
 ---
 name: operations
 author: kaoru
-version: "1.0.0"
+version: "1.1.0"
 description: >-
   Global agent operational rules. Enforces commit discipline, GPG signing,
   session start/end protocol, inventory checks, and audit logging. Always active.
@@ -23,8 +23,10 @@ Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
 1. Run `git status`. Report if dirty.
 2. Uncommitted changes from a prior session: commit before new work.
 3. Read last 1-3 entries of `$AGENT_CONFIG_HOME/AUDIT.md` for continuity.
-4. HEAD detached or branch >1 week stale: mention it.
-5. Unfamiliar repo or long gap: run inventory checks.
+4. Load `$AGENT_CONFIG_HOME` via `personal-context` (STACK, DECISIONS, AGENTS
+   precedence). Repo lockfiles override greenfield defaults.
+5. HEAD detached or branch >1 week stale: mention it.
+6. Unfamiliar repo or long gap: run inventory checks.
 
 ## Commit discipline
 
@@ -62,12 +64,16 @@ Check these once at session start. Note findings silently and follow throughout.
 ### Workflow hygiene
 
 - Branch naming: use `feat/`, `fix/`, `chore/` prefixes.
-- Lockfiles: commit `pnpm-lock.yaml` in the same commit as `package.json`
+- Lockfiles: follow the repo. Commit the lockfile the project already uses
+  (`pnpm-lock.yaml`, `package-lock.json`, …) in the same commit as manifest
   changes. Never regenerate without cause.
+- Greenfield JS/TS I scaffold: **pnpm**. Existing npm/yarn repos: keep their
+  package manager. Chat "never npm" does not rewrite an inherited scaffold —
+  stop and ask (`AGENTS.md` precedence in `$AGENT_CONFIG_HOME`).
 - Submodules: do not accidentally commit a submodule pointer bump. If a
   submodule is dirty, report it separately.
-- Container engine: use `podman`, not `docker`, in commands and generated config.
-- Package manager: use `pnpm` exclusively. Never fall back to `npm` or `npx`.
+- Container engine: prefer `podman` for greenfield and generated config. Follow
+  the repo when it already depends on Docker-specific behavior.
 - Test before push: run the project's test suite or build before pushing.
   If `act` is available, prefer a dry-run to catch CI errors locally.
 - After PR merges: prompt to delete local and remote branch.
@@ -84,8 +90,14 @@ Run on unfamiliar repo or after a long gap:
 ## Session end
 
 1. Commit all pending work. No dirty state left.
-2. Append entry to `$AGENT_CONFIG_HOME/AUDIT.md` (format: [references/audit-format.md](references/audit-format.md)).
-3. Incomplete work: note in audit entry and leave TODO in code.
+2. **Loop closure:** if the session taught a durable trap, false assumption, or
+   non-obvious command — update `STACK.md` / `DECISIONS.md` / `INVENTORY.md` /
+   a skill you own / a repo script **before** claiming DONE. "Update later" is
+   incomplete work.
+3. If you edited skills or `$AGENT_CONFIG_HOME` prose, run
+   `python3 $AGENT_CONFIG_HOME/bin/prove-prose.py` and fix failures.
+4. Append entry to `$AGENT_CONFIG_HOME/AUDIT.md` (format: [references/audit-format.md](references/audit-format.md)).
+5. Incomplete work: note in audit entry and leave TODO in code.
 
 ## Recovery
 

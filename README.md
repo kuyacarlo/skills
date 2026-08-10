@@ -1,16 +1,37 @@
 # Skills
 
-Installable agent skills for Cursor / Claude / Gemini / Kiro / Codex and other
-local harnesses.
+Installable agent skills for local harnesses (Agents, Gemini/Antigravity, Cursor,
+Copilot). Personal data stays in `~/.config/karlo` — not in this repo.
 
 ```bash
 ./apply -y        # enable all, deploy
 ./apply           # interactive
 FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
+./scripts/check_readme_skills.sh          # README table vs skills/ must match
 ```
 
-Symlinks land under `~/.agents`, `~/.cursor`, `~/.claude`, `~/.kiro`, … when present.
-Pack default: **`simplified-technical-english`** always deploys.
+## What `./apply` actually deploys
+
+Symlinks land only under these roots **when the directory already exists**:
+
+| Target | Path |
+|--------|------|
+| Agents | `~/.agents/skills/` |
+| Gemini / Antigravity | `~/.gemini/config/skills/` |
+| Cursor | `~/.cursor/skills/` |
+| Copilot | `~/.copilot/skills/` |
+
+Also links this repo's `AGENTS.md` into each target root.
+
+**Not managed by `./apply`:** `~/.claude`, `~/.codex`, `~/.kiro`, `~/.qwen`,
+`~/.agent`, and Cursor's product dir `~/.cursor/skills-cursor`. Those are
+vendor/manual. Claude Code skills stay out of this installer on purpose — do not
+edit vendor symlinks in place; point lessons at a skill you own or at
+`~/.config/karlo`.
+
+Pack default: **`simplified-technical-english`** always deploys when enabled (default).
+
+Cursor agents that load `~/.agents/skills` pick up this pack after `./apply`.
 
 ---
 
@@ -19,24 +40,24 @@ Pack default: **`simplified-technical-english`** always deploys.
 | Skill | Role |
 |-------|------|
 | `agent-fleet` | Multi-agent claims, trees, file work queue |
-| `context-handoff` | HANDOFF.md across agent/tool switches |
-| `engineering-rulebook` | When to act alone; proof; silent failure |
-| `operations` | Commits, signing, session start/end |
-| `personal-context` | Load `~/.config/karlo` (data stays outside skills) |
-| `developer-profile` | Generate portable profile artifacts (setup) |
-| `ef-starter` | Executive-function system (submodule) |
-| `focus-management` | Energy / demotivation / reconnect logs |
-| `specification-pipeline` | specify → clarify → plan → implement |
-| `specification-compliance` | SPEC.md drift checks |
 | `architectural-planning` | Mermaid plans, milestones |
-| `thorough-code-review` | Citation-style review |
 | `code-simplification` | YAGNI prune |
+| `context-handoff` | HANDOFF.md across agent/tool switches |
 | `continuous-improvement` | `.agents/LEARNINGS.md` loop |
-| `idea-generator` | Hackathon ideation only |
-| `idea-evaluation` | Go / No-Go / Pivot |
+| `developer-profile` | Generate portable profile artifacts (setup) |
+| `ef-starter` | Executive-function system (submodule; directory name executive-function) |
+| `engineering-rulebook` | When to act alone; proof; silent failure; skill upkeep |
+| `focus-management` | Energy / demotivation / reconnect logs |
 | `free-tier-deploy` | CF / Vercel / Fly / Railway / Render |
 | `git-signed-commit` | GPG / profiles / SSH host aliases |
+| `idea-evaluation` | Go / No-Go / Pivot |
+| `idea-generator` | Hackathon ideation only |
+| `operations` | Commits, signing, session start/end, loop closure |
+| `personal-context` | Load `~/.config/karlo` (data stays outside skills) |
 | `simplified-technical-english` | Default dense prose (always on) |
+| `specification-compliance` | SPEC.md drift checks |
+| `specification-pipeline` | specify → clarify → plan → implement |
+| `thorough-code-review` | Citation-style review |
 
 \* Auto: STE always on; `focus-management` on stuck/low-energy language.
 
@@ -48,7 +69,8 @@ Credits / submodule policy: [ORIGINS.md](ORIGINS.md).
 
 | Scope | Where |
 |-------|--------|
-| Agent-wide | `./apply` → home skill dirs |
+| Agent-wide | `./apply` → home skill dirs above |
+| Personal context | Private `~/.config/karlo` (Forgejo `karlo-context`) |
 | Project | `.agents/skills`, repo `AGENTS.md` |
 
 If it would be wrong in another repo, keep it project-local.

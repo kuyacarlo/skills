@@ -18,7 +18,8 @@ Usage: ./apply [-y] [-v]
   -h, --help     Show help
 
 Targets (if present): ~/.agents, ~/.gemini/config, ~/.cursor, ~/.copilot
-Explicitly excluded: ~/.claude (do not manage Claude Code from this repo)
+Explicitly excluded: ~/.claude, ~/.codex, ~/.kiro, ~/.qwen, ~/.agent,
+~/.cursor/skills-cursor (Cursor product skills)
 EOF
       exit 0
       ;;
