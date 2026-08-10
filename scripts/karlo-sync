@@ -1,0 +1,215 @@
+#!/usr/bin/env bash
+# Sync personal context (and optionally the public skills pack).
+# Safe defaults: pull only when the working tree is clean; never force; never
+# auto-commit (GPG sign-off stays human/agent-explicit).
+set -euo pipefail
+
+CONFIG_HOME="${AGENT_CONFIG_HOME:-$HOME/.config/karlo}"
+# Prefer the skills repo that shipped this script when installed via ./apply
+_SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null || realpath "$0" 2>/dev/null || echo "$0")"
+_DEFAULT_SKILLS="$HOME/projects/skills"
+case "$_SCRIPT_PATH" in
+  */scripts/karlo-sync)
+    _DEFAULT_SKILLS="$(cd "$(dirname "$_SCRIPT_PATH")/.." && pwd)"
+    ;;
+esac
+SKILLS_HOME="${KARLO_SKILLS_HOME:-$_DEFAULT_SKILLS}"
+MODE="pull"
+DO_SKILLS=0
+JSON=0
+
+usage() {
+  cat <<'EOF'
+Usage: karlo-sync [pull|push|status] [--skills] [--json]
+
+  pull     git pull --ff-only when worktree is clean (default)
+  push     git push when clean and ahead of upstream
+  status   print sync state
+  --skills also sync $KARLO_SKILLS_HOME (default ~/projects/skills)
+  --json   machine-readable one-line summary on stdout (human text on stderr)
+
+Exit 0 always for pull/status (fail-open for hooks). push exits 1 on refuse.
+EOF
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    pull|push|status) MODE="$1" ;;
+    --skills) DO_SKILLS=1 ;;
+    --json) JSON=1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "unknown arg: $1" >&2; usage; exit 2 ;;
+  esac
+  shift
+done
+
+log() { if [ "$JSON" -eq 1 ]; then echo "$*" >&2; else echo "$*"; fi; }
+
+repo_state() {
+  local dir="$1"
+  if [ ! -d "$dir/.git" ]; then
+    echo "missing"
+    return
+  fi
+  git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "missing"; return; }
+  if [ -n "$(git -C "$dir" status --porcelain 2>/dev/null)" ]; then
+    echo "dirty"
+    return
+  fi
+  git -C "$dir" remote get-url origin >/dev/null 2>&1 || { echo "no-remote"; return; }
+  # refresh remote refs quietly; ignore network failure
+  git -C "$dir" fetch --quiet origin 2>/dev/null || true
+  local left right
+  left="$(git -C "$dir" rev-list --count 'HEAD..@{upstream}' 2>/dev/null || echo "?")"
+  right="$(git -C "$dir" rev-list --count '@{upstream}..HEAD' 2>/dev/null || echo "?")"
+  if [ "$left" = "?" ] || [ "$right" = "?" ]; then
+    echo "clean-no-upstream"
+    return
+  fi
+  if [ "$left" != 0 ] && [ "$right" != 0 ]; then
+    echo "diverged:${left}:${right}"
+    return
+  fi
+  if [ "$left" != 0 ]; then
+    echo "behind:${left}"
+    return
+  fi
+  if [ "$right" != 0 ]; then
+    echo "ahead:${right}"
+    return
+  fi
+  echo "ok"
+}
+
+sync_pull() {
+  local dir="$1" label="$2"
+  local st
+  st="$(repo_state "$dir")"
+  case "$st" in
+    missing)
+      log "karlo-sync: $label missing at $dir"
+      echo "$st"
+      return
+      ;;
+    dirty)
+      log "karlo-sync: $label dirty — skip pull (commit or stash first)"
+      echo "$st"
+      return
+      ;;
+    no-remote|clean-no-upstream)
+      log "karlo-sync: $label $st — skip pull"
+      echo "$st"
+      return
+      ;;
+    diverged:*)
+      log "karlo-sync: $label $st — skip pull (rebase manually)"
+      echo "$st"
+      return
+      ;;
+    ok)
+      log "karlo-sync: $label already up to date"
+      echo "$st"
+      return
+      ;;
+    behind:*)
+      if git -C "$dir" pull --ff-only --quiet; then
+        log "karlo-sync: $label pulled (${st#behind:} commit(s))"
+        echo "pulled:${st#behind:}"
+      else
+        log "karlo-sync: $label pull failed"
+        echo "pull-failed"
+      fi
+      return
+      ;;
+    ahead:*)
+      log "karlo-sync: $label ahead ${st#ahead:} — pull not needed; push when ready"
+      echo "$st"
+      return
+      ;;
+    *)
+      log "karlo-sync: $label unknown state $st"
+      echo "$st"
+      return
+      ;;
+  esac
+}
+
+sync_push() {
+  local dir="$1" label="$2"
+  local st
+  st="$(repo_state "$dir")"
+  case "$st" in
+    ahead:*)
+      if git -C "$dir" push --quiet; then
+        log "karlo-sync: $label pushed"
+        echo "pushed"
+        return 0
+      fi
+      log "karlo-sync: $label push failed"
+      echo "push-failed"
+      return 1
+      ;;
+    dirty)
+      log "karlo-sync: $label dirty — refuse push"
+      echo "$st"
+      return 1
+      ;;
+    ok)
+      log "karlo-sync: $label nothing to push"
+      echo "$st"
+      return 0
+      ;;
+    *)
+      log "karlo-sync: $label refuse push ($st)"
+      echo "$st"
+      return 1
+      ;;
+  esac
+}
+
+KARLO_ST=""
+SKILLS_ST=""
+
+case "$MODE" in
+  status)
+    KARLO_ST="$(repo_state "$CONFIG_HOME")"
+    log "karlo-context: $KARLO_ST ($CONFIG_HOME)"
+    if [ "$DO_SKILLS" -eq 1 ]; then
+      SKILLS_ST="$(repo_state "$SKILLS_HOME")"
+      log "skills: $SKILLS_ST ($SKILLS_HOME)"
+    fi
+    ;;
+  pull)
+    KARLO_ST="$(sync_pull "$CONFIG_HOME" "karlo-context")"
+    if [ "$DO_SKILLS" -eq 1 ]; then
+      SKILLS_ST="$(sync_pull "$SKILLS_HOME" "skills")"
+      case "$SKILLS_ST" in
+        pulled:*)
+          log "karlo-sync: skills updated — run: cd $SKILLS_HOME && ./apply -y"
+          ;;
+      esac
+    fi
+    ;;
+  push)
+    set +e
+    KARLO_ST="$(sync_push "$CONFIG_HOME" "karlo-context")"
+    kc=$?
+    sc=0
+    if [ "$DO_SKILLS" -eq 1 ]; then
+      SKILLS_ST="$(sync_push "$SKILLS_HOME" "skills")"
+      sc=$?
+    fi
+    set -e
+    if [ "$JSON" -eq 1 ]; then
+      printf '{"karlo":"%s","skills":"%s"}\n' "$KARLO_ST" "${SKILLS_ST:-skipped}"
+    fi
+    exit $(( kc || sc ))
+    ;;
+esac
+
+if [ "$JSON" -eq 1 ] && [ "$MODE" != "push" ]; then
+  printf '{"mode":"%s","karlo":"%s","skills":"%s"}\n' \
+    "$MODE" "$KARLO_ST" "${SKILLS_ST:-skipped}"
+fi
+
+exit 0

@@ -1,0 +1,9 @@
+[Unit]
+Description=Pull Karlo personal context (ff-only when clean)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/karlo-sync pull
+Nice=10

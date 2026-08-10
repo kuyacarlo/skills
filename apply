@@ -245,4 +245,36 @@ for target in "${targets[@]}"; do
   echo "✓ Linked $linked_count skills + AGENTS.md → $target"
 done
 
+# --- karlo-sync (personal context auto-pull) ---
+install_karlo_sync() {
+  local src="$repo_dir/scripts/karlo-sync"
+  local assets="$repo_dir/scripts/karlo-sync-assets"
+  [ -f "$src" ] || return 0
+
+  mkdir -p "$HOME/.local/bin"
+  ln -sfn "$src" "$HOME/.local/bin/karlo-sync"
+  [ "$VERBOSE" -eq 1 ] && echo "  ✓ karlo-sync -> $HOME/.local/bin/karlo-sync"
+
+  if [ -d "$HOME/.cursor" ] && [ -f "$assets/karlo-sync-session.sh" ]; then
+    mkdir -p "$HOME/.cursor/hooks"
+    ln -sfn "$assets/karlo-sync-session.sh" "$HOME/.cursor/hooks/karlo-sync-session.sh"
+    [ "$VERBOSE" -eq 1 ] && echo "  ✓ Cursor hook -> $HOME/.cursor/hooks/karlo-sync-session.sh"
+  fi
+
+  if command -v systemctl >/dev/null 2>&1; then
+    mkdir -p "$HOME/.config/systemd/user"
+    if [ -f "$assets/karlo-context-pull.service" ]; then
+      install -m 644 "$assets/karlo-context-pull.service" "$HOME/.config/systemd/user/karlo-context-pull.service"
+      install -m 644 "$assets/karlo-context-pull.timer" "$HOME/.config/systemd/user/karlo-context-pull.timer"
+      systemctl --user daemon-reload 2>/dev/null || true
+      systemctl --user enable --now karlo-context-pull.timer 2>/dev/null || true
+      [ "$VERBOSE" -eq 1 ] && echo "  ✓ enabled karlo-context-pull.timer (if systemd user session allows)"
+    fi
+  fi
+
+  echo "✓ Installed karlo-sync (bin + optional Cursor hook / systemd timer)"
+}
+
+install_karlo_sync
+
 echo -e "\n\033[1;32m✨ Deploy complete (Claude Code untouched).\033[0m"

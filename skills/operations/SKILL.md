@@ -20,7 +20,7 @@ Config home: `$AGENT_CONFIG_HOME` (default `~/.config/karlo`).
 
 ## Session start
 
-1. Run `$AGENT_CONFIG_HOME/bin/karlo-sync pull` (skip if dirty; never force).
+1. Run `karlo-sync pull` (`~/.local/bin/karlo-sync` after `./apply`) (skip if dirty; never force).
 2. Run `git status` in the project worktree. Report if dirty.
 3. Uncommitted changes from a prior session: commit before new work.
 4. Read last 1-3 entries of `$AGENT_CONFIG_HOME/AUDIT.md` for continuity.

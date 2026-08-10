@@ -4,11 +4,21 @@ Installable agent skills for local harnesses (Agents, Gemini/Antigravity, Cursor
 Copilot). Personal data stays in `~/.config/karlo` — not in this repo.
 
 ```bash
-./apply -y        # enable all, deploy
+./apply -y        # enable all, deploy (+ install karlo-sync)
 ./apply           # interactive
 FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
 ./scripts/check_readme_skills.sh          # README table vs skills/ must match
 ```
+
+`./apply` also installs **`karlo-sync`** (personal-context git pull/push helper):
+
+| Install | Path |
+|---------|------|
+| PATH | `~/.local/bin/karlo-sync` → `scripts/karlo-sync` |
+| Cursor hook | `~/.cursor/hooks/karlo-sync-session.sh` |
+| systemd | `~/.config/systemd/user/karlo-context-pull.{service,timer}` (enabled when possible) |
+
+Wire `sessionStart` / `sessionEnd` in `~/.cursor/hooks.json` to `./hooks/karlo-sync-session.sh` once (see private `SYNC.md` in karlo-context). Pull is automatic when the tree is clean; push stays explicit.
 
 ## What `./apply` actually deploys
 
