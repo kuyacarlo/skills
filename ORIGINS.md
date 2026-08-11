@@ -16,6 +16,7 @@ Policy:
 | `thorough-code-review` | reframe | Process generalized |
 | `idea-generator` | reframe | Personal ideation slice |
 | `idea-evaluation` | original | — |
+| `numbers-first-report` | original | Freestack blunt voice / gap-report pattern |
 | `focus-management` | original | — |
 | `architectural-planning` | original | — |
 | `continuous-improvement` | original | — |

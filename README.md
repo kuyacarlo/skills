@@ -9,7 +9,9 @@ local harnesses.
 FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
 ```
 
-Symlinks land under `~/.agents`, `~/.cursor`, `~/.claude`, `~/.kiro`, … when present.
+Symlinks land under `~/.agents`, `~/.gemini/config`, `~/.cursor`, `~/.copilot`,
+… when present. `apply` never touches `~/.claude` (Claude Code is out of scope
+for this pack) or `~/.kiro`.
 Pack default: **`simplified-technical-english`** always deploys.
 
 ---
@@ -36,6 +38,7 @@ Pack default: **`simplified-technical-english`** always deploys.
 | `continuous-improvement` | `.agents/LEARNINGS.md` loop |
 | `idea-generator` | Hackathon ideation only |
 | `idea-evaluation` | Go / No-Go / Pivot |
+| `numbers-first-report` | Blunt gap / research reports (counts → P0–P3 → skip → GO wave) |
 | `free-tier-deploy` | CF / Vercel / Fly / Railway / Render |
 | `git-signed-commit` | GPG / profiles / SSH host aliases |
 | `simplified-technical-english` | Default dense prose (always on) |

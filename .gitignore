@@ -12,3 +12,7 @@ simulation_results_comprehensive.md
 test_run_log.jsonl
 .pytest_cache/
 .ruff_cache/
+
+# local harness scratch (retired; machine-local)
+run_harness.py
+test_summary_matrix.md
