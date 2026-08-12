@@ -190,15 +190,16 @@ readlink -f ~/.claude/skills/<name> # inside this repo → yours. Elsewhere → 
 ### The precedent
 
 Several mature skills already make this binding for their own domain, and the
-wording is worth copying. `claude-skills/sop-expert/SKILL.md` in the millia repo
-opens with **"MANDATORY: This Skill Is The Contract"**, and requires the skill be
-updated *first* — before the code — on **every** change including bug fixes:
+wording is worth copying. A well-known example: an ops-domain skill in a large
+internal repo opens with **"MANDATORY: This Skill Is The Contract"** and requires
+the skill be updated *first* — before the code — on **every** change including bug
+fixes:
 
-> "If you find an undocumented trap or capability while working on sop_expert,
-> **add it to this skill before you ship the fix.** Not after."
+> "If you find an undocumented trap or capability while working on this domain,
+> **add it to the skill before you ship the fix.** Not after."
 
-`claude-skills/agent-harness-expert/SKILL.md` carries the same clause: "If your
-intended change isn't described in a runbook below, **add the runbook first**."
+A harness-adjacent skill carries the same clause: "If your intended change isn't
+described in a runbook below, **add the runbook first**."
 
 Skill-first is stronger than skill-eventually, and it is the model. Writing the
 skill first forces you to state what you think is true before the code can

@@ -1,5 +1,7 @@
 ---
 name: git-signed-commit
+author: kaoru
+version: "1.0.0"
 description: Guide to configuring Git repositories with custom git-profiles, GPG signatures, sign-offs, and custom SSH hostnames.
 ---
 
