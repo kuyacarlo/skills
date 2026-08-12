@@ -10,8 +10,8 @@ FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
 ```
 
 Symlinks land under `~/.agents`, `~/.gemini/config`, `~/.cursor`, `~/.copilot`,
-… when present. `apply` never touches `~/.claude` (Claude Code is out of scope
-for this pack) or `~/.kiro`.
+`~/.kiro`, … when present. `apply` never touches `~/.claude` (Claude Code is out
+of scope for this pack).
 Pack default: **`simplified-technical-english`** always deploys.
 
 ---
