@@ -273,6 +273,61 @@ as a gate stalls every lane indefinitely. Identify it, name it, and move.
 
 Ready for review is not merge. Marking a PR ready means a human can look at it.
 
+### Taking the baseline without disturbing the working tree
+
+"Run the check at the branch point" is easy to say and easy to skip, because the
+obvious moves — `git stash`, `git checkout <ref> -- .` — destroy uncommitted
+work. Two ways that touch nothing:
+
+- **Lint, per file.** Pipe the old version into the linter and keep the filename
+  so per-path config still applies:
+
+      git show HEAD:path/to/file.py | ruff check --stdin-filename path/to/file.py -
+
+- **Tests, temporarily.** Copy your version aside, drop the old one in with
+  `git show`, run, restore. Never `git checkout --` / `git restore`:
+
+      cp src/mod.py "$SCRATCH/mod.mine.py"
+      git show HEAD:src/mod.py > src/mod.py
+      <run the failing tests>
+      cp "$SCRATCH/mod.mine.py" src/mod.py
+
+  Confirm with `git diff --stat` that your change is back before moving on.
+
+Both take under a minute and turn "those failures look pre-existing" into "those
+failures **are** pre-existing, measured". The second is what a reviewer can act
+on. Do it before writing a word about someone else's red, and quote the result.
+
+**A caller can break on a field you added, not just a line you changed.** Adding
+a read of `settings.some_field` to a shared dependency broke twenty-nine tests
+whose fake settings object modelled only the fields its own subject touched.
+When you widen what a shared function reads, run the suites of everything that
+injects a double — nothing warns you, because a duck-typed double has no
+contract to violate until runtime.
+
+## Cost is a constraint, and it is the one nobody writes into the ticket
+
+Correctness, blast radius and effort get weighed by default. **Money does not**,
+because it rarely appears in the diff. Before moving work onto any metered
+service — CI minutes, managed runners, a hosted database, an API tier — say
+which resource is scarce and what the marginal cost of the move is.
+
+- **"We pay for it now" is not a licence to relocate work onto it.** A paid plan
+  usually buys a *different* thing than the one blocking you — concurrency,
+  seats, support — while the metered resource stays metered. Name what you
+  bought.
+- **Never move a job onto a more expensive machine class than it needs.** A
+  Linux build on a macOS instance is money spent for nothing, every run, forever.
+- **Check standing directives before proposing spend.** An operator who has
+  refused to pay one vendor has stated a policy about money, not about that
+  vendor. Read it as the general rule it is.
+
+**The meta-rule underneath: if you write "X doesn't need Y" and then select Y,
+stop.** That sentence is a finding, not an aside. Rationalising past a smell to
+keep moving is how the expensive mistakes happen — they are rarely knowledge
+failures, they are failures to act on something already noticed. "It's the
+proven shape" is not a defence for a path that has never once executed.
+
 ## Silent failure
 
 The failure modes that cost the most days are the ones that produce **no error**.
