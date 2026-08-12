@@ -1,7 +1,7 @@
 ---
 name: personal-context
 author: kaoru
-version: "1.1.0"
+version: "1.2.0"
 description: >-
   Loads the user's personal systems, background, stack, and constraints from a
   context file so agents stop re-asking. Use when starting work, choosing stacks,
@@ -50,6 +50,29 @@ From context, extract and apply:
 
 Do not paste the entire context into every reply. Use it silently for decisions.
 Prefer STACK + DECISIONS + AGENTS for tooling choices. Prefer INVENTORY for machine traps.
+
+## Harness memory does not travel — write durable lessons here
+
+Most coding harnesses keep their own memory (Claude Code writes one per project,
+per machine; others are per-workspace). **That store is not the context system.**
+It does not follow the user to another device, another project, or another tool,
+and it is invisible to every agent except the one that wrote it.
+
+So when a session establishes something durable, decide where it lives before
+writing it down:
+
+| what was learned | where it goes |
+|---|---|
+| a fact about this repository | that repo's own docs / `CLAUDE.md` / `AGENTS.md` |
+| a machine or tool trap (paths, versions, a command that lies) | `$AGENT_CONFIG_HOME/INVENTORY.md` |
+| a rule about how to work — commit discipline, verification, proof | `$AGENT_CONFIG_HOME/OPERATIONS.md` |
+| why X was chosen over Y, portably | `$AGENT_CONFIG_HOME/DECISIONS.md` |
+| what happened this session | `$AGENT_CONFIG_HOME/AUDIT.md`, newest first |
+| a generalizable technique | the skill that owns it |
+
+Harness memory is fine for the current project's working state. It is the wrong
+home for anything the user would want on a different laptop next week — and
+"I'll write it up properly later" is how it gets lost.
 
 ## Maintenance
 
