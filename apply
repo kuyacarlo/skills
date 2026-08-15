@@ -156,6 +156,7 @@ targets+=("$HOME/.agents")
 [ -d "$HOME/.gemini/config" ] && targets+=("$HOME/.gemini/config")
 [ -d "$HOME/.cursor" ] && targets+=("$HOME/.cursor")
 [ -d "$HOME/.copilot" ] && targets+=("$HOME/.copilot")
+[ -d "$HOME/.kiro" ] && targets+=("$HOME/.kiro")
 
 if [ "$VERBOSE" -eq 1 ]; then
   echo "Targets: ${targets[*]}"

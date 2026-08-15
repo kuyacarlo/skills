@@ -50,14 +50,24 @@ Cursor agents that load `~/.agents/skills` pick up this pack after `./apply`.
 | Skill | Role |
 |-------|------|
 | `agent-fleet` | Multi-agent claims, trees, file work queue |
+| `context-handoff` | HANDOFF.md across agent/tool switches |
+| `branch-lifecycle` | Start → PR → merge → delete/prune WIP |
+| `verification-before-completion` | Done-gate: your lane + local hooks, not all-CI |
+| `engineering-rulebook` | When to act alone; proof; silent failure |
+| `operations` | Commits, signing, session start/end |
+| `personal-context` | Load `~/.config/karlo` (data stays outside skills) |
+| `developer-profile` | Generate portable profile artifacts (setup) |
+| `ef-starter` | Executive-function system (submodule) |
+| `focus-management` | Energy / demotivation / reconnect logs |
+| `specification-pipeline` | specify → clarify → plan → implement |
+| `specification-compliance` | SPEC.md drift checks |
 | `architectural-planning` | Mermaid plans, milestones |
 | `code-simplification` | YAGNI prune |
 | `context-handoff` | HANDOFF.md across agent/tool switches |
 | `continuous-improvement` | `.agents/LEARNINGS.md` loop |
-| `developer-profile` | Generate portable profile artifacts (setup) |
-| `ef-starter` | Executive-function system (submodule; directory name executive-function) |
-| `engineering-rulebook` | When to act alone; proof; silent failure; skill upkeep |
-| `focus-management` | Energy / demotivation / reconnect logs |
+| `idea-generator` | Hackathon ideation only |
+| `idea-evaluation` | Go / No-Go / Pivot |
+| `numbers-first-report` | Blunt gap / research reports (counts → P0–P3 → skip → GO wave) |
 | `free-tier-deploy` | CF / Vercel / Fly / Railway / Render |
 | `git-signed-commit` | GPG / profiles / SSH host aliases |
 | `idea-evaluation` | Go / No-Go / Pivot |

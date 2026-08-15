@@ -12,11 +12,11 @@ Sources:
 | # | Skill | What it does | Why | Source |
 |---|-------|-------------|-----|--------|
 | 1 | ~~`context-handoff`~~ | **Shipped** — `skills/context-handoff` (+ fleet work-queue) | — | context |
-| 2 | `homelab-watchdog` | Monitoring checks, health dashboards, alerting for Podman containers | 51 containers with no observability = silent death. | context |
-| 3 | `backup-rotation` | 3-2-1 strategy, restic/borgmatic configs, scheduled verification | One disk failure away from losing everything. | context |
-| 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | "Patch Tuesday" for 51 containers is tedious manual work. | context |
-| 5 | `branch-lifecycle` | Full arc: checkout → commits → PR → merge → cleanup | ADHD WIP branch accumulation. Closes the loop. | ecosystem |
-| 6 | `verification-before-completion` | Final checklist gate before marking done: tests, types, spec | ADHD brains skip the last 10% when dopamine drops. | ecosystem |
+| 2 | `homelab-watchdog` | Monitoring / health / alert loop for Podman fleet | Still open (not decided) | context |
+| 3 | `backup-rotation` | **Deferred** — no budget for backup infra yet | — | context |
+| 4 | `container-lifecycle` | Track image freshness, generate update diffs, flag CVEs | Unsure — park | context |
+| 5 | ~~`branch-lifecycle`~~ | **Shipped** — `skills/branch-lifecycle` | — | ecosystem |
+| 6 | ~~`verification-before-completion`~~ | **Shipped** — scoped done-gate (not all-CI) | — | ecosystem |
 
 ## Tier 2: Strong fit, solves recurring annoyances
 
@@ -82,6 +82,10 @@ handoff protocol, student+CTO+intern competing deadlines, ADHD completion dropou
 ## Your call
 
 **Started 2026-08-01:** `1` context-handoff — skill at `skills/context-handoff/`.
+
+**2026-08-10:** Primer + open grill (answer anytime) →
+[skill-backlog-grill-2026-08-10.md](./skill-backlog-grill-2026-08-10.md).
+Do not fan out Tier 2–4 skills until that grill has answers.
 
 Reply with numbers. Examples:
 - "1, 5, 6, 13 — hit" 

@@ -16,6 +16,7 @@ Policy:
 | `thorough-code-review` | reframe | Process generalized |
 | `idea-generator` | reframe | Personal ideation slice |
 | `idea-evaluation` | original | — |
+| `numbers-first-report` | original | Freestack blunt voice / gap-report pattern |
 | `focus-management` | original | — |
 | `architectural-planning` | original | — |
 | `continuous-improvement` | original | — |
@@ -25,6 +26,8 @@ Policy:
 | `operations` | original | — |
 | `agent-fleet` | original | — |
 | `context-handoff` | original | — |
+| `branch-lifecycle` | original | — |
+| `verification-before-completion` | reframe | obra/superpowers-style gate + rulebook baselines |
 | `engineering-rulebook` | original | — |
 | `simplified-technical-english` | original | ASD-STE100 practice |
 

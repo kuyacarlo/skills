@@ -67,6 +67,8 @@ Model/effort if relevant. Open questions.
 
 - `agent-fleet` — multi-agent claims, trees, and file work queue
   (`references/work-queue.md`); use handoff *inside* a claimed job or branch
+- `branch-lifecycle` — start → PR → merge → cleanup (handoff dies with branch)
+- `verification-before-completion` — scoped done-gate before “ready”
 - `operations` — session start/end, commit discipline
 - `specification-pipeline` — SPEC before big features
 - `personal-context` — identity / stack defaults (local context files)
