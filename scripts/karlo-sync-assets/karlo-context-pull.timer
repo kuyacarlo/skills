@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly pull of Karlo personal context
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1h
+Persistent=true
+Unit=karlo-context-pull.service
+
+[Install]
+WantedBy=timers.target
