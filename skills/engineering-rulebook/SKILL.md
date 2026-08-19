@@ -274,6 +274,29 @@ as a gate stalls every lane indefinitely. Identify it, name it, and move.
 
 Ready for review is not merge. Marking a PR ready means a human can look at it.
 
+## Local tests must not inherit live credentials
+
+An application `.env` is useful for a developer runtime and unsafe as an
+implicit test fixture. A test command that reads the project `.env` can send
+requests to a real provider, fail for account-specific reasons, or incur usage
+without making that intent visible in the command.
+
+- Test commands must set an explicit test environment.
+- Inject fake providers for unit and integration tests.
+- Use a real provider only in a separately named, bounded smoke command.
+- Assert that the test path cannot reach the network when network access is not
+  part of the test.
+- Record provider status codes and account-plan failures without recording keys.
+
+## Noninteractive container builds need explicit image references
+
+Podman may resolve a short image name by prompting for a registry. CI and agent
+commands do not have a human TTY, so the same build then fails before the
+application starts. Use a fully qualified image reference such as
+`docker.io/library/postgres:16` or `docker.io/pgvector/pgvector:pg16` in
+Compose, Containerfiles, and CI. Treat an interactive short-name prompt as a
+configuration failure, not as a human setup step.
+
 ### Taking the baseline without disturbing the working tree
 
 "Run the check at the branch point" is easy to say and easy to skip, because the
