@@ -150,7 +150,7 @@ done
 git log --format='%h %G?' origin/main..origin/<branch> | grep -v ' G$'
 ```
 
-## Five blind spots that each produced a confident, wrong "nothing here"
+## Seven blind spots that each produced a confident, wrong "nothing here"
 
 1. **Filtered worktree lists.** Recipes that `grep -v '/tmp/'` or
    `grep -v '.<agent>/worktrees'` hide exactly where agents put worktrees. Eight
@@ -164,6 +164,17 @@ git log --format='%h %G?' origin/main..origin/<branch> | grep -v ' G$'
    `gh pr list --head <branch> --state all` before calling it unpushed work.
 5. **Paginated API results.** `gh pr list --limit 200` returning exactly 200 is a
    truncation, not a total. Raise the limit and re-check.
+6. **A competing PR already owns your issue.** The fleet opened a PR for issue
+   #12 while an external contributor's larger PR for the same issue was already
+   open, overlapping 5 of the fleet's files. Before a lane claims an issue, check
+   `gh pr list --state all --search "issue:<N>"` (or `gh pr list` and scan the
+   body) — a claim file that says "ours" does not stop someone else's PR from
+   landing first and making the lane's diff obsolete or conflicting.
+7. **Draft PRs skip automated review.** CodeRabbit (and similar bots) report
+   "Review skipped: draft pull request" and their check still reads **pass**.
+   A green check on a draft is lint/build only — it is NOT a review signal. If
+   review is the deliverable, the PR must be marked ready; do not report a draft
+   as "reviewed" because its checks are green.
 
 ## Shared interactive resources — never probe
 
