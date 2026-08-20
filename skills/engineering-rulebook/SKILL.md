@@ -297,6 +297,20 @@ application starts. Use a fully qualified image reference such as
 Compose, Containerfiles, and CI. Treat an interactive short-name prompt as a
 configuration failure, not as a human setup step.
 
+## Responsive UI needs runtime proof
+
+Responsive classes and a desktop screenshot do not prove that a UI works on a
+phone. A mobile layout can overflow, hide navigation, or lose its live API
+behavior while the desktop route remains green.
+
+- Add a real mobile browser project for frontend changes.
+- Load the user-visible route at a supported mobile viewport.
+- Assert the primary heading and navigation/actions are accessible.
+- Assert `document.documentElement.scrollWidth <= clientWidth` unless overflow
+  is an intentional, tested interaction.
+- Assert the same live API responses or explicit unavailable state as desktop.
+- Record the device profile and command in the project verification docs.
+
 ### Taking the baseline without disturbing the working tree
 
 "Run the check at the branch point" is easy to say and easy to skip, because the
