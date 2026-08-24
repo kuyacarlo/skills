@@ -2,11 +2,7 @@
 name: branch-lifecycle
 author: kaoru
 version: "1.0.0"
-description: >-
-  Close the loop on a git branch: start → work → PR → merge → cleanup. Use when
-  opening a feature branch, auditing stale WIP, finishing a PR, or after merge
-  when local/remote branches and worktrees linger. Triggers on branch lifecycle,
-  stale branch, delete branch, finish the PR, WIP audit, close the loop.
+description: "Close the loop on a git branch: start → work → PR → merge → cleanup. Use when opening a feature branch, auditing stale WIP, finishing a PR, or after merge when local/remote branches and worktrees linger. Triggers on branch lifecycle, stale branch, delete branch, finish the PR, WIP audit, close the loop."
 ---
 
 # Branch lifecycle

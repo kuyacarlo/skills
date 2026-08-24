@@ -2,9 +2,7 @@
 name: idea-evaluation
 author: kaoru
 version: "1.0.0"
-description: >-
-  Idea sanitizer. Grills options, calculates Go/No-Go/Pivot verdicts,
-  and logs alternatives.
+description: "Idea sanitizer. Grills options, calculates Go/No-Go/Pivot verdicts, and logs alternatives."
 ---
 
 # Idea Evaluation

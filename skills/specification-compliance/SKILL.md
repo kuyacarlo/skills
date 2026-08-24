@@ -2,12 +2,7 @@
 name: specification-compliance
 author: kaoru
 version: "1.0.0"
-description: >-
-  Specification compliance keeper. Enforces SPEC.md project contracts, detects
-  feature drift between code and spec, reviews API gaps, runs adversarial
-  failure-mode analysis, and prevents scope creep. Anchors development around a
-  single source of truth to eliminate vibe coding. Produces drift reports,
-  contract audits, and compliance checklists.
+description: "Specification compliance keeper. Enforces SPEC.md project contracts, detects feature drift between code and spec, reviews API gaps, runs adversarial failure-mode analysis, and prevents scope creep. Anchors development around a single source of truth to eliminate vibe coding. Produces drift reports, contract audits, and compliance checklists."
 ---
 
 # Specification Compliance

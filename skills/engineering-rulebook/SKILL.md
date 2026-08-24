@@ -2,20 +2,7 @@
 name: engineering-rulebook
 author: kaoru
 version: "1.0.0"
-description: >-
-  Use before changing infrastructure, CI/CD, a deploy, a live system, or anything
-  whose blast radius you have not measured — and before reporting that a change
-  works. Answers "am I allowed to just do this, or does a human have to decide?",
-  "what counts as proof?", "this check is red, is that mine?", "is this safe to
-  run against prod?". Also use when a session teaches you something durable, to
-  route the lesson to the right home and write it in the same change. Triggers on
-  "can I just try it", "do I need approval", "is it safe to", "CI is red", "the
-  check failed", "did that actually work", "tested it", "ready or draft",
-  "deploy", "promote to prod", "rollback", "migration", "spin up a VM", "change
-  it on the box", "hotfix", "update the skill", "we should remember this",
-  "lesson learned", "that cost me an hour". Covers the three red lines,
-  experiment→document→script→PR, skill upkeep and routing, proof discipline,
-  red-CI baselines, silent failure modes, live-change and promotion order.
+description: "Use before changing infrastructure, CI/CD, a deploy, a live system, or anything whose blast radius you have not measured — and before reporting that a change works. Answers \"am I allowed to just do this, or does a human have to decide?\", \"what counts as proof?\", \"this check is red, is that mine?\", \"is this safe to run against prod?\". Also use when a session teaches you something durable, to route the lesson to the right home and write it in the same change. Triggers on \"can I just try it\", \"do I need approval\", \"is it safe to\", \"CI is red\", \"the check failed\", \"did that actually work\", \"tested it\", \"ready or draft\", \"deploy\", \"promote to prod\", \"rollback\", \"migration\", \"spin up a VM\", \"change it on the box\", \"hotfix\", \"update the skill\", \"we should remember this\", \"lesson learned\", \"that cost me an hour\". Covers the three red lines, experiment→document→script→PR, skill upkeep and routing, proof discipline, red-CI baselines, silent failure modes, live-change and promotion order."
 ---
 
 # Engineering Rulebook

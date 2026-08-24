@@ -2,12 +2,7 @@
 name: operations
 author: kaoru
 version: "1.0.0"
-description: >-
-  Global agent operational rules. Enforces commit discipline, GPG signing,
-  session start/end protocol, inventory checks, and audit logging. Always active.
-  Use on every session start, before first action, and before session end.
-  Triggers on session start, commit, signing, checkpoint, audit, inventory check,
-  dirty state, WIP, context loss, restart risk.
+description: "Global agent operational rules. Enforces commit discipline, GPG signing, session start/end protocol, inventory checks, and audit logging. Always active. Use on every session start, before first action, and before session end. Triggers on session start, commit, signing, checkpoint, audit, inventory check, dirty state, WIP, context loss, restart risk."
 ---
 
 # Operations

@@ -2,13 +2,7 @@
 name: numbers-first-report
 author: kaoru
 version: "1.0.0"
-description: >-
-  Blunt, numbers-first comprehensive research and gap reports in Karlo’s voice.
-  Inventories what exists, triangulates forums/lists/docs, ranks P0–P3 adds,
-  names what to skip, and ends with one GO wave. Use when the user asks for a
-  comprehensive report, catalog gaps, what else to add, coverage audit, or
-  research dump vs community signal. Triggers on comprehensive report, gap
-  report, what more can we add, numbers first, catalog research.
+description: "Blunt, numbers-first comprehensive research and gap reports in Karlo’s voice. Inventories what exists, triangulates forums/lists/docs, ranks P0–P3 adds, names what to skip, and ends with one GO wave. Use when the user asks for a comprehensive report, catalog gaps, what else to add, coverage audit, or research dump vs community signal. Triggers on comprehensive report, gap report, what more can we add, numbers first, catalog research."
 ---
 
 # Numbers-First Report

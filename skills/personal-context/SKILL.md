@@ -2,11 +2,7 @@
 name: personal-context
 author: kaoru
 version: "1.0.0"
-description: >-
-  Loads the user's personal systems, background, stack, and constraints from a
-  context file so agents stop re-asking. Use when starting work, choosing stacks,
-  planning projects, or when demotivated — read personal context before guessing.
-  Triggers on personal context, about me, my stack, my systems, homelab defaults.
+description: "Loads the user's personal systems, background, stack, and constraints from a context file so agents stop re-asking. Use when starting work, choosing stacks, planning projects, or when demotivated — read personal context before guessing. Triggers on personal context, about me, my stack, my systems, homelab defaults."
 ---
 
 # Personal Context

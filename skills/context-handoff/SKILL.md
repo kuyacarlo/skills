@@ -2,11 +2,7 @@
 name: context-handoff
 author: kaoru
 version: "1.0.0"
-description: >-
-  Structured handoff when switching agents (agy, Cursor, Kiro) or pausing a
-  branch. First file on a new feature branch is HANDOFF.md. Use when starting a
-  branch, mid-task agent switch, brownout/restart risk, or "hand this off".
-  Triggers on handoff, HANDOFF.md, switch agent, continue this branch, context loss.
+description: "Structured handoff when switching agents (agy, Cursor, Kiro) or pausing a branch. First file on a new feature branch is HANDOFF.md. Use when starting a branch, mid-task agent switch, brownout/restart risk, or \"hand this off\". Triggers on handoff, HANDOFF.md, switch agent, continue this branch, context loss."
 ---
 
 # Context Handoff

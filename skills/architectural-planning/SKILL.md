@@ -2,12 +2,7 @@
 name: architectural-planning
 author: kaoru
 version: "1.0.0"
-description: >-
-  Research and architectural planning partner. Generates Mermaid architecture
-  flowcharts, milestone timelines, and task matrices with activation energy
-  scoring. Supports general thought logs, technical research summaries, project
-  roadmaps, system design diagrams, database schemas, and data flow
-  visualizations. Helps overcome execution friction with strategy suggestions.
+description: "Research and architectural planning partner. Generates Mermaid architecture flowcharts, milestone timelines, and task matrices with activation energy scoring. Supports general thought logs, technical research summaries, project roadmaps, system design diagrams, database schemas, and data flow visualizations. Helps overcome execution friction with strategy suggestions."
 ---
 
 # Architectural Planning

@@ -2,11 +2,7 @@
 name: idea-generator
 author: kaoru
 version: "1.0.0"
-description: >-
-  Hackathon ideation only: parse a problem brief, score 5+ ideas, stacks, and
-  effort. Does not build products or run a full factory pipeline. Use when the
-  user wants ideas, pitches options, or hackathon brainstorming — not end-to-end
-  implementation.
+description: "Hackathon ideation only: parse a problem brief, score 5+ ideas, stacks, and effort. Does not build products or run a full factory pipeline. Use when the user wants ideas, pitches options, or hackathon brainstorming — not end-to-end implementation."
 ---
 
 # Project Idea Generator

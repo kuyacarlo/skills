@@ -2,11 +2,7 @@
 name: simplified-technical-english
 author: kaoru
 version: "1.0.0"
-description: >-
-  Default technical English for this pack (ASD-STE100 Issue 9 practice).
-  Short sentences, active voice, one meaning per term. Use for docs, READMEs,
-  procedures, comments, user-facing strings, skill bodies. Triggers: STE,
-  Simplified Technical English, ASD-STE100, clear writing.
+description: "Default technical English for this pack (ASD-STE100 Issue 9 practice). Short sentences, active voice, one meaning per term. Use for docs, READMEs, procedures, comments, user-facing strings, skill bodies. Triggers: STE, Simplified Technical English, ASD-STE100, clear writing."
 ---
 
 # Simplified Technical English
