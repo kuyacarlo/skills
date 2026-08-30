@@ -6,11 +6,11 @@ set -euo pipefail
 # Consume hook stdin (JSON event payload)
 cat >/dev/null 2>&1 || true
 
-SYNC="${AGENT_CONFIG_HOME:-$HOME/.config/karlo}/bin/karlo-sync"
+SYNC="${AGENT_CONFIG_HOME:-$HOME/.config/karlo}/bin/context-sync"
 EVENT="${CURSOR_HOOK_EVENT_NAME:-sessionStart}"
 
 if [ ! -x "$SYNC" ]; then
-  printf '%s\n' '{"additional_context":"karlo-sync missing; personal context not auto-pulled."}'
+  printf '%s\n' '{"additional_context":"context-sync missing; personal context not auto-pulled."}'
   exit 0
 fi
 
@@ -21,12 +21,12 @@ if [ "${KARLO_SYNC_SKILLS:-0}" = "1" ]; then
   extra+=(--skills)
 fi
 
-out="$("$SYNC" pull --json "${extra[@]}" 2>/tmp/karlo-sync-hook.err || true)"
+out="$("$SYNC" pull --json "${extra[@]}" 2>/tmp/context-sync-hook.err || true)"
 karlo="$(printf '%s' "$out" | sed -n 's/.*"karlo":"\([^"]*\)".*/\1/p')"
 skills="$(printf '%s' "$out" | sed -n 's/.*"skills":"\([^"]*\)".*/\1/p')"
-err="$(tr '\n' ' ' </tmp/karlo-sync-hook.err 2>/dev/null || true)"
+err="$(tr '\n' ' ' </tmp/context-sync-hook.err 2>/dev/null || true)"
 
-ctx="karlo-sync ($EVENT): karlo=${karlo:-unknown}"
+ctx="context-sync ($EVENT): karlo=${karlo:-unknown}"
 if [ -n "$skills" ] && [ "$skills" != "skipped" ]; then
   ctx="$ctx; skills=$skills"
 fi

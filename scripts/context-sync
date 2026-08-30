@@ -9,7 +9,7 @@ CONFIG_HOME="${AGENT_CONFIG_HOME:-$HOME/.config/karlo}"
 _SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null || realpath "$0" 2>/dev/null || echo "$0")"
 _DEFAULT_SKILLS="$HOME/projects/skills"
 case "$_SCRIPT_PATH" in
-  */scripts/karlo-sync)
+  */scripts/context-sync)
     _DEFAULT_SKILLS="$(cd "$(dirname "$_SCRIPT_PATH")/.." && pwd)"
     ;;
 esac
@@ -20,7 +20,7 @@ JSON=0
 
 usage() {
   cat <<'EOF'
-Usage: karlo-sync [pull|push|status] [--skills] [--json]
+Usage: context-sync [pull|push|status] [--skills] [--json]
 
   pull     git pull --ff-only when worktree is clean (default)
   push     git push when clean and ahead of upstream
@@ -87,47 +87,47 @@ sync_pull() {
   st="$(repo_state "$dir")"
   case "$st" in
     missing)
-      log "karlo-sync: $label missing at $dir"
+      log "context-sync: $label missing at $dir"
       echo "$st"
       return
       ;;
     dirty)
-      log "karlo-sync: $label dirty — skip pull (commit or stash first)"
+      log "context-sync: $label dirty — skip pull (commit or stash first)"
       echo "$st"
       return
       ;;
     no-remote|clean-no-upstream)
-      log "karlo-sync: $label $st — skip pull"
+      log "context-sync: $label $st — skip pull"
       echo "$st"
       return
       ;;
     diverged:*)
-      log "karlo-sync: $label $st — skip pull (rebase manually)"
+      log "context-sync: $label $st — skip pull (rebase manually)"
       echo "$st"
       return
       ;;
     ok)
-      log "karlo-sync: $label already up to date"
+      log "context-sync: $label already up to date"
       echo "$st"
       return
       ;;
     behind:*)
       if git -C "$dir" pull --ff-only --quiet; then
-        log "karlo-sync: $label pulled (${st#behind:} commit(s))"
+        log "context-sync: $label pulled (${st#behind:} commit(s))"
         echo "pulled:${st#behind:}"
       else
-        log "karlo-sync: $label pull failed"
+        log "context-sync: $label pull failed"
         echo "pull-failed"
       fi
       return
       ;;
     ahead:*)
-      log "karlo-sync: $label ahead ${st#ahead:} — pull not needed; push when ready"
+      log "context-sync: $label ahead ${st#ahead:} — pull not needed; push when ready"
       echo "$st"
       return
       ;;
     *)
-      log "karlo-sync: $label unknown state $st"
+      log "context-sync: $label unknown state $st"
       echo "$st"
       return
       ;;
@@ -141,26 +141,26 @@ sync_push() {
   case "$st" in
     ahead:*)
       if git -C "$dir" push --quiet; then
-        log "karlo-sync: $label pushed"
+        log "context-sync: $label pushed"
         echo "pushed"
         return 0
       fi
-      log "karlo-sync: $label push failed"
+      log "context-sync: $label push failed"
       echo "push-failed"
       return 1
       ;;
     dirty)
-      log "karlo-sync: $label dirty — refuse push"
+      log "context-sync: $label dirty — refuse push"
       echo "$st"
       return 1
       ;;
     ok)
-      log "karlo-sync: $label nothing to push"
+      log "context-sync: $label nothing to push"
       echo "$st"
       return 0
       ;;
     *)
-      log "karlo-sync: $label refuse push ($st)"
+      log "context-sync: $label refuse push ($st)"
       echo "$st"
       return 1
       ;;
@@ -185,7 +185,7 @@ case "$MODE" in
       SKILLS_ST="$(sync_pull "$SKILLS_HOME" "skills")"
       case "$SKILLS_ST" in
         pulled:*)
-          log "karlo-sync: skills updated — run: cd $SKILLS_HOME && ./apply -y"
+          log "context-sync: skills updated — run: cd $SKILLS_HOME && ./apply -y"
           ;;
       esac
     fi

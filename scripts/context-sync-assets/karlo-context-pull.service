@@ -5,5 +5,5 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/karlo-sync pull
+ExecStart=%h/.local/bin/context-sync pull
 Nice=10

@@ -246,20 +246,20 @@ for target in "${targets[@]}"; do
   echo "✓ Linked $linked_count skills + AGENTS.md → $target"
 done
 
-# --- karlo-sync (personal context auto-pull) ---
+# --- context-sync (personal context auto-pull) ---
 install_karlo_sync() {
-  local src="$repo_dir/scripts/karlo-sync"
-  local assets="$repo_dir/scripts/karlo-sync-assets"
+  local src="$repo_dir/scripts/context-sync"
+  local assets="$repo_dir/scripts/context-sync-assets"
   [ -f "$src" ] || return 0
 
   mkdir -p "$HOME/.local/bin"
-  ln -sfn "$src" "$HOME/.local/bin/karlo-sync"
-  [ "$VERBOSE" -eq 1 ] && echo "  ✓ karlo-sync -> $HOME/.local/bin/karlo-sync"
+  ln -sfn "$src" "$HOME/.local/bin/context-sync"
+  [ "$VERBOSE" -eq 1 ] && echo "  ✓ context-sync -> $HOME/.local/bin/context-sync"
 
-  if [ -d "$HOME/.cursor" ] && [ -f "$assets/karlo-sync-session.sh" ]; then
+  if [ -d "$HOME/.cursor" ] && [ -f "$assets/context-sync-session.sh" ]; then
     mkdir -p "$HOME/.cursor/hooks"
-    ln -sfn "$assets/karlo-sync-session.sh" "$HOME/.cursor/hooks/karlo-sync-session.sh"
-    [ "$VERBOSE" -eq 1 ] && echo "  ✓ Cursor hook -> $HOME/.cursor/hooks/karlo-sync-session.sh"
+    ln -sfn "$assets/context-sync-session.sh" "$HOME/.cursor/hooks/context-sync-session.sh"
+    [ "$VERBOSE" -eq 1 ] && echo "  ✓ Cursor hook -> $HOME/.cursor/hooks/context-sync-session.sh"
   fi
 
   if command -v systemctl >/dev/null 2>&1; then
@@ -273,7 +273,7 @@ install_karlo_sync() {
     fi
   fi
 
-  echo "✓ Installed karlo-sync (bin + optional Cursor hook / systemd timer)"
+  echo "✓ Installed context-sync (bin + optional Cursor hook / systemd timer)"
 }
 
 install_karlo_sync
