@@ -2,12 +2,7 @@
 name: code-simplification
 author: kaoru
 version: "1.0.0"
-description: >-
-  Simplification checker. Employs a YAGNI decision ladder to prune code bloat,
-  trace technical debt, and enforce minimum-viable implementations. Use when
-  reviewing code, preventing premature abstractions, auditing dependencies, or
-  generating delete lists. Triggers on simplify, YAGNI, dead code, bloat,
-  over-engineering, prune, reduce complexity, tech debt audit.
+description: "Simplification checker. Employs a YAGNI decision ladder to prune code bloat, trace technical debt, and enforce minimum-viable implementations. Use when reviewing code, preventing premature abstractions, auditing dependencies, or generating delete lists. Triggers on simplify, YAGNI, dead code, bloat, over-engineering, prune, reduce complexity, tech debt audit."
 ---
 
 # Code Simplification

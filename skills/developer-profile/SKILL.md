@@ -2,11 +2,7 @@
 name: developer-profile
 author: kaoru
 version: "1.0.0"
-description: >-
-  Generates a quantified developer profile and agent integration files. Use when
-  setting up personal context, onboarding agents to a developer, or refreshing
-  stack/constraint docs. Writes artifacts under ~/.config (or chosen path) — does
-  not keep personal data inside this skill.
+description: "Generates a quantified developer profile and agent integration files. Use when setting up personal context, onboarding agents to a developer, or refreshing stack/constraint docs. Writes artifacts under ~/.config (or chosen path) — does not keep personal data inside this skill."
 ---
 
 # Developer Profile (generator)

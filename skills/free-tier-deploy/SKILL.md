@@ -2,12 +2,7 @@
 name: free-tier-deploy
 author: kaoru
 version: "1.0.0"
-description: >-
-  Deploy and debug apps on free-tier hosts — Cloudflare Workers/Pages, Vercel,
-  Fly.io, Railway, Render. Use when deploying, fixing cold starts, env/secrets,
-  custom domains, or choosing a free host. Triggers on deploy, hosting,
-  free tier, cold start, wrangler, vercel, fly.io, railway, render, edge,
-  serverless. Prefer working commands over theory.
+description: "Deploy and debug apps on free-tier hosts — Cloudflare Workers/Pages, Vercel, Fly.io, Railway, Render. Use when deploying, fixing cold starts, env/secrets, custom domains, or choosing a free host. Triggers on deploy, hosting, free tier, cold start, wrangler, vercel, fly.io, railway, render, edge, serverless. Prefer working commands over theory."
 ---
 
 # Free-Tier Deploy
@@ -38,6 +33,9 @@ npx wrangler deploy
 - Secrets: `wrangler secret put NAME` (never commit)
 - Local dev: `wrangler dev`
 - Trap: Node APIs that need full Node — check Workers compatibility flags / `nodejs_compat`
+- Config-as-code: `wrangler.toml` with `pages_build_output_dir = "./dist"` means `wrangler pages deploy` (no args) deploys the right folder — no `--project-name` or directory arg needed.
+- Static Astro/Vite: no adapter needed — build with the framework's own CLI, upload `dist/`.
+- Trap: switching hosts does NOT disable the old host. Vercel (or whatever was installed as a GitHub app) keeps auto-deploying and posting checks until you unlink it — Vercel dashboard → project → Settings → Git, or repo GitHub → Settings → Applications → remove.
 
 ## Vercel
 

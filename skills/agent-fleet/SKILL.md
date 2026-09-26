@@ -2,20 +2,7 @@
 name: agent-fleet
 author: kaoru
 version: "1.1.0"
-description: >-
-  Use when several AI coding agents work one repository in parallel git
-  worktrees and someone must answer "what is the true state?" — who holds which
-  branch, what is actually pushed, which claims are stale, what work is
-  invisible. Also covers running a TREE of agents, where each worker spawns its
-  own sub-fleet, and a file-based cross-agent work queue (claim/lease/handoff)
-  for agy, Cursor, Kiro, and similar CLIs. Triggers on "who is working on what",
-  "reconcile the claims", "is that branch done", "what is blocked", "did that
-  agent push anything", "coordination folder", "orchestrator", "fan out
-  subagents", "prune merged worktrees", "why is the issue still open after we
-  merged", "agent work queue", "taskboard", "claim the next job", "ticket rail".
-  Covers the file-based coordination protocol, recursive delegation, the
-  measurement bugs that silently under-report work, shared-resource hazards, PR
-  grain and linking, and when to escalate to Orca orchestration vs file claims.
+description: "Use when several AI coding agents work one repository in parallel git worktrees and someone must answer \"what is the true state?\" — who holds which branch, what is actually pushed, which claims are stale, what work is invisible. Also covers running a TREE of agents, where each worker spawns its own sub-fleet, and a file-based cross-agent work queue (claim/lease/handoff) for agy, Cursor, Kiro, and similar CLIs. Triggers on \"who is working on what\", \"reconcile the claims\", \"is that branch done\", \"what is blocked\", \"did that agent push anything\", \"coordination folder\", \"orchestrator\", \"fan out subagents\", \"prune merged worktrees\", \"why is the issue still open after we merged\", \"agent work queue\", \"taskboard\", \"claim the next job\", \"ticket rail\". Covers the file-based coordination protocol, recursive delegation, the measurement bugs that silently under-report work, shared-resource hazards, PR grain and linking, and when to escalate to Orca orchestration vs file claims."
 ---
 
 # Agent Fleet Coordination
@@ -150,7 +137,7 @@ done
 git log --format='%h %G?' origin/main..origin/<branch> | grep -v ' G$'
 ```
 
-## Five blind spots that each produced a confident, wrong "nothing here"
+## Seven blind spots that each produced a confident, wrong "nothing here"
 
 1. **Filtered worktree lists.** Recipes that `grep -v '/tmp/'` or
    `grep -v '.<agent>/worktrees'` hide exactly where agents put worktrees. Eight
@@ -164,6 +151,17 @@ git log --format='%h %G?' origin/main..origin/<branch> | grep -v ' G$'
    `gh pr list --head <branch> --state all` before calling it unpushed work.
 5. **Paginated API results.** `gh pr list --limit 200` returning exactly 200 is a
    truncation, not a total. Raise the limit and re-check.
+6. **A competing PR already owns your issue.** The fleet opened a PR for issue
+   #12 while an external contributor's larger PR for the same issue was already
+   open, overlapping 5 of the fleet's files. Before a lane claims an issue, check
+   `gh pr list --state all --search "issue:<N>"` (or `gh pr list` and scan the
+   body) — a claim file that says "ours" does not stop someone else's PR from
+   landing first and making the lane's diff obsolete or conflicting.
+7. **Draft PRs skip automated review.** CodeRabbit (and similar bots) report
+   "Review skipped: draft pull request" and their check still reads **pass**.
+   A green check on a draft is lint/build only — it is NOT a review signal. If
+   review is the deliverable, the PR must be marked ready; do not report a draft
+   as "reviewed" because its checks are green.
 
 ## Shared interactive resources — never probe
 

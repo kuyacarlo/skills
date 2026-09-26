@@ -2,13 +2,7 @@
 name: specification-pipeline
 author: kaoru
 version: "1.0.0"
-description: >-
-  The complete specification pipeline. Automates project specification, design,
-  and execution through structured phases: specify, clarify, plan, checklist,
-  tasks, implement, analyze, and constitution sync. Produces SPEC.md contracts,
-  requirement clarifications, implementation plans, validation checklists,
-  dependency-ordered task lists, and artifact analysis. Chains phases
-  automatically using sensible defaults for minor ambiguities.
+description: "The complete specification pipeline. Automates project specification, design, and execution through structured phases: specify, clarify, plan, checklist, tasks, implement, analyze, and constitution sync. Produces SPEC.md contracts, requirement clarifications, implementation plans, validation checklists, dependency-ordered task lists, and artifact analysis. Chains phases automatically using sensible defaults for minor ambiguities."
 ---
 
 # Specification Pipeline

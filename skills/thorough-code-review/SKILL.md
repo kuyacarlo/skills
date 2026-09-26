@@ -2,12 +2,7 @@
 name: thorough-code-review
 author: kaoru
 version: "1.0.0"
-description: >-
-  Systematic code review requiring file:line citations for every issue, cross-file
-  pattern detection, and consolidation tables for duplication. Use when reviewing
-  a PR, diff, or branch for bugs, inconsistencies, or DRY violations. Covers
-  correctness, security, consistency, maintainability. Outputs severity-ranked
-  findings with actionable fix suggestions.
+description: "Systematic code review requiring file:line citations for every issue, cross-file pattern detection, and consolidation tables for duplication. Use when reviewing a PR, diff, or branch for bugs, inconsistencies, or DRY violations. Covers correctness, security, consistency, maintainability. Outputs severity-ranked findings with actionable fix suggestions."
 ---
 
 # Thorough Code Review

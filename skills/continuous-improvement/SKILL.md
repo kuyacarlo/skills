@@ -2,11 +2,7 @@
 name: continuous-improvement
 author: kaoru
 version: "1.1.0"
-description: >-
-  Build/test/lint iteration loop with a project blackboard at
-  `.agents/LEARNINGS.md`. Use when fixing failures, refactoring under tests, or
-  recording lessons that die with the task. Triggers on LEARNINGS.md, patch
-  failures, self-reinforcing loop, record what broke.
+description: "Build/test/lint iteration loop with a project blackboard at `.agents/LEARNINGS.md`. Use when fixing failures, refactoring under tests, or recording lessons that die with the task. Triggers on LEARNINGS.md, patch failures, self-reinforcing loop, record what broke."
 ---
 
 # Continuous improvement
