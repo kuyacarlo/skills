@@ -2,7 +2,7 @@
 name: engineering-rulebook
 author: kaoru
 version: "1.0.0"
-description: "Use for engineering safety, branch closeout, YAGNI reviews, proof, risky or live changes, and durable lessons."
+description: "Use for engineering safety, branch closeout, YAGNI, proof, CI failures, live operations, cost controls, or durable lessons."
 ---
 
 # Engineering Rulebook
@@ -73,6 +73,7 @@ not need to ask twice.
 |---|---|
 | Close a task, check red CI, or diagnose silent failures | [Proof and CI](references/proof-and-ci.md) |
 | Change a live system or promote between environments | [Live operations](references/live-operations.md) |
+| Move work onto a metered service or set a spending ceiling | [Live operations](references/live-operations.md) |
 | Capture a durable engineering lesson | [Durable lessons](references/durable-lessons.md) |
 | Start, close, or audit a branch; prepare an agent handoff | [Branch lifecycle](references/branch-lifecycle.md) |
 | Review for YAGNI, dead code, or over-engineering | [Code simplification](references/simplification.md) |

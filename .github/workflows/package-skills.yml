@@ -27,6 +27,11 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Check README Live skills vs disk
+        run: |
+          chmod +x scripts/check_readme_skills.sh
+          ./scripts/check_readme_skills.sh
+
       - name: Detect skill changes / missing packages
         id: plan
         env:

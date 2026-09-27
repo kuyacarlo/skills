@@ -2,7 +2,7 @@
 name: agent-fleet
 author: kaoru
 version: "1.1.0"
-description: "Use when coordinating agents or worktrees, reconciling claims with git, tracking shared work queues, or choosing between file claims and Orca orchestration."
+description: "Use for parallel agents and worktrees: reconcile claims with Git, track queues, verify pushed work, spot stale branches, and choose file coordination or Orca orchestration."
 ---
 
 # Agent Fleet Coordination
@@ -48,7 +48,7 @@ ticket rail; no server required.
 Full protocol, job frontmatter, optional `tb` shim, and **when to use Orca
 instead**: [references/work-queue.md](references/work-queue.md).  
 Job stub: [templates/queue-job.md](templates/queue-job.md).  
-Session/branch survival docs: engineering-rulebook's [handoff guide](../engineering-rulebook/references/handoff.md).
+Session and branch survival docs: engineering-rulebook's handoff guide.
 
 **Do not** stand up a Taskboard HTTP service unless the human asked for one.
 Files first.

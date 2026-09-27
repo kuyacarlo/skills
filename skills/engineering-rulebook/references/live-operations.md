@@ -16,6 +16,18 @@ Read this guide only when its workflow applies.
 One config file can wedge a whole service's boot, not just the feature it
 configures. Validate before you restart, and know your rollback before you need
 it.
+
+## Cost is a constraint
+
+Before moving work onto a metered service, name the scarce resource and its
+marginal cost. This includes CI minutes, hosted runners, databases, and APIs.
+
+- A paid plan may buy seats or support while the metered resource remains metered.
+- Do not move work to a more expensive machine class without a need.
+- Check standing spending directives before proposing a purchase.
+
+Treat “X does not need Y” as a finding. Do not select Y without resolving it.
+
 ## Promoting between environments
 
 Portable rules. The names change; the ordering does not.

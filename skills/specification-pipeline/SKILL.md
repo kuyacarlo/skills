@@ -2,7 +2,7 @@
 name: specification-pipeline
 author: kaoru
 version: "1.0.0"
-description: "Use for requirements, SPEC.md contracts, project plans, task lists, implementation, and drift audits."
+description: "Use to turn requirements into SPEC.md contracts, plans, checklists, tasks, implementation steps, and drift audits."
 ---
 
 # Specification Pipeline

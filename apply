@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploy skills to agent harnesses (Antigravity / Gemini / Cursor / Copilot).
+# Deploy skills to agent harnesses (excluding Claude Code).
 # NEVER touches ~/.claude (Claude Code is out of scope for this pack).
 set -euo pipefail
 
@@ -17,8 +17,11 @@ Usage: ./apply [-y] [-v]
   -v, --verbose  Verbose logging
   -h, --help     Show help
 
-Targets (if present): ~/.agents, ~/.gemini/config, ~/.cursor, ~/.copilot
-Explicitly excluded: ~/.claude (do not manage Claude Code from this repo)
+Targets (if present): ~/.agents, ~/.codex, ~/.gemini/config, ~/.cursor,
+~/.copilot, ~/.kiro, ~/.config/opencode, ~/.antigravity, ~/.augment,
+~/.continue, ~/.roo
+Explicitly excluded: ~/.claude, ~/.qwen, ~/.agent,
+~/.cursor/skills-cursor (Cursor product skills)
 EOF
       exit 0
       ;;
@@ -152,10 +155,16 @@ fi
 # Targets — never Claude Code
 targets=()
 targets+=("$HOME/.agents")
+[ -d "$HOME/.codex" ] && targets+=("$HOME/.codex")
 [ -d "$HOME/.gemini/config" ] && targets+=("$HOME/.gemini/config")
 [ -d "$HOME/.cursor" ] && targets+=("$HOME/.cursor")
 [ -d "$HOME/.copilot" ] && targets+=("$HOME/.copilot")
 [ -d "$HOME/.kiro" ] && targets+=("$HOME/.kiro")
+[ -d "$HOME/.config/opencode" ] && targets+=("$HOME/.config/opencode")
+[ -d "$HOME/.antigravity" ] && targets+=("$HOME/.antigravity")
+[ -d "$HOME/.augment" ] && targets+=("$HOME/.augment")
+[ -d "$HOME/.continue" ] && targets+=("$HOME/.continue")
+[ -d "$HOME/.roo" ] && targets+=("$HOME/.roo")
 
 if [ "$VERBOSE" -eq 1 ]; then
   echo "Targets: ${targets[*]}"
@@ -241,8 +250,50 @@ for target in "${targets[@]}"; do
   if [ -f "$repo_dir/AGENTS.md" ]; then
     ln -sfn "$repo_dir/AGENTS.md" "$target/AGENTS.md"
   fi
+  if [ -f "$repo_dir/harness-context.md" ]; then
+    ln -sfn "$repo_dir/harness-context.md" "$target/harness-context.md"
+  fi
 
   echo "✓ Linked $linked_count skills + AGENTS.md → $target"
 done
+
+# Gemini-compatible harnesses read GEMINI.md instead of AGENTS.md.
+for target in "$HOME/.gemini" "$HOME/.antigravity"; do
+  [ -d "$target" ] || continue
+  ln -sfn "$repo_dir/GEMINI.md" "$target/GEMINI.md"
+  [ "$VERBOSE" -eq 1 ] && echo "✓ Linked GEMINI.md → $target"
+done
+
+# --- karlo-sync (personal context auto-pull) ---
+install_karlo_sync() {
+  local src="$repo_dir/scripts/karlo-sync"
+  local assets="$repo_dir/scripts/karlo-sync-assets"
+  [ -f "$src" ] || return 0
+
+  mkdir -p "$HOME/.local/bin"
+  ln -sfn "$src" "$HOME/.local/bin/karlo-sync"
+  [ "$VERBOSE" -eq 1 ] && echo "  ✓ karlo-sync -> $HOME/.local/bin/karlo-sync"
+
+  if [ -d "$HOME/.cursor" ] && [ -f "$assets/karlo-sync-session.sh" ]; then
+    mkdir -p "$HOME/.cursor/hooks"
+    ln -sfn "$assets/karlo-sync-session.sh" "$HOME/.cursor/hooks/karlo-sync-session.sh"
+    [ "$VERBOSE" -eq 1 ] && echo "  ✓ Cursor hook -> $HOME/.cursor/hooks/karlo-sync-session.sh"
+  fi
+
+  if command -v systemctl >/dev/null 2>&1; then
+    mkdir -p "$HOME/.config/systemd/user"
+    if [ -f "$assets/karlo-context-pull.service" ]; then
+      install -m 644 "$assets/karlo-context-pull.service" "$HOME/.config/systemd/user/karlo-context-pull.service"
+      install -m 644 "$assets/karlo-context-pull.timer" "$HOME/.config/systemd/user/karlo-context-pull.timer"
+      systemctl --user daemon-reload 2>/dev/null || true
+      systemctl --user enable --now karlo-context-pull.timer 2>/dev/null || true
+      [ "$VERBOSE" -eq 1 ] && echo "  ✓ enabled karlo-context-pull.timer (if systemd user session allows)"
+    fi
+  fi
+
+  echo "✓ Installed karlo-sync (bin + optional Cursor hook / systemd timer)"
+}
+
+install_karlo_sync
 
 echo -e "\n\033[1;32m✨ Deploy complete (Claude Code untouched).\033[0m"

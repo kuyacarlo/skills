@@ -1,18 +1,44 @@
 # Skills
 
-Installable agent skills for Cursor / Claude / Gemini / Kiro / Codex and other
-local harnesses.
+Installable agent skills for local harnesses (Agents, Gemini/Antigravity, Cursor,
+Copilot). Personal data stays in `~/.config/karlo`, not in this repository.
 
-```bash
-./apply -y        # enable all, deploy
-./apply           # interactive
-FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
-```
+- `./apply -y` enables all skills and deploys them. It also installs `karlo-sync`.
+- `./apply` opens the interactive setup.
+- `FORCE_ALL=1 ./scripts/package_skills.sh` rebuilds skill packages.
+- `./scripts/check_readme_skills.sh` checks this table against the skill folders.
 
-Symlinks land under `~/.agents`, `~/.gemini/config`, `~/.cursor`, `~/.copilot`,
-`~/.kiro`, … when present. `apply` never touches `~/.claude` (Claude Code is out
-of scope for this pack).
-Pack defaults: technical prose rules always apply; focus guidance auto-triggers when the user is stuck or low-energy.
+## Personal context sync
+
+`./apply` installs `karlo-sync`, a personal-context pull and push helper.
+
+| Install | Path |
+|---------|------|
+| PATH | `~/.local/bin/karlo-sync` → `scripts/karlo-sync` |
+| Cursor hook | `~/.cursor/hooks/karlo-sync-session.sh` |
+| systemd | `~/.config/systemd/user/karlo-context-pull.{service,timer}` |
+
+Pull runs when the tree is clean. Push stays explicit. See private `SYNC.md` in
+`karlo-context` before wiring Cursor session hooks.
+
+## What `./apply` deploys
+
+Symlinks land only under supported roots that already exist:
+
+| Target | Path |
+|--------|------|
+| Agents | `~/.agents/skills/` |
+| Gemini / Antigravity | `~/.gemini/config/skills/` |
+| Cursor | `~/.cursor/skills/` |
+| Copilot | `~/.copilot/skills/` |
+
+The installer also links this repository's `AGENTS.md` into each target root.
+It does not manage Claude, Codex, Kiro, Qwen, or Cursor product skills.
+
+Technical prose follows the pack's short-sentence defaults. Detailed prose and
+focus guidance load from personal-context only when the task calls for them.
+
+Cursor agents that load `~/.agents/skills` pick up this pack after `./apply`.
 
 ---
 
@@ -20,16 +46,16 @@ Pack defaults: technical prose rules always apply; focus guidance auto-triggers 
 
 | Skill | Role |
 |-------|------|
-| `agent-fleet` | Multi-agent claims, trees, file work queue |
-| `engineering-rulebook` | Action boundaries, branch closeout, YAGNI, proof, durable lessons |
-| `personal-context` | Load `~/.config/karlo`; focus, report, and prose guides (data stays outside skills) |
-| `ef-starter` | Executive-function system (submodule) |
-| `specification-pipeline` | specify → clarify → plan → implement |
+| `agent-fleet` | Multi-agent claims, trees, queues, and worktree reconciliation |
+| `engineering-rulebook` | Engineering safety, branches, YAGNI, proof, live operations, lessons |
+| `personal-context` | Personal settings, focus support, report structure, technical prose |
+| `ef-starter` | Executive-function system builder (upstream submodule) |
 | `idea-generator` | Generate, compare, and evaluate ideas |
+| `specification-pipeline` | Requirements, specifications, plans, tasks, implementation, drift audits |
 
-Detailed guides load only for matching tasks, keeping the default skill context small.
+Detailed guides load only for matching tasks, keeping default skill context small.
 
-Credits / submodule policy: [ORIGINS.md](ORIGINS.md).
+Credits and submodule policy: [ORIGINS.md](ORIGINS.md).
 
 ---
 
@@ -37,10 +63,11 @@ Credits / submodule policy: [ORIGINS.md](ORIGINS.md).
 
 | Scope | Where |
 |-------|--------|
-| Agent-wide | `./apply` → home skill dirs |
-| Project | `.agents/skills`, repo `AGENTS.md` |
+| Agent-wide | `./apply` → supported home skill directories |
+| Personal context | Private `~/.config/karlo` (Forgejo `karlo-context`) |
+| Project | `.agents/skills`, repository `AGENTS.md` |
 
-If it would be wrong in another repo, keep it project-local.
+If a rule would be wrong in another repository, keep it project-local.
 
 ## License
 

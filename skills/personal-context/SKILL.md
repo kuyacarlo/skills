@@ -2,8 +2,8 @@
 name: personal-context
 metadata:
   author: kaoru
-  version: "1.0.0"
-description: "Load personal context for identity, stack, work style, or communication preferences. Use its focus guide when the user is stuck. Set up profiles only when asked."
+  version: "1.3.0"
+description: "Use for personal context, focus support, technical prose, or comprehensive gap reports. Set up profiles only when asked."
 ---
 
 # Personal Context
@@ -55,3 +55,11 @@ Update personal context only when relevant and authorized. Respect filesystem ap
 When a write is blocked, prepare a proposed update in the workspace and report the pending step.
 Never commit private context into a public skill repository.
 Portable examples must use placeholders, not personal identity or host details.
+
+## Durable memory across harnesses
+
+Harness-local memory is a working cache, not the portable source of truth.
+Keep repository facts in repository docs. Route portable lessons through local
+SKILLS.md. Consult relevant notebook topics when present; do not load the whole
+notebook. After authorized context or skill edits, run the local prose checker.
+For cross-device sync, follow local `SYNC.md`.

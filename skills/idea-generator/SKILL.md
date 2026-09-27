@@ -2,7 +2,7 @@
 name: idea-generator
 author: kaoru
 version: "1.0.0"
-description: "Use for hackathon brainstorming, idea comparison, alternative research, and Go/No-Go/Pivot decisions."
+description: "Use to generate and evaluate ideas, compare alternatives, and make Go/No-Go/Pivot decisions. Does not run an end-to-end product factory."
 ---
 
 # Idea Workshop
