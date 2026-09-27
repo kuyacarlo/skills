@@ -2,7 +2,7 @@
 name: agent-fleet
 author: kaoru
 version: "1.1.0"
-description: "Use when several AI coding agents work one repository in parallel git worktrees and someone must answer \"what is the true state?\" — who holds which branch, what is actually pushed, which claims are stale, what work is invisible. Also covers running a TREE of agents, where each worker spawns its own sub-fleet, and a file-based cross-agent work queue (claim/lease/handoff) for agy, Cursor, Kiro, and similar CLIs. Triggers on \"who is working on what\", \"reconcile the claims\", \"is that branch done\", \"what is blocked\", \"did that agent push anything\", \"coordination folder\", \"orchestrator\", \"fan out subagents\", \"prune merged worktrees\", \"why is the issue still open after we merged\", \"agent work queue\", \"taskboard\", \"claim the next job\", \"ticket rail\". Covers the file-based coordination protocol, recursive delegation, the measurement bugs that silently under-report work, shared-resource hazards, PR grain and linking, and when to escalate to Orca orchestration vs file claims."
+description: "Use when coordinating agents or worktrees, reconciling claims with git, tracking shared work queues, or choosing between file claims and Orca orchestration."
 ---
 
 # Agent Fleet Coordination
@@ -48,7 +48,7 @@ ticket rail; no server required.
 Full protocol, job frontmatter, optional `tb` shim, and **when to use Orca
 instead**: [references/work-queue.md](references/work-queue.md).  
 Job stub: [templates/queue-job.md](templates/queue-job.md).  
-Session/branch survival docs: skill `context-handoff`.
+Session/branch survival docs: engineering-rulebook's [handoff guide](../engineering-rulebook/references/handoff.md).
 
 **Do not** stand up a Taskboard HTTP service unless the human asked for one.
 Files first.

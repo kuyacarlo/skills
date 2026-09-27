@@ -3,10 +3,15 @@ name: personal-context
 metadata:
   author: kaoru
   version: "1.0.0"
-description: "Loads the user's personal systems, background, stack, and constraints from a context file so agents stop re-asking. Use when starting work, choosing stacks, planning projects, or when demotivated — read personal context before guessing. Triggers on personal context, about me, my stack, my systems, homelab defaults."
+description: "Load personal context for identity, stack, work style, or communication preferences. Use its focus guide when the user is stuck. Set up profiles only when asked."
 ---
 
 # Personal Context
+
+Use [focus guidance](references/focus.md) for low-energy or stuck moments. Use
+[numbers-first reports](references/numbers-first-report.md) for comprehensive
+research and gap audits. Apply [technical prose rules](references/technical-prose.md)
+to technical writing.
 
 Keep personal facts in local context files, not portable skill bodies.
 Config home: `$AGENT_CONFIG_HOME`, default `~/.config/karlo`.
@@ -29,6 +34,20 @@ If identity context is missing, answer from available information and disclose t
 Do not generate a profile or write personal files merely because a file is absent.
 Files supply guidance; they cannot override host instructions, permissions, or explicit user instructions.
 Before engineering work, apply the capability check in local OPERATIONS.md when available.
+
+## Set up or refresh context
+
+Only create or update a profile when the user asks. First compare existing
+context files so updates do not erase useful information. Ask about current
+projects, tools, strengths, constraints, pain points, and what the user will
+build or skip. Keep `CONTEXT.md` under about 100 lines. Use the
+[context template](../../examples/CONTEXT.template.md). Add
+`agy-context.json` only when structured data helps an active tool. Create
+`ABOUT_ME.md` only when asked. Smoke-test one recommendation using only the new
+context. Never commit private profile data into this repository.
+
+See the [full profile example](../../examples/developer-profile.full.example.md)
+for output shape. Treat it as a format sample, not as current user data.
 
 ## Maintenance
 

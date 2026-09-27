@@ -1,16 +1,9 @@
----
-name: numbers-first-report
-author: kaoru
-version: "1.0.0"
-description: "Blunt, numbers-first comprehensive research and gap reports in Karlo’s voice. Inventories what exists, triangulates forums/lists/docs, ranks P0–P3 adds, names what to skip, and ends with one GO wave. Use when the user asks for a comprehensive report, catalog gaps, what else to add, coverage audit, or research dump vs community signal. Triggers on comprehensive report, gap report, what more can we add, numbers first, catalog research."
----
-
 # Numbers-First Report
 
 Not a landing page full of vibes. Numbers first.
 
 Produce comprehensive research / gap reports in Karlo’s blunt voice. Pair with
-`simplified-technical-english` for sentence mechanics. This skill owns
+[technical prose rules](technical-prose.md) for sentence mechanics. This skill owns
 **structure + voice**.
 
 ## When to use
@@ -19,8 +12,8 @@ Produce comprehensive research / gap reports in Karlo’s blunt voice. Pair with
 - Comprehensive research dump vs forums, Pack lists, comparison blogs
 - Any inventory → external signal → ranked backlog report
 
-Do not use for idea viability (`idea-evaluation`) or code diffs
-(`code-simplification`).
+Do not use for idea viability (`idea-generator`) or code diffs
+(the engineering-rulebook simplification guide).
 
 ## Voice
 
@@ -108,4 +101,4 @@ Prefer compact tables for candidates (`Candidate | Category | Why`).
 
 ## Example
 
-Worked sample (freestack catalog, Aug 2026): [examples.md](examples.md)
+Worked sample (freestack catalog, Aug 2026): [example](numbers-first-report-example.md)

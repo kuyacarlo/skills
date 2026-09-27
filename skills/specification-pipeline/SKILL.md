@@ -2,7 +2,7 @@
 name: specification-pipeline
 author: kaoru
 version: "1.0.0"
-description: "The complete specification pipeline. Automates project specification, design, and execution through structured phases: specify, clarify, plan, checklist, tasks, implement, analyze, and constitution sync. Produces SPEC.md contracts, requirement clarifications, implementation plans, validation checklists, dependency-ordered task lists, and artifact analysis. Chains phases automatically using sensible defaults for minor ambiguities."
+description: "Use for requirements, SPEC.md contracts, project plans, task lists, implementation, and drift audits."
 ---
 
 # Specification Pipeline
@@ -24,7 +24,7 @@ subdirectory.
 | Tasks | [references/tasks.md](references/tasks.md) | Create dependency-ordered tasks.md |
 | Tasks to Issues | [references/taskstoissues.md](references/taskstoissues.md) | Convert tasks to tracking issues |
 | Implement | [references/implement.md](references/implement.md) | Iterate through implementation checks |
-| Analyze | [references/analyze.md](references/analyze.md) | Review and validate artifacts for consistency |
+| Analyze | [references/analyze.md](references/analyze.md) | Review and validate artifacts for consistency and drift |
 | Constitution | [references/constitution.md](references/constitution.md) | Sync project core principles |
 
 ---
@@ -39,3 +39,14 @@ subdirectory.
 4. Output all spec updates, tasks, and checklists directly in the chat unless a
    target path is specified.
 5. Prefer compact diffs over full-file dumps when reporting changes.
+
+## Specification Contract
+
+Keep `SPEC.md` as the source of truth for project goals, architecture, data and
+API contracts, feature scope, and validation criteria. Create or update it
+before implementation. When requirements change, update the spec first.
+
+During analysis, compare the implementation and planning artifacts with the
+contract. Flag scope creep, missing or incomplete requirements, contract drift,
+and likely security, scale, or edge-case failures. See
+[references/spec-contract.md](references/spec-contract.md) for the audit details.

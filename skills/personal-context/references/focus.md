@@ -1,10 +1,3 @@
----
-name: focus-management
-author: kaoru
-version: "1.0.0"
-description: "Developer focus and state management. Diagnoses energy levels, manages cognitive load, and writes session reconnect logs. Use when the user is demotivated, stuck, overwhelmed, avoiding work, choice-paralyzed, low energy, or asks what to do next / how to start. Defaults to outputting in the chat."
----
-
 # Focus Management
 
 Guide interaction by diagnosing focus state, managing context switching, preventing

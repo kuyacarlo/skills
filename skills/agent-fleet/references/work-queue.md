@@ -13,7 +13,7 @@ This is **not** personal life todos, internship trackers, or a SaaS kanban.
 | Need | Use |
 |------|-----|
 | Who owns which paths / branches in one repo | Claim files + reconcile (`SKILL.md`) |
-| Survive agent switch / brownout | `context-handoff` (+ per-agent `HANDOFF.md`) |
+| Survive agent switch / brownout | engineering-rulebook handoff guide (+ per-agent `HANDOFF.md`) |
 | Shared backlog of jobs across tools/sessions | **Work queue** (this file) |
 | Live DAG, blocking ask/reply, supervise workers **inside Orca** | Orca orchestration skill (`orca skills get orchestration`) |
 | Full ownership move to another worktree/agent without supervising a DAG | `orca-cli` handoff — not this queue |
@@ -110,7 +110,7 @@ Orca orchestration skill — threaded messages, task dispatch, `worker_done` /
 escalation waits, decision gates. Do **not** invent a fake Orca DAG in markdown.
 
 When they only need "give this branch to another agent" without supervision, use
-`orca-cli` handoff (see that skill), and leave a `context-handoff` / queue note so
+`orca-cli` handoff (see that skill), and leave a branch handoff / queue note so
 non-Orca agents can still see state.
 
 File queue and Orca can coexist: Orca runs the live turn; the queue/HANDOFF

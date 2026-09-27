@@ -36,7 +36,7 @@ These guidelines apply to all project scoping, roadmaps, and code generation wit
     1.  **Constitution Check**: Check for `.specify/memory/constitution.md` (or the templates) first. Read it, present a 1-2 sentence gist of it to the user, ask for any overrides/improvements, and ensure the task conforms to it.
     2.  **Task Context & Outline**: Outlines the task/problem context before writing any files.
     3.  **Phase Transitions**: Automatically chain the subsequent phases (`specify` → `clarify` → `plan` → `implement`) without stopping to wait for slash commands, using sensible defaults to resolve minor ambiguities, unless a major design fork requires an explicit user choice.
-*   **Demotivation / stuck**: Prefer `focus-management` (auto-trigger on low energy / avoidance language).
+*   **Demotivation / stuck**: Use the focus guide under `personal-context` for low-energy or avoidance language.
 *   **Private hackathon E2E**: Lives outside this repo; do not vendor confidential factories here. This pack supplies shared guardrails only.
 
 

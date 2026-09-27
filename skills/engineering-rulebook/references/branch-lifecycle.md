@@ -1,18 +1,13 @@
----
-name: branch-lifecycle
-author: kaoru
-version: "1.0.0"
-description: "Close the loop on a git branch: start → work → PR → merge → cleanup. Use when opening a feature branch, auditing stale WIP, finishing a PR, or after merge when local/remote branches and worktrees linger. Triggers on branch lifecycle, stale branch, delete branch, finish the PR, WIP audit, close the loop."
----
-
 # Branch lifecycle
 
 Stops ADHD WIP accumulation. A branch is not “in progress forever” — it ends in
 merge + cleanup, or an explicit park/abandon note.
 
-Pairs with `context-handoff` (first file on the branch) and `operations`
-(commits, signing). Does not replace `agent-fleet` claims; those are assertions,
-git is fact.
+For cross-agent handoffs and pauses, use the
+[handoff guide](handoff.md). Use `engineering-rulebook` for
+operational proof. Follow the repository's `AGENTS.md` and `OPERATIONS.md` for
+signing. This does not replace `agent-fleet` claims; those are assertions, git
+is fact.
 
 ## Arc
 
@@ -30,14 +25,14 @@ Skip a step only with a written reason in handoff or the PR body.
 
 1. `git fetch` and branch from up-to-date base (`master` / `main`).
 2. Name: `feat/`, `fix/`, or `chore/` + short slug.
-3. Write `HANDOFF.md` before implementation commits (`context-handoff`).
+3. Write `HANDOFF.md` before implementation commits (see the handoff guide).
 4. If fleet/queue job: claim first, then branch (`agent-fleet`).
 
 ## Work → open
 
-1. Commit in logical units (`operations`). Sign; never `--no-verify` unless asked.
+1. Commit in logical units. Follow repo signing policy; never `--no-verify` unless asked.
 2. Before push: run the **local** gate the repo actually uses (see
-   `verification-before-completion`) — usually pre-commit / targeted tests, not
+   the engineering-rulebook proof guide — usually pre-commit / targeted tests, not
    “full remote CI must be imaginary-green.”
 3. Open PR. Link issue. Say what is *your* proof vs known red baseline
    (`engineering-rulebook`).

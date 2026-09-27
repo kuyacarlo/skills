@@ -1,10 +1,3 @@
----
-name: simplified-technical-english
-author: kaoru
-version: "1.0.0"
-description: "Default technical English for this pack (ASD-STE100 Issue 9 practice). Short sentences, active voice, one meaning per term. Use for docs, READMEs, procedures, comments, user-facing strings, skill bodies. Triggers: STE, Simplified Technical English, ASD-STE100, clear writing."
----
-
 # Simplified Technical English
 
 Default prose skill for this pack. Write technical text so a reader with basic English can follow it. Based on ASD-STE100 Issue 9 (2025-01-15). Do not copy or redistribute the official PDF.
@@ -47,5 +40,5 @@ For aerospace, safety, or formal compliance: download Issue 9 from the STEMG sit
 
 ## Interaction with other skills
 
-- Code-simplification cuts speculative code. This skill cuts speculative wording.
+- Engineering-rulebook cuts speculative code. This guide cuts speculative wording.
 - Prefer dense, clear prose over long explanations.

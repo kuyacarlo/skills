@@ -1,6 +1,6 @@
 # Generation Framework
 
-Detailed template and scoring reference for the idea-generator skill.
+Detailed template and scoring reference for the idea-workshop skill.
 
 ## Confidence Score Scale
 

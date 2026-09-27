@@ -12,7 +12,7 @@ FORCE_ALL=1 ./scripts/package_skills.sh   # rebuild dist/*.skill
 Symlinks land under `~/.agents`, `~/.gemini/config`, `~/.cursor`, `~/.copilot`,
 `~/.kiro`, … when present. `apply` never touches `~/.claude` (Claude Code is out
 of scope for this pack).
-Pack default: **`simplified-technical-english`** always deploys.
+Pack defaults: technical prose rules always apply; focus guidance auto-triggers when the user is stuck or low-energy.
 
 ---
 
@@ -21,29 +21,13 @@ Pack default: **`simplified-technical-english`** always deploys.
 | Skill | Role |
 |-------|------|
 | `agent-fleet` | Multi-agent claims, trees, file work queue |
-| `context-handoff` | HANDOFF.md across agent/tool switches |
-| `branch-lifecycle` | Start → PR → merge → delete/prune WIP |
-| `verification-before-completion` | Done-gate: your lane + local hooks, not all-CI |
-| `engineering-rulebook` | When to act alone; proof; silent failure |
-| `operations` | Commits, signing, session start/end |
-| `personal-context` | Load `~/.config/karlo` (data stays outside skills) |
-| `developer-profile` | Generate portable profile artifacts (setup) |
+| `engineering-rulebook` | Action boundaries, branch closeout, YAGNI, proof, durable lessons |
+| `personal-context` | Load `~/.config/karlo`; focus, report, and prose guides (data stays outside skills) |
 | `ef-starter` | Executive-function system (submodule) |
-| `focus-management` | Energy / demotivation / reconnect logs |
 | `specification-pipeline` | specify → clarify → plan → implement |
-| `specification-compliance` | SPEC.md drift checks |
-| `architectural-planning` | Mermaid plans, milestones |
-| `thorough-code-review` | Citation-style review |
-| `code-simplification` | YAGNI prune |
-| `continuous-improvement` | `.agents/LEARNINGS.md` loop |
-| `idea-generator` | Hackathon ideation only |
-| `idea-evaluation` | Go / No-Go / Pivot |
-| `numbers-first-report` | Blunt gap / research reports (counts → P0–P3 → skip → GO wave) |
-| `free-tier-deploy` | CF / Vercel / Fly / Railway / Render |
-| `git-signed-commit` | GPG / profiles / SSH host aliases |
-| `simplified-technical-english` | Default dense prose (always on) |
+| `idea-generator` | Generate, compare, and evaluate ideas |
 
-\* Auto: STE always on; `focus-management` on stuck/low-energy language.
+Detailed guides load only for matching tasks, keeping the default skill context small.
 
 Credits / submodule policy: [ORIGINS.md](ORIGINS.md).
 

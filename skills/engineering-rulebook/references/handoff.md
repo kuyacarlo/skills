@@ -1,13 +1,6 @@
----
-name: context-handoff
-author: kaoru
-version: "1.0.0"
-description: "Structured handoff when switching agents (agy, Cursor, Kiro) or pausing a branch. First file on a new feature branch is HANDOFF.md. Use when starting a branch, mid-task agent switch, brownout/restart risk, or \"hand this off\". Triggers on handoff, HANDOFF.md, switch agent, continue this branch, context loss."
----
+# Handoff reference
 
-# Context Handoff
-
-Stops context evaporating across agy / Cursor / Kiro / session restarts.
+Use this when an agent switch, pause, or restart could lose task context.
 
 ## When
 
@@ -63,9 +56,7 @@ Model/effort if relevant. Open questions.
 
 - `agent-fleet` — multi-agent claims, trees, and file work queue
   (`references/work-queue.md`); use handoff *inside* a claimed job or branch
-- `branch-lifecycle` — start → PR → merge → cleanup (handoff dies with branch)
-- `verification-before-completion` — scoped done-gate before “ready”
-- `operations` — session start/end, commit discipline
+- `engineering-rulebook` — branch lifecycle, scoped proof gate, session rules, and operational discipline
 - `specification-pipeline` — SPEC before big features
 - `personal-context` — identity / stack defaults (local context files)
 - Orca orchestration — live DAG / supervise only when inside Orca; otherwise

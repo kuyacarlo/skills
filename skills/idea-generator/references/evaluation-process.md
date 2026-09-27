@@ -1,7 +1,7 @@
 # Evaluation Process — Full Reference
 
 This document contains the detailed scoring matrix, narrative guidance, and
-step-by-step execution flow for the idea-evaluation skill.
+step-by-step evaluation flow for the idea-workshop skill.
 
 ## Scoring Matrix
 
