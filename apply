@@ -1,30 +1,38 @@
 #!/usr/bin/env bash
-# Deploy skills to agent harnesses (excluding Claude Code).
-# NEVER touches ~/.claude (Claude Code is out of scope for this pack).
+# Deploy skill and adapter symlinks to installed agent harnesses.
 set -euo pipefail
 
 VERBOSE=0
 AUTO_YES=0
-for arg in "$@"; do
-  case "$arg" in
-    -v|--verbose) VERBOSE=1 ;;
-    -y|--yes) AUTO_YES=1 ;;
+HERMES_ONLY=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -v|--verbose) VERBOSE=1 ; shift ;;
+    -y|--yes) AUTO_YES=1 ; shift ;;
+    --harness=hermes) HERMES_ONLY=1 ; shift ;;
+    --harness)
+      shift
+      if [ $# -gt 0 ] && [ "$1" = "hermes" ]; then
+        HERMES_ONLY=1
+        shift
+      fi
+      ;;
     -h|--help)
       cat <<'EOF'
-Usage: ./apply [-y] [-v]
+Usage: ./apply [-y] [-v] [--harness hermes]
 
   -y, --yes      Non-interactive: enable all skills and deploy
   -v, --verbose  Verbose logging
+  --harness NAME Deploy only to a specific harness (e.g. hermes)
   -h, --help     Show help
 
-Targets (if present): ~/.agents, ~/.codex, ~/.gemini/config, ~/.cursor,
-~/.copilot, ~/.kiro, ~/.config/opencode, ~/.antigravity, ~/.augment,
-~/.continue, ~/.roo
-Explicitly excluded: ~/.claude, ~/.qwen, ~/.agent,
-~/.cursor/skills-cursor (Cursor product skills)
+Targets (if present): ~/.agents, ~/.codex, ~/.gemini/config, ~/.cursor, ~/.claude,
+  ~/.copilot, ~/.kiro, ~/.config/opencode, ~/.antigravity, ~/.augment,
+  ~/.continue, ~/.roo, ~/.hermes
 EOF
       exit 0
       ;;
+    *) shift ;;
   esac
 done
 
@@ -104,7 +112,7 @@ STALE_ALIASES=(
 if [ "$AUTO_YES" -eq 0 ]; then
   while true; do
     clear 2>/dev/null || true
-    echo -e "\033[1;36m✨ Skill Installer (Antigravity / Gemini / Cursor) ✨\033[0m"
+    echo -e "\033[1;36m✨ Skill Installer ✨\033[0m"
     echo "---------------------------------"
     echo "Toggle skills to enable (default: all on):"
     echo
@@ -152,148 +160,133 @@ else
   echo "Non-interactive: enabling all ${#skills[@]} skills."
 fi
 
-# Targets — never Claude Code
-targets=()
-targets+=("$HOME/.agents")
-[ -d "$HOME/.codex" ] && targets+=("$HOME/.codex")
-[ -d "$HOME/.gemini/config" ] && targets+=("$HOME/.gemini/config")
-[ -d "$HOME/.cursor" ] && targets+=("$HOME/.cursor")
-[ -d "$HOME/.copilot" ] && targets+=("$HOME/.copilot")
-[ -d "$HOME/.kiro" ] && targets+=("$HOME/.kiro")
-[ -d "$HOME/.config/opencode" ] && targets+=("$HOME/.config/opencode")
-[ -d "$HOME/.antigravity" ] && targets+=("$HOME/.antigravity")
-[ -d "$HOME/.augment" ] && targets+=("$HOME/.augment")
-[ -d "$HOME/.continue" ] && targets+=("$HOME/.continue")
-[ -d "$HOME/.roo" ] && targets+=("$HOME/.roo")
+# Install only repository-owned links for other harnesses. Matching names alone never imply ownership.
+python3 - "$repo_dir" "${skills[@]}" -- "${enabled[@]}" --paths "${paths[@]}" "$HERMES_ONLY" <<'PY'
+import json
+import os
+from pathlib import Path
+import shutil
+import sys
+import tempfile
 
-if [ "$VERBOSE" -eq 1 ]; then
-  echo "Targets: ${targets[*]}"
-  command -v agy >/dev/null 2>&1 && echo "Detected: agy"
-  command -v antigravity >/dev/null 2>&1 && echo "Detected: antigravity"
-fi
+repo = Path(sys.argv[1]).resolve()
+args = sys.argv[2:]
+cut = args.index("--")
+path_cut = args.index("--paths")
+names = args[:cut]
+enabled = args[cut + 1:path_cut]
+source_paths = [Path(p).resolve() for p in args[path_cut + 1:-1]]
+hermes_only = args[-1] == "1"
+skills = dict(zip(names, source_paths))
+selected = {name for name, flag in zip(names, enabled) if flag == "1"}
+home = Path.home()
 
-is_owned_name() {
-  local n="$1"
-  for s in "${skills[@]}"; do
-    [ "$s" = "$n" ] && return 0
-  done
-  for s in "${STALE_ALIASES[@]}"; do
-    [ "$s" = "$n" ] && return 0
-  done
-  return 1
-}
 
-points_into_repo() {
-  local link="$1"
-  [ -L "$link" ] || return 1
-  local resolved
-  resolved="$(readlink -f "$link" 2>/dev/null || true)"
-  case "$resolved" in
-    "$repo_dir"|"$repo_dir"/*) return 0 ;;
-    *) return 1 ;;
-  esac
-}
+def exists(path):
+    return os.path.lexists(path)
 
-for target in "${targets[@]}"; do
-  mkdir -p "$target/skills"
-  rm -f "$target/skills.json"
-  rm -rf "$target/enabled-skills"
 
-  # Purge stale / broken / owned links only (safe)
-  for entry in "$target/skills"/*; do
-    [ -e "$entry" ] || [ -L "$entry" ] || continue
-    base="$(basename "$entry")"
-    if [ -L "$entry" ] && [ ! -e "$entry" ]; then
-      rm -f "$entry"
-      [ "$VERBOSE" -eq 1 ] && echo "  purged broken: $target/skills/$base"
-      continue
-    fi
-    if is_owned_name "$base" || points_into_repo "$entry"; then
-      # Will re-link enabled ones below; remove first so disabled/stale go away
-      if [ -L "$entry" ] || is_owned_name "$base"; then
-        # Only remove symlinks or known stale names — never wipe foreign real dirs
-        if [ -L "$entry" ]; then
-          rm -f "$entry"
-          [ "$VERBOSE" -eq 1 ] && echo "  cleared owned link: $target/skills/$base"
-        elif [ -d "$entry" ]; then
-          # real dir with stale alias name — leave foreign content alone unless stale alias
-          for s in "${STALE_ALIASES[@]}"; do
-            if [ "$base" = "$s" ]; then
-              rm -rf "$entry"
-              [ "$VERBOSE" -eq 1 ] && echo "  purged stale dir: $target/skills/$base"
-            fi
-          done
-        fi
-      fi
-    fi
-  done
+def owned_link(path):
+    if not path.is_symlink():
+        return False
+    # Resolve the link text lexically, so broken foreign links are never deleted.
+    target = Path(os.path.abspath(path.parent / os.readlink(path)))
+    return target == repo or repo in target.parents
 
-  linked_count=0
-  for i in "${!skills[@]}"; do
-    dest_path="$target/skills/${skills[$i]}"
-    if [ -e "$dest_path" ] || [ -L "$dest_path" ]; then
-      if [ -L "$dest_path" ]; then
-        rm -f "$dest_path"
-      elif is_owned_name "${skills[$i]}"; then
-        # Do not delete non-symlink foreign dirs with same name
-        echo "  warn: $dest_path exists and is not a symlink; skip ${skills[$i]}"
-        continue
-      fi
-    fi
-    if [ "${enabled[$i]}" -eq 1 ]; then
-      ln -sfn "${paths[$i]}" "$dest_path"
-      linked_count=$((linked_count + 1))
-      [ "$VERBOSE" -eq 1 ] && echo "  ✓ ${skills[$i]} -> ${paths[$i]}"
-    fi
-  done
 
-  if [ -f "$repo_dir/AGENTS.md" ]; then
-    ln -sfn "$repo_dir/AGENTS.md" "$target/AGENTS.md"
-  fi
-  if [ -f "$repo_dir/harness-context.md" ]; then
-    ln -sfn "$repo_dir/harness-context.md" "$target/harness-context.md"
-  fi
+def safe_link(source, destination):
+    if exists(destination):
+        if not owned_link(destination):
+            print(f"  preserve: {destination}")
+            return False
+        if destination.resolve() == source.resolve():
+            return True
+        destination.unlink()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.symlink_to(os.path.relpath(source, destination.parent))
+    return True
 
-  echo "✓ Linked $linked_count skills + AGENTS.md → $target"
-done
 
-# Gemini-compatible harnesses read GEMINI.md instead of AGENTS.md.
-for target in "$HOME/.gemini" "$HOME/.antigravity"; do
-  [ -d "$target" ] || continue
-  ln -sfn "$repo_dir/GEMINI.md" "$target/GEMINI.md"
-  [ "$VERBOSE" -eq 1 ] && echo "✓ Linked GEMINI.md → $target"
-done
+def install_hermes():
+    # Hermes uses portable copies: references remain relative and the install works
+    # after this repository moves to another device. The manifest owns directories,
+    # never arbitrary files or symlinks that happen to share a skill name.
+    hermes = Path(os.environ.get("HERMES_HOME", home / ".hermes")).expanduser()
+    skill_root = hermes / "skills"
+    if skill_root.is_symlink():
+        print(f"  preserve symlinked skills root: {skill_root}")
+        return
+    skill_root.mkdir(parents=True, exist_ok=True)
+    manifest_path = skill_root / ".skills-apply-manifest.json"
+    try:
+        old = json.loads(manifest_path.read_text())
+        old_names = set(old.get("skills", []))
+    except (FileNotFoundError, ValueError, OSError):
+        old_names = set()
+    for name in old_names - selected:
+        stale = skill_root / name
+        if stale.is_dir() and not stale.is_symlink():
+            shutil.rmtree(stale)
+    installed = []
+    for name in sorted(selected):
+        source = skills[name]
+        destination = skill_root / name
+        if exists(destination) and name not in old_names:
+            print(f"  preserve: {destination}")
+            continue
+        if exists(destination):
+            if destination.is_symlink():
+                print(f"  preserve symlink: {destination}")
+                continue
+            if not destination.is_dir():
+                print(f"  preserve: {destination}")
+                continue
+            shutil.rmtree(destination)
+        with tempfile.TemporaryDirectory(dir=skill_root) as staging:
+            staged = Path(staging) / name
+            shutil.copytree(source, staged, symlinks=True)
+            os.replace(staged, destination)
+        installed.append(name)
+    manifest = {"format": 1, "skills": installed}
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    print(f"✓ Installed {len(installed)} copied skills → {hermes}")
 
-# --- karlo-sync (personal context auto-pull) ---
-install_karlo_sync() {
-  local src="$repo_dir/scripts/karlo-sync"
-  local assets="$repo_dir/scripts/karlo-sync-assets"
-  [ -f "$src" ] || return 0
 
-  mkdir -p "$HOME/.local/bin"
-  ln -sfn "$src" "$HOME/.local/bin/karlo-sync"
-  [ "$VERBOSE" -eq 1 ] && echo "  ✓ karlo-sync -> $HOME/.local/bin/karlo-sync"
+if hermes_only:
+    install_hermes()
+else:
+    locations = {"agents": home / ".agents", "codex": home / ".codex",
+                 "gemini": home / ".gemini/config", "cursor": home / ".cursor",
+                 "claude": home / ".claude", "copilot": home / ".copilot",
+                 "kiro": home / ".kiro", "opencode": home / ".config/opencode",
+                 "antigravity": home / ".antigravity", "augment": home / ".augment",
+                 "continue": home / ".continue", "roo": home / ".roo"}
+    for harness, target in locations.items():
+        if harness != "agents" and not target.is_dir():
+            continue
+        folder = target / "skills"
+        if folder.is_symlink():
+            print(f"  preserve symlinked skills root: {folder}")
+            continue
+        folder.mkdir(parents=True, exist_ok=True)
+        for entry in folder.iterdir():
+            if owned_link(entry) and entry.name not in selected:
+                entry.unlink()
+        for name in sorted(selected):
+            safe_link(skills[name], folder / name)
+        if harness != "claude":
+            for filename in ("AGENTS.md", "harness-context.md"):
+                if (repo / filename).is_file():
+                    safe_link(repo / filename, target / filename)
+        if harness == "cursor" and (repo / "agents/context-health.md").is_file():
+            folder = target / "agents"
+            if not folder.is_symlink():
+                folder.mkdir(exist_ok=True)
+                safe_link(repo / "agents/context-health.md", folder / "context-health.md")
+        if harness in ("gemini", "antigravity") and (repo / "GEMINI.md").is_file():
+            destination = target.parent / "GEMINI.md" if harness == "gemini" else target / "GEMINI.md"
+            safe_link(repo / "GEMINI.md", destination)
+        print(f"✓ Installed skills → {target}")
+PY
 
-  if [ -d "$HOME/.cursor" ] && [ -f "$assets/karlo-sync-session.sh" ]; then
-    mkdir -p "$HOME/.cursor/hooks"
-    ln -sfn "$assets/karlo-sync-session.sh" "$HOME/.cursor/hooks/karlo-sync-session.sh"
-    [ "$VERBOSE" -eq 1 ] && echo "  ✓ Cursor hook -> $HOME/.cursor/hooks/karlo-sync-session.sh"
-  fi
-
-  if command -v systemctl >/dev/null 2>&1; then
-    mkdir -p "$HOME/.config/systemd/user"
-    if [ -f "$assets/karlo-context-pull.service" ]; then
-      install -m 644 "$assets/karlo-context-pull.service" "$HOME/.config/systemd/user/karlo-context-pull.service"
-      install -m 644 "$assets/karlo-context-pull.timer" "$HOME/.config/systemd/user/karlo-context-pull.timer"
-      systemctl --user daemon-reload 2>/dev/null || true
-      systemctl --user enable --now karlo-context-pull.timer 2>/dev/null || true
-      [ "$VERBOSE" -eq 1 ] && echo "  ✓ enabled karlo-context-pull.timer (if systemd user session allows)"
-    fi
-  fi
-
-  echo "✓ Installed karlo-sync (bin + optional Cursor hook / systemd timer)"
-}
-
-install_karlo_sync
-
-echo -e "\n\033[1;32m✨ Deploy complete (Claude Code untouched).\033[0m"
+echo "Deploy complete."

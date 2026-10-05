@@ -19,7 +19,7 @@ analysis paralysis, and grounding project scope.
 
 3. **Co-Piloting (Reduce Friction)**
    Take on administrative tasks (container config, API stubs, linter fixes,
-   dependencies) automatically so the user can focus on core logic.
+   dependencies) within the authorized scope so the user can focus on core logic.
 
 ---
 
@@ -57,7 +57,7 @@ When the user is in Divergent state:
 
 1. Capture raw ideas as bullets — do not start repositories or scaffolding.
 2. Run immediate sanity checks: Stack Alignment, Alternative Maturity, Cost.
-3. If GO probability < 60%, declare NO-GO or force a PIVOT within 5 minutes.
+3. If evidence is weak, propose one cheap validation step or a PIVOT. Do not present heuristic scores as probabilities.
 
 ---
 

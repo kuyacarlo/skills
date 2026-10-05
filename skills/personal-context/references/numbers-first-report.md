@@ -2,7 +2,7 @@
 
 Not a landing page full of vibes. Numbers first.
 
-Produce comprehensive research / gap reports in Karlo’s blunt voice. Pair with
+Produce comprehensive research / gap reports in a direct technical voice. Pair with
 [technical prose rules](technical-prose.md) for sentence mechanics. This skill owns
 **structure + voice**.
 
@@ -30,8 +30,8 @@ Do not use for idea viability (`idea-generator`) or code diffs
 | Bottom line in 2–4 sentences | Restate the whole report at the end |
 | Short STE-ish sentences; American English | Emoji status theater |
 
-Honor `~/.config/karlo/AGENTS.md`: strong GO/NO-GO, assume literacy, prefer
-portable / self-host when relevant.
+Honor interaction preferences from the configured personal context when available.
+State a clear recommendation, assume technical literacy, and assess portability when relevant.
 
 ## Workflow
 

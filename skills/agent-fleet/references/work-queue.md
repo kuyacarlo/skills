@@ -119,5 +119,7 @@ files are what survive after Orca closes.
 ## Non-goals
 
 - Replacing Linear / Todoist / ZenNotes / Google Tasks
-- Multi-tenant SaaS, budgets, Paperclip org charts
+- Multi-tenant SaaS, budgets, and resource limits constrain what the queue can move. Track capacity explicitly.
+
+ Paperclip org charts
 - Running agents *inside* the queue (agents stay external CLIs/IDEs)

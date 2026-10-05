@@ -5,7 +5,10 @@ step-by-step evaluation flow for the idea-workshop skill.
 
 ## Scoring Matrix
 
-Rate each factor out of 10. Combine into a **GO Probability (%)**.
+Rate each factor out of 10, with higher scores always meaning better fit.
+Invert friction, redundancy, and cost into ease, differentiation, and affordability.
+Report an equal-weight mean unless the brief supplies weights; state any chosen weights.
+Label any percentage a **GO score**, not a calibrated probability. Show evidence gaps beside the score.
 
 | # | Factor | What to assess |
 |---|--------|----------------|

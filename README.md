@@ -1,73 +1,66 @@
 # Skills
 
-Installable agent skills for local harnesses (Agents, Gemini/Antigravity, Cursor,
-Copilot). Personal data stays in `~/.config/karlo`, not in this repository.
+This repository owns portable skills and the scripts that install them.
+Personal identity, host details, and work preferences live in the private
+`personal-context` repository. Its companion `personal-context` skill reads
+those files only when a task needs them.
 
-- `./apply -y` enables all skills and deploys them. It also installs `karlo-sync`.
-- `./apply` opens the interactive setup.
-- `FORCE_ALL=1 ./scripts/package_skills.sh` rebuilds skill packages.
-- `./scripts/check_readme_skills.sh` checks this table against the skill folders.
+## Install
 
-## Personal context sync
+- Run `./apply` to choose skills interactively.
+- Run `./apply -y` to enable every skill and refresh its links.
+- Run `SKIP_KARLO_SYNC=1 ./apply -y` to refresh skill links without installing
+  the optional sync helper and timer.
 
-`./apply` installs `karlo-sync`, a personal-context pull and push helper.
+`apply` creates harness-specific symlinks. It always creates `~/.agents/skills`
+for shared skill discovery, then links skills under each installed harness.
+It links `AGENTS.md` and `harness-context.md` where those files apply. It links
+`GEMINI.md` for Gemini and Antigravity. It links the context-health helper into
+Cursor's `agents/` directory. Claude gets skill links only; the script does not
+add global Claude instructions.
 
-| Install | Path |
-|---------|------|
-| PATH | `~/.local/bin/karlo-sync` → `scripts/karlo-sync` |
-| Cursor hook | `~/.cursor/hooks/karlo-sync-session.sh` |
-| systemd | `~/.config/systemd/user/karlo-context-pull.{service,timer}` |
+The private context folder remains a separate downstream working area. The
+installer does not replace or synchronize `~/.config/karlo`.
 
-Pull runs when the tree is clean. Push stays explicit. See private `SYNC.md` in
-`karlo-context` before wiring Cursor session hooks.
+## Maintain
 
-## What `./apply` deploys
+- Run `FORCE_ALL=1 ./scripts/package_skills.sh` to rebuild every skill package.
+- Run `./scripts/check_readme_skills.sh` to compare the list below with skill
+  folders.
+- Keep examples synthetic. Never include private context or secrets.
+- Keep source and retirement notes in [ORIGINS.md](ORIGINS.md).
 
-Symlinks land only under supported roots that already exist:
+## Simulate and evaluate
 
-| Target | Path |
-|--------|------|
-| Agents | `~/.agents/skills/` |
-| Gemini / Antigravity | `~/.gemini/config/skills/` |
-| Cursor | `~/.cursor/skills/` |
-| Copilot | `~/.copilot/skills/` |
-
-The installer also links this repository's `AGENTS.md` into each target root.
-It does not manage Claude, Codex, Kiro, Qwen, or Cursor product skills.
-
-Technical prose follows the pack's short-sentence defaults. Detailed prose and
-focus guidance load from personal-context only when the task calls for them.
-
-Cursor agents that load `~/.agents/skills` pick up this pack after `./apply`.
-
----
+Use [the evaluation handbook](docs/skill-evaluation.md) to compare matched runs
+with and without a skill. It includes a rubric and synthetic starter cases for
+`personal-context`. Keep fixtures generic and do not include private profile
+data or conversation logs.
 
 ## Live skills
 
 | Skill | Role |
 |-------|------|
 | `agent-fleet` | Multi-agent claims, trees, queues, and worktree reconciliation |
-| `engineering-rulebook` | Engineering safety, branches, YAGNI, proof, live operations, lessons |
+| `engineering-rulebook` | Engineering safety, branches, proof, operations, and lessons |
 | `personal-context` | Personal settings, focus support, report structure, technical prose |
 | `ef-starter` | Executive-function system builder (upstream submodule) |
+| `feature-plan` | Feature planning and handoff documentation |
 | `idea-generator` | Generate, compare, and evaluate ideas |
-| `specification-pipeline` | Requirements, specifications, plans, tasks, implementation, drift audits |
+| `specification-pipeline` | Requirements, specifications, plans, tasks, and drift audits |
 
-Detailed guides load only for matching tasks, keeping default skill context small.
+Detailed guides load only for matching tasks. Credits and submodule policy:
+[ORIGINS.md](ORIGINS.md).
 
-Credits and submodule policy: [ORIGINS.md](ORIGINS.md).
+## Boundaries
 
----
-
-## Scope
-
-| Scope | Where |
+| Scope | Source |
 |-------|--------|
-| Agent-wide | `./apply` → supported home skill directories |
-| Personal context | Private `~/.config/karlo` (Forgejo `karlo-context`) |
-| Project | `.agents/skills`, repository `AGENTS.md` |
+| Portable skills and adapters | This repository |
+| Personal context | Private `~/.config/karlo` checkout |
+| Project rules | The project's own `AGENTS.md` and skill links |
 
-If a rule would be wrong in another repository, keep it project-local.
+If a rule is only valid for one repository, keep it with that project.
 
 ## License
 

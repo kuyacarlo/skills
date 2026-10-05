@@ -29,6 +29,15 @@ subdirectory.
 
 ---
 
+## The spec-to-implementation loop
+
+1. **Contract** — specify the feature, its scope, boundaries, acceptance criteria, and drift limit.
+2. **Plan** — derive tasks from the spec, estimate effort, and order by dependency.
+3. **Check** — before each task, verify that preceding tasks passed their acceptance checks. Do not chain failed work.
+4. **Implement** — run the bounded implementation, testing at each task boundary.
+5. **Analyze** — audit the implementation against the spec, flagging drift and any acceptance failures.
+6. **Deliver** — hand off with proof of verification, not just completion. Record what was tested and what could not run.
+
 ## Execution Rules
 
 1. Chain phases in sequence (specify → clarify → plan → implement) automatically

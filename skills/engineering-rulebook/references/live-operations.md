@@ -4,6 +4,9 @@ Read this guide only when its workflow applies.
 
 ## Changing something that is live
 
+Confirm authorization for the exact environment and operation before mutation.
+A backup or successful dry run does not grant deployment approval.
+
 1. **Read-only discovery first.** Look at the running state. Do not design from
    documentation — it goes stale, and the box is the truth.
 2. **Back the file up, dated.** `foo.yaml.bak-20260731`.

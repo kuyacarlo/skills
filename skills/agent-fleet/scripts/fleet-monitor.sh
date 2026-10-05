@@ -16,15 +16,27 @@
 # trains the reader to ignore it.
 
 set -u
-COORD="${1:-$(git rev-parse --show-toplevel)/../.coordination}"
-POLL="${2:-120}"
-US="${FLEET_AUTHOR_MATCH:-$(git config user.email)}"
+ONCE=0
+COORD=""
+POLL="120"
 
-command -v inotifywait >/dev/null || echo "note: inotifywait missing — claim-file watch disabled" >&2
+for arg in "$@"; do
+  case "$arg" in
+    --once|-1) ONCE=1 ;;
+    *) if [ -z "$COORD" ]; then COORD="$arg"; else POLL="$arg"; fi ;;
+  esac
+done
+
+COORD="${COORD:-$(git rev-parse --show-toplevel 2>/dev/null || pwd)/../.coordination}"
+US="${FLEET_AUTHOR_MATCH:-$(git config user.email 2>/dev/null || echo '')}"
+
+trap 'kill $(jobs -p) 2>/dev/null || true' EXIT INT TERM
+
+command -v inotifywait >/dev/null 2>&1 || echo "note: inotifywait missing — claim-file watch disabled" >&2
 
 # --- claim-file watch -------------------------------------------------------
 # Skip temp files and the orchestrator's own writes, or it reports itself.
-if command -v inotifywait >/dev/null; then
+if [ "$ONCE" -eq 0 ] && command -v inotifywait >/dev/null 2>&1; then
   inotifywait -m -q -e close_write --format '%f' "$COORD" 2>/dev/null | while read -r f; do
     case "$f" in
       *.tmp.*|*.swp|decisions.md) continue ;;
@@ -34,13 +46,15 @@ if command -v inotifywait >/dev/null; then
 fi
 
 git fetch -q origin --prune 2>/dev/null || true
-prev=$(git for-each-ref --format='%(refname:short) %(objectname:short)' refs/remotes/origin | sort)
+prev=$(git for-each-ref --format='%(refname:short) %(objectname:short)' refs/remotes/origin 2>/dev/null | sort)
 heldset=""
 
 while true; do
-  sleep "$POLL"
-  git fetch -q origin --prune 2>/dev/null || true
-  cur=$(git for-each-ref --format='%(refname:short) %(objectname:short)' refs/remotes/origin | sort)
+  if [ "$ONCE" -eq 0 ]; then
+    sleep "$POLL"
+    git fetch -q origin --prune 2>/dev/null || true
+  fi
+  cur=$(git for-each-ref --format='%(refname:short) %(objectname:short)' refs/remotes/origin 2>/dev/null | sort)
 
   # --- new/moved refs on origin --------------------------------------------
   join -j1 -v2 <(echo "$prev") <(echo "$cur") 2>/dev/null | while read -r b sha; do
@@ -95,4 +109,5 @@ while true; do
     fi
     heldset="$nowset"
   fi
+  [ "$ONCE" -eq 1 ] && break
 done

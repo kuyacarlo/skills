@@ -85,11 +85,11 @@ for skill_dir in skills/*/; do
     continue
   fi
 
-  tmp="$(mktemp "/tmp/${name}.XXXXXX.zip")"
-  rm -f "$tmp"
+  tmp_dir="$(mktemp -d "/tmp/skillpkg.${name}.XXXXXX")"
+  tmp_zip="$tmp_dir/${name}.zip"
   (
     cd "$skill_dir"
-    zip -r -q "$tmp" . \
+    zip -r -q "$tmp_zip" . \
       -x '*/.git/*' \
       -x '.git/*' \
       -x '*.skill' \
@@ -98,9 +98,8 @@ for skill_dir in skills/*/; do
       -x '*/.DS_Store' \
       -x '*/node_modules/*'
   )
-  # cp+rm avoids Podman/SELinux "mv: setting attribute 'security.selinux'" noise
-  cp -f "$tmp" "$out"
-  rm -f "$tmp"
+  cp -f "$tmp_zip" "$out"
+  rm -rf "$tmp_dir"
   built=$((built + 1))
   echo "build $name → dist/${name}.skill ($reason)"
 done

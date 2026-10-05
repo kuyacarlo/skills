@@ -18,6 +18,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+When unclear or conflicting requirements surface, resolve by consulting existing specs, codebase structure, and prior decisions first.
+Reduce redundant questions by leveraging available context.
+
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.
 
 Note: This clarification workflow is expected to run (and be completed) BEFORE invoking `/speckit.plan`. If the user explicitly states they are skipping clarification (e.g., exploratory spike), you may proceed, but must warn that downstream rework risk increases.
@@ -125,7 +128,7 @@ Execution steps:
     - After the user answers:
        - If the user replies with "yes", "recommended", or "suggested", use your previously stated recommendation/suggestion as the answer.
        - Otherwise, validate the answer maps to one option or fits the <=5 word constraint.
-       - If ambiguous, ask for a quick disambiguation (count still belongs to same question; do not advance).
+       If ambiguous, ask for a quick disambiguation and state the limit for that question. (count still belongs to same question; do not advance).
        - Once satisfactory, record it in working memory (do not yet write to disk) and move to the next queued question.
     - Stop asking further questions when:
        - All critical ambiguities resolved early (remaining queued items become unnecessary), OR

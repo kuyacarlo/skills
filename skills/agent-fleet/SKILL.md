@@ -10,6 +10,19 @@ description: "Use for parallel agents and worktrees: reconcile claims with Git, 
 Running N agents against one repository without collision, duplication, or
 silently lost work — and running them as a **tree**, not a flat list.
 
+## The coordination contract
+
+Before starting, record the task, agreed scope, time/cost caps, and which parts may use tools or delegation.
+State the acceptance check for each subagent and the verification strategy for each claimed result.
+Never present a claim as verified without re-running the verification. Re-check claims against git, not the agent.
+The orchestrator does not code; it reconciles and reports evidence.
+
+### Multi-Agent Fleet Execution (AI Paradigms)
+- **Loop Engineering:** Bounded worker loops with deterministic convergence. Every worker owns one branch and one issue, delivering a PR with verifiable proofs.
+- **Context Engineering:** Shared state lives in sibling `.coordination/` directories, claim ledgers, and handoffs — not bloated into agent session histories.
+- **Prompt Engineering:** Concise, unambiguous delegation instructions specifying owned path globs, constraints, and exact completion criteria.
+- **Harness Engineering:** Worktree isolation, tmux session management, and cross-tool bridges (agy, Cursor, Hermes, OpenCode).
+
 ## The core rule
 
 **Claim files are assertions. Git is the fact.** Never relay a claim without
@@ -206,6 +219,14 @@ different namespaces still split. Never join large refactors that merely share a
 parent — if a reviewer cannot hold the diff in their head, it is two PRs.
 
 Review capacity, not authoring, is usually the real bottleneck.
+
+## Prompt and delegation contract
+
+- Provide each agent with its lane, outcome, allowed paths, non-goals, acceptance checks, and stop conditions.
+- Give bounded context per lane, not the full shared history. Use sanitized task packets.
+- Each subagent reports its verification, not just its action. Record what was tested, how, and what could not be verified.
+- Verify before trusting claims. Check the branch, not the agent's summary.
+- If a subagent fails or stalls twice, escalate with the failing hypothesis and new evidence. Do not silently retry.
 
 ## Reporting discipline
 

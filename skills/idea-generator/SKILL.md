@@ -33,6 +33,22 @@ Output in chat. Write to a specified path if provided.
 Use the [evaluation process](references/evaluation-process.md) for detailed
 scoring and verdict guidance. Templates are in `resources/templates/`.
 
+## Evidence loop before commitment
+
+- Frame the prompt with the target user, pain, constraints, non-goals, and observable success.
+- Load only relevant personal preferences and current alternatives. Never copy private work context into public artifacts.
+- Separate sourced facts from assumptions. Scores are decision aids, not calibrated success probabilities.
+- Rank the riskiest assumption and choose one cheap, falsifiable test before expanding scope.
+- Define its pass/fail threshold, time/cost cap, and stop condition before running it.
+- Research is allowed within scope; prototypes, outreach, purchases, and deployment require appropriate authorization.
+- Record the result, update the ranking, and stop when evidence supports adoption, contribution, GO, NO-GO, or PIVOT.
+- Generate broadly, then present the strongest two options unless the user requests the full scoring table.
+
+For agent-based ideas, compare a simple non-agent baseline first.
+Test representative tasks, failure cases, and unsafe inputs against the proposed prompts, context, and tool harness.
+Measure task success, human corrections, latency, and cost. More agents are not evidence of more value.
+Hand the selected outcome and acceptance checks to [specification-pipeline](../specification-pipeline/SKILL.md); do not launch implementation automatically.
+
 ## Input Requirements
 
 ### Problem Brief Source

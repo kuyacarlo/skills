@@ -172,6 +172,16 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Confirm the implementation follows the technical plan
    - Report final status with summary of completed work
 
+## Verification-first loop
+
+Before executing each task:
+- State the acceptance check and verify that prior dependent tasks passed.
+- Run the smallest failing test first, then the passing one — prove the test discriminates.
+- Track which verification lanes ran, which were skipped, and why. Do not report as passed what was untested.
+- After each task, record verification evidence, not just task completion.
+
+On failure: stop, report the first failing check, and propose a revision before continuing.
+
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit.tasks` first to regenerate the task list.
 
 10. **Check for extension hooks**: After completion validation, check if `.specify/extensions.yml` exists in the project root.
