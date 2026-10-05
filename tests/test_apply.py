@@ -59,7 +59,6 @@ class ApplyTests(unittest.TestCase):
         self.assertTrue((target / "enabled-skills").is_dir())
 
     def test_hermes_copies_are_idempotent_and_targeted(self):
-        (self.home / ".agents").mkdir()
         self.run_apply("--harness", "hermes")
         target = self.home / ".hermes"
         installed = target / "skills/sample"
@@ -72,9 +71,30 @@ class ApplyTests(unittest.TestCase):
         self.run_apply("--harness=hermes")
         self.assertEqual(manifest.read_bytes(), first)
         self.assertEqual((installed / "SKILL.md").stat().st_mtime_ns, stamp)
-        self.assertFalse((self.home / ".agents" / "skills").exists())
+        # Targeted runs must not touch unrelated harness directories.
+        self.assertFalse((self.home / ".agents").exists())
+        # Hermes copies live alongside its own skills; no repo guidance is injected.
         self.assertFalse((target / "AGENTS.md").exists())
         self.assertNotIn(str(self.repo), manifest.read_text())
+
+    def test_hermes_home_override_and_foreign_preservation(self):
+        hermes = self.root / "custom-hermes"
+        skill_root = hermes / "skills"
+        skill_root.mkdir(parents=True)
+        (skill_root / "foreign").mkdir()
+        (skill_root / "foreign" / "own.md").write_text("mine\n")
+        (skill_root / "sample").write_text("not a directory\n")
+        foreign_link = skill_root / "sample-link"
+        foreign_link.symlink_to("/missing/foreign")
+        self.env["HERMES_HOME"] = str(hermes)
+        self.run_apply("--harness", "hermes")
+        self.assertEqual((skill_root / "foreign" / "own.md").read_text(), "mine\n")
+        self.assertEqual((skill_root / "sample").read_text(), "not a directory\n")
+        self.assertEqual(os.readlink(foreign_link), "/missing/foreign")
+        self.assertTrue((skill_root / "sample" / "SKILL.md").is_file() is False)
+        manifest = json.loads((skill_root / ".skills-apply-manifest.json").read_text())["skills"]
+        self.assertEqual(manifest, [])
+        self.assertFalse(self.home.joinpath(".hermes/skills").exists())
 
 
 if __name__ == "__main__":
