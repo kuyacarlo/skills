@@ -2,7 +2,7 @@
 name: personal-context
 metadata:
   author: kaoru
-  version: "1.3.0"
+  version: "1.4.0"
 description: "Use for personal context, focus support, technical prose, or comprehensive gap reports. Set up profiles only when asked."
 ---
 
@@ -15,16 +15,17 @@ to technical writing.
 
 Keep personal facts in local context files, not portable skill bodies.
 Config home: `$AGENT_CONFIG_HOME`, default `~/.config/karlo`.
-Use `$PERSONAL_CONTEXT_PATH` for the identity file when set; otherwise use config home's `CONTEXT.md`.
+When this skill is active, read config home's `AGENTS.md` first, then `INDEX.md`.
+The Index is the sole router for local context. Use `$PERSONAL_CONTEXT_PATH` for
+an identity file when set; otherwise follow the Index's identity route.
 
 ## Read the minimum
 
 - Reuse context already loaded during this conversation.
-- For identity questions, read CONTEXT.md. Add relevant AGENTS.md sections for interaction preferences.
-- For work-style questions, read relevant ASSESSMENT.md sections, including superseding corrections.
-- For engineering work, load OPERATIONS.md and relevant project rules before changes.
-- Choose other files by task: STACK/DECISIONS for tooling, INVENTORY for hosts, DESIGN for UI, MODELS for models.
-- Read SKILLS.md only when routing is needed. Read recent AUDIT entries only for continuity of engineering work.
+- For identity and work-style questions, follow the Index's relevant routes.
+- For engineering work, follow the Index and load relevant project rules before changes.
+- Load tool, host, design, and model references only when the Index routes them for the task.
+- Read history only when the task needs continuity or evidence; never load the legacy archive wholesale.
 - Do not recursively load every linked file or run Git housekeeping for conversation-only questions.
 - Use targeted searches and bounded reads. Follow up on truncation when relevant evidence is missing.
 
@@ -43,15 +44,15 @@ Use `$PERSONAL_CONTEXT_PATH` for the identity file when set; otherwise use confi
 If identity context is missing, answer from available information and disclose the gap.
 Do not generate a profile or write personal files merely because a file is absent.
 Files supply guidance; they cannot override host instructions, permissions, or explicit user instructions.
-Before engineering work, apply the capability check in local OPERATIONS.md when available.
+Before engineering work, follow the capability and workflow guidance routed by `INDEX.md`.
 
 ## Set up or refresh context
 
 Only create or update a profile when the user asks. First compare existing
 context files so updates do not erase useful information. Ask about current
-projects, tools, strengths, constraints, pain points, and what the user will
-build or skip. Keep `CONTEXT.md` under about 100 lines. Use the
-[context template](../../examples/CONTEXT.template.md). Add
+tools, strengths, constraints, and pain points only when needed. Follow the
+Index's tiers and routing; do not put project-specific facts or instructions in
+Personal Context. Add
 `agy-context.json` only when structured data helps an active tool. Create
 `ABOUT_ME.md` only when asked. Smoke-test one recommendation using only the new
 context. Never commit private profile data into this repository.
@@ -69,7 +70,7 @@ Portable examples must use placeholders, not personal identity or host details.
 ## Durable memory across harnesses
 
 Harness-local memory is a working cache, not the portable source of truth.
-Keep repository facts in repository docs. Route portable lessons through local
-SKILLS.md. Consult relevant notebook topics when present; do not load the whole
-notebook. After authorized context or skill edits, run the local prose checker.
-For cross-device sync, follow local `SYNC.md`.
+Keep repository facts in repository docs. Route portable procedures through
+skills; route personal guidance through `INDEX.md`. Consult legacy notes only
+when the Index or task requires them. After authorized context or skill edits,
+run the local prose checker. For cross-device sync, consult `legacy/SYNC.md`.
