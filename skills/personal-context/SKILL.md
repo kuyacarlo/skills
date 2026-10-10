@@ -2,7 +2,7 @@
 name: personal-context
 metadata:
   author: kaoru
-  version: "1.4.0"
+  version: "1.5.0"
 description: "Use for personal context, focus support, technical prose, or comprehensive gap reports. Set up profiles only when asked."
 ---
 
@@ -25,7 +25,7 @@ an identity file when set; otherwise follow the Index's identity route.
 - For identity and work-style questions, follow the Index's relevant routes.
 - For engineering work, follow the Index and load relevant project rules before changes.
 - Load tool, host, design, and model references only when the Index routes them for the task.
-- Read history only when the task needs continuity or evidence; never load the legacy archive wholesale.
+- Read history only when the task needs continuity or evidence; never load the full Git history wholesale.
 - Do not recursively load every linked file or run Git housekeeping for conversation-only questions.
 - Use targeted searches and bounded reads. Follow up on truncation when relevant evidence is missing.
 
@@ -71,6 +71,6 @@ Portable examples must use placeholders, not personal identity or host details.
 
 Harness-local memory is a working cache, not the portable source of truth.
 Keep repository facts in repository docs. Route portable procedures through
-skills; route personal guidance through `INDEX.md`. Consult legacy notes only
-when the Index or task requires them. After authorized context or skill edits,
-run the local prose checker. For cross-device sync, consult `legacy/SYNC.md`.
+skills; route personal guidance through `INDEX.md`. Consult source history only
+when the Index or task requires specific evidence. After authorized context or
+skill edits, run the local prose checker.
