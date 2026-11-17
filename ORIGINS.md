@@ -14,6 +14,7 @@ Policy:
 | `personal-context` | original | `~/.config/karlo/` |
 | `agent-fleet` | original | — |
 | `engineering-rulebook` | original | — |
+| `karlo-frontend-taste` | original | Two design-session briefs (Nov 2026) |
 
 ## Retired (2026-08-10)
 
