@@ -44,6 +44,7 @@ data or conversation logs.
 | `agent-fleet` | Multi-agent claims, trees, queues, and worktree reconciliation |
 | `engineering-rulebook` | Engineering safety, branches, proof, operations, and lessons |
 | `personal-context` | Personal settings, focus support, report structure, technical prose |
+| `saas-readiness-audit` | Evidence-backed SaaS launch-readiness audit with runner and evals |
 | `ef-starter` | Executive-function system builder (upstream submodule) |
 | `feature-plan` | Feature planning and handoff documentation |
 | `idea-generator` | Generate, compare, and evaluate ideas |

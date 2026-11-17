@@ -1,0 +1,4 @@
+phases:
+  audit:  {write_allow: [".readiness/runs/**"], network: localhost}
+  verify: {write_allow: [".readiness/runs/**"], network: localhost}
+semantic_files: [".readiness/project.yaml", ".readiness/checks.yaml", ".readiness/waivers.yaml", ".readiness/LESSONS.md"]

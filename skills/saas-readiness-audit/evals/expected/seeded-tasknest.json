@@ -1,0 +1,27 @@
+{
+  "_note": "Ground truth written BEFORE compile/audit. Fixture: B2C, unpaid, PH-only, no teams, no dev audience.",
+  "verdict": "Not ready",
+  "checks": {
+    "T0-LEGAL-TOS": "PASS",
+    "T0-LEGAL-PRIVACY": "FAIL",
+    "T0-LEGAL-DELETE": "FAIL",
+    "T0-LEGAL-COOKIES": "N/A",
+    "T0-AUTH-CORE": "PASS",
+    "T0-AUTH-RESET": "FAIL",
+    "T0-AUTH-VERIFY": "FAIL",
+    "T0-AUTH-HASH": "FAIL",
+    "T0-AUTH-RATELIMIT": "FAIL",
+    "T0-AUTH-SESSION": "FAIL",
+    "T0-BILL-PRICING": "N/A",
+    "T0-BILL-CANCEL": "N/A",
+    "T0-BILL-INVOICE": "N/A",
+    "T0-BILL-WEBHOOKS": "N/A",
+    "T0-OPS-ERRORPAGES": "FAIL",
+    "T0-OPS-SUPPORT": "PASS",
+    "T0-OPS-SETTINGS": "PARTIAL",
+    "T0-SEC-HTTPS": "FAIL",
+    "T0-SEC-SECRETS": "FAIL",
+    "T0-OPS-BACKUP": "UNRUN",
+    "T0-OPS-MONITOR": "FAIL"
+  }
+}

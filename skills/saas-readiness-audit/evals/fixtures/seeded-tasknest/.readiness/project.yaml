@@ -1,0 +1,14 @@
+# compile-phase draft (agent). Detected from src/app.mjs, package.json, routes.
+product_type: b2c          # detected: no org/team routes
+paid: false                # detected: no billing routes or provider SDK in package.json
+billing: none
+self_hosted: false
+dev_audience: false        # detected: no /docs, no API key routes
+has_teams: false
+jurisdictions: [PH]        # NOT detectable -> listed in unknowns
+stack: {framework: express, auth: custom-bearer, db: in-memory, deploy: unknown}
+unknowns:
+  - jurisdictions served (assumed PH; EU would enable T0-LEGAL-COOKIES)
+  - deploy target (affects T0-SEC-HTTPS probe; checked app-level HSTS only)
+  - last backup restore test date (T0-OPS-BACKUP is manual attestation)
+attestations: {}

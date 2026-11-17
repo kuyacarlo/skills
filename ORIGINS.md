@@ -15,6 +15,7 @@ Policy:
 | `agent-fleet` | original | — |
 | `engineering-rulebook` | original | — |
 | `karlo-frontend-taste` | original | Two design-session briefs (Nov 2026) |
+| `saas-readiness-audit` | original | Imported audit bundle with runner, scorer, and eval fixture |
 
 ## Retired (2026-08-10)
 
