@@ -1,5 +1,7 @@
 # Motion
 
+Product profile only. The brutalist personal profile has no motion. A project design file overrides this note.
+
 Use these tokens. Do not invent a second timing system on the same page.
 
 | Job | Token |

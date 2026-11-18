@@ -1,6 +1,6 @@
 # Patterns
 
-Synthetic before/after pairs for the hard rules in [SKILL.md](../SKILL.md). Copy the shape, not this sample product. The sample is a cloud dev environment with no real customers.
+Synthetic before/after pairs for the hard rules in [SKILL.md](../SKILL.md). Copy the shape, not the samples. Pairs 1–18 use a cloud dev environment. Pairs 19–32 use a personal site and a tools catalog. None have real customers.
 
 ## 1. Eyebrow
 
@@ -113,3 +113,87 @@ After: the proposition from the owner, or `TODO(positioning)`. Missing numbers s
 Before: a cartoon animal face with eyes.
 
 After: one flat path. Rounded snout, a cut-out for the nose, no eyes, no sharp chin. See [logo](logo.md) for the sheet.
+
+## 19. Explained design
+
+Before: a caption under a list, `Each one links to the issuer, so you don't have to take my word for it.` Or a legend, `symptom → cause → fix`.
+
+After: the list alone. The links prove it. The row structure shows the order.
+
+## 20. Stray link color
+
+Before: a card that is one big link, so its heading, paragraph, and bullets all render in link blue. The table of contents and breadcrumbs use browser-default blue.
+
+After: everything in ink. The card title underlines on hover. Only inline links in body text use the link color.
+
+## 21. Lost emphasis
+
+Before: desktop inverts the featured project row. The phone version drops the inversion to save space.
+
+After: the phone card keeps the inverted block. The layout changes. The emphasis does not.
+
+## 22. Sparse versus cramped
+
+Before: a resume page with three short entries and large empty bands. Or a phone layout with text against the cell edge.
+
+After: the resume shows every real entry in a packed single column. Cells get padding from the spacing scale.
+
+## 23. Empty control
+
+Before: a filter with three choices, two of which show zero results. A `Show more` button under a list of one. A blank certificates page.
+
+After: the filter offers only choices with results, and hides under two choices. No `Show more`. The page says `No certificates yet.`
+
+## 24. Phone layout
+
+Before: a six-item layer strip on desktop becomes a two-column card stack on phone, in a new order.
+
+After: the same strip, transposed. Numbers in one row, labels in the next, same order.
+
+## 25. Link target
+
+Before: a row with the name as plain text, then `source` and `live` links, and a line `or write to [email]` under a `Send an email` button.
+
+After: the name links to live, or to source when there is no live. Other links sit at the row end. The repeated email line is gone.
+
+## 26. Stat overflow
+
+Before: `2,713,408` clipped inside a stat card.
+
+After: `2.71M`, with the exact value in an accessible label or tooltip.
+
+## 27. Dark mode
+
+Before: a hard color inversion. Black blocks turn white and glare.
+
+After: a tuned dark palette. Filled blocks stay dark, slightly raised. The toggle sits just before the primary action.
+
+## 28. Copy button
+
+Before: `Copy this stack` opens a dialog and copies nothing. Or every copy button on the page flips to `Copied`.
+
+After: one click copies. Only that button reads `Copied` for a moment.
+
+## 29. Link preview
+
+Before: a shared link shows the bare URL and a generic favicon.
+
+After: Open Graph title, description, and a designed preview image in the site's own style.
+
+## 30. Code and prose
+
+Before: monochrome code blocks. Inline prose words with a tinted highlight background.
+
+After: a quiet syntax theme in code. Prose has no highlight.
+
+## 31. Voice
+
+Before, personal site: `Let's talk.` and `I am a software and systems engineer.`
+
+After: a friendly first-person line in his words, or `TODO(positioning)`.
+
+## 32. Dead filter
+
+Before: a filter bar on a page of six notes, or a filter that does not change the list.
+
+After: no filter for a small set. Any filter that ships changes the results, with a test.
