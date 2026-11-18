@@ -7,7 +7,7 @@ Animate real activity and state changes. Never decoration. Use these tokens and 
 | Job | Token |
 | --- | --- |
 | Hero text rise | 0.7s, `cubic-bezier(.2, .7, .2, 1)`, stagger from 0.05s to 0.4s |
-| Product shot entrance | `perspective(1800px) rotateX(16deg) translateY(48px)` to identity, over 1.1s. No float loop after |
+| Product shot entrance | `perspective(112rem) rotateX(16deg) translateY(3rem)` to identity, over 1.1s. No float loop after |
 | Integration marquee | 40s linear. Duplicate the list and translate −50%. Pause on hover and a visible pause control. Fade both edges with a mask |
 | How-it-works step | Fill the active track for 4.5s, then advance. A click selects that step and stops the timer |
 | Feature tabs | Advance about every 6s until a click, then stop |

@@ -100,7 +100,7 @@ After: every step has a track. Only the fill moves. The animation panel height d
 
 Before: an emoji, or an icon inside a colored rounded square, or a step whose icon node renders empty.
 
-After: a 1.5px stroke icon beside the text, sitting directly on the row. Confirm it is visible.
+After: a stroke icon (stroke width 1.5, sized 1em) beside the text, sitting directly on the row. Confirm it is visible.
 
 ## Invented claim
 

@@ -11,7 +11,7 @@ Use for a developer or infrastructure product site. Reference sites in that cate
 - Dark graphite first. Light only when asked.
 - One warm accent for the primary action and focus.
 - A plain ground. No grid backdrop, glow, or halo unless the design file asks.
-- Radius about 6–12 px. Borders over shadows.
+- Radius about 0.375–0.75rem. Borders over shadows.
 - Header: nav, `Sign in` as a text link, and a solid primary verb.
 - Motion on, for real activity only. Tokens are in [motion](motion.md).
 - Voice: minimal, sleek, corporate.
@@ -49,7 +49,7 @@ Use for a directory, a tool, a dashboard, or an app screen.
 - Exact vendor figures. Unknowns shown as unknown, with an invite to check.
 - Lead with the catch.
 - Motion only where it shows state.
-- Every strip or row that holds a link is at least 44 px tall.
+- Every strip or row that holds a link is at least 2.75rem tall.
 
 ## Choosing
 

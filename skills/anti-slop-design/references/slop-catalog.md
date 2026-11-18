@@ -31,7 +31,7 @@ Adapted from the [impeccable slop catalog](https://impeccable.style/slop). Slop 
 | Label above a heading | Remove it, or fold it into the heading |
 | Badge above the hero headline | Remove it, or move the information into the headline or body |
 | Icon tile stacked above a heading | Icon beside the heading, no container |
-| Tiny interface text | Readable without zoom |
+| Tiny interface text | Nothing under 1.5rem |
 | One word alone on the last line | `text-wrap: pretty`, or adjust the measure |
 | Heading with a stub last line | `text-wrap: balance` |
 | Flat type hierarchy | Vary size, weight, and spacing |
@@ -111,5 +111,6 @@ Adapted from the [impeccable slop catalog](https://impeccable.style/slop). Slop 
 | Low-contrast text | WCAG AA: 4.5:1 regular, 3:1 large |
 | Skipped heading level | Levels match the page structure |
 | Tight line height | Start near 1.5× |
-| Tiny body text | Start near 16px |
+| Tiny body text | Nothing under 1.5rem |
+| Sizes set in `px` | `rem`, `em`, `ch`, `%`, or viewport units |
 | Wide tracking on body text | Default tracking; wide only on short labels |

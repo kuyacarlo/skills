@@ -16,7 +16,7 @@
 Do not keep nudging one rejected idea.
 
 1. After a rejection, make one sheet with 3 or 4 directions that are actually different.
-2. Show each direction large, at 24px inside a wordmark lockup, and in one color on a light ground.
+2. Show each direction large, at 1.5rem inside a wordmark lockup, and in one color on a light ground.
 3. Wait for the pick.
 4. Make a second sheet with 2 or 3 small variants of that pick.
 5. Stop when the owner picks. Do not add rejected features back in a later pass.

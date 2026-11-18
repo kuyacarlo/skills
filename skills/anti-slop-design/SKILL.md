@@ -1,7 +1,7 @@
 ---
 name: anti-slop-design
 author: kaoru
-version: "3.1.0"
+version: "3.2.0"
 description: "Use whenever designing, critiquing, or building UI: landing pages, marketing sites, personal sites, app screens, catalogs, pricing, docs, dashboards, canvases, mockups, and logos. Blocks AI-generated design slop (eyebrow labels, icon-card grids, gradients, glows, glass, explained design, slogan copy, toy demos, layout shift, invented claims) and applies functional, product-first replacements. Ends with a pre-ship checklist."
 ---
 
@@ -9,7 +9,7 @@ description: "Use whenever designing, critiquing, or building UI: landing pages,
 
 Good interfaces look like working products, not templates or pitch decks. Design that is functional first and real holds up. Decoration that carries no information, witty copy, design that explains itself, and anything that looks like a toy reads as generated slop. Borrow structure from category leaders before inventing layouts.
 
-Default model output drifts toward every pattern in this skill. Assume your first draft contains slop. Do not ship any pattern listed here, in any surface, mockup, or demo, unless the user asks for that exact pattern. Find it and remove it before the user sees the work.
+Default model output drifts toward every pattern in this skill. Assume your first draft contains slop. Do not ship any pattern listed here, in any surface, mockup, or demo, unless the user asks for that exact pattern. Find it and remove it before the user sees the work. The target is zero slop, not less slop.
 
 This skill is self-contained. It does not depend on another design skill.
 
@@ -49,15 +49,16 @@ Each project has its own visual system. Never carry one project's palette or mot
 7. **No equal icon-card grids.** No row of 3 or 4 equal cards with a tinted icon, a blurb, and "Explore". Use a tabbed showcase of the real feature, an alternating text-and-mock row, or a bento cell that holds a real snippet, status, or input. No nested cards.
 8. **No decorative surface effects.** No gradient washes, gradient text, radial halos, spotlights, glowing blobs, mesh or decorative grid backgrounds, glassmorphism, neon outlines, hairline-border-plus-wide-shadow, or hard offset shadows used as decoration.
 9. **One color, one meaning.** The accent marks the primary action, a link, or focus. Link color goes on inline text links only. Headings, paragraphs, rows, nav, and breadcrumbs stay ink even when they are links. Underline only what is a link. Status color always has a word beside it.
-10. **Icons are plain and they render.** Inline stroke icons, about 1.5px, beside the text, never in a tinted tile and never stacked above a heading. No emoji as icons. A conditional that can render nothing is a bug.
+10. **Icons are plain and they render.** Inline stroke icons (stroke width 1.5) sized in `em` beside the text, never in a tinted tile and never stacked above a heading. No emoji as icons. A conditional that can render nothing is a bug.
 11. **Demos look like the product.** Real file trees, the real language with syntax color, tabs, breadcrumbs, status bars, timestamped logs, a real pull-request page. No grey boxes labeled "Editor". No fake browser chrome or fake metrics.
 12. **Nothing shifts layout.** Progress tracks always render. Animation and tab panels keep one fixed height. A jump on interaction is a bug.
 13. **Every visible control works.** Tabs switch, filters filter, toggles toggle, forms confirm, copy controls copy on the first click and only the clicked one says "Copied". Clicking an item opens that item. A dead control reads as fake.
 14. **Empty means remove or say so.** A filter, row, or control with nothing under it is removed. An empty page says it is empty. No "Show more" for one item. Small collections get no filter chrome.
 15. **Emphasis survives every breakpoint.** The phone layout is the desktop layout transposed: same pieces, same order, same emphasis. Do not invent a new phone structure or split one list into columns to fill width.
 16. **Content is visible by default.** It never waits on an animation or script to appear. No JavaScript errors on load. No placeholder or broken images.
-17. **Accessible as drawn.** Real buttons, links, and labels. Targets about 44 px. Text contrast at least 4.5:1, including muted labels and grey text on colored grounds. No text under 11px, including inside product mockups. Heading levels never skip. Honor `prefers-reduced-motion`.
-18. **Nothing escapes the viewport.** No horizontal scroll at phone width. Popovers, menus, and tooltips are hidden with `display: none`, not `visibility`, so they never widen the page. They clamp inside the viewport and render outside any `overflow: hidden` parent. Check every layer at 390px.
+17. **Accessible as drawn.** Real buttons, links, and labels. Targets at least 2.75rem. Text contrast at least 4.5:1, including muted labels and grey text on colored grounds. No text under 1.5rem anywhere: body, captions, labels, table cells, code, buttons, and product mockups. Small text that one person can read on one screen is unreadable for others. Heading levels never skip. Honor `prefers-reduced-motion`.
+18. **Nothing escapes the viewport.** No horizontal scroll at phone width. Popovers, menus, and tooltips are hidden with `display: none`, not `visibility`, so they never widen the page. They clamp inside the viewport and render outside any `overflow: hidden` parent. Check every layer at phone width (a 390-wide viewport).
+19. **No px units.** Size type, spacing, radius, and layout in `rem`, `em`, `ch`, `%`, or viewport units, so the page follows the reader's font settings and zoom. Media queries use `rem` or `em`. Hairline borders use `thin` or `0.0625rem`. A `px` value in shipped CSS is a bug.
 
 ## Defaults
 
@@ -75,7 +76,7 @@ Each project has its own visual system. Never carry one project's palette or mot
 
 - A workhorse sans, plus mono for code. Self-host web fonts. Pick type for the product, not the font every generated page uses.
 - No display serifs, italic serif headlines, condensed fashion faces, or ultra-thin weights.
-- Body around 16px, line height around 1.5, measure around 65–75 characters. No tiny UI text.
+- Body at least 1.5rem, line height around 1.5, measure 60–75ch. Headings scale up from there. Nothing goes smaller.
 - Build hierarchy with size, weight, and spacing before adding a second family.
 - Sentence case. Uppercase and wide tracking only on short labels, never body. No crushed tracking.
 - `text-wrap: balance` on headings, `text-wrap: pretty` on paragraphs. No justified body text.
@@ -122,6 +123,7 @@ Each project has its own visual system. Never carry one project's palette or mot
 - Sparse and "breathe" do not conflict. Sparse means too little content. Breathe means padding inside cells.
 - Grids are fine. Splitting one list into columns just to fill width is not.
 - If the `impeccable` CLI is available, run `npx impeccable detect` on the files and on the rendered URL at `--viewport 390x844`. Browser scans need puppeteer installed.
+- Every scanner finding gets fixed, or written down as a false positive with its reason. "Mostly clean" is not done.
 - A clean scan is not a pass. Scanners catch surface CSS. They miss most copy and behavior slop: slogans, "not X, Y" lines, trademarks, fake proof, narration, eyebrows outside the first screen, dead filters, layout shift, lying copy buttons, and empty controls. Check those by hand with the checklist.
 
 ## Pre-ship checklist
@@ -140,7 +142,7 @@ Run this on the output before showing it. Check desktop and phone width.
 - [ ] No gradients, gradient text, glows, halos, glass, decorative grids, or offset shadows.
 - [ ] Accent only on primary actions, links, and focus. Status color has a word.
 - [ ] Icons render as plain strokes beside text. No tiles, no emoji.
-- [ ] Type: body ~16px, line height ~1.5, measure ≤ 75ch, no all-caps body, no justified text, no orphans.
+- [ ] Type: nothing under 1.5rem, line height ~1.5, measure ≤ 75ch, no all-caps body, no justified text, no orphans.
 - [ ] Spacing groups related items. Headings sit closer to their own section. Nothing sparse or cramped.
 - [ ] Emphasis on desktop also shows on phone. Phone is the desktop transposed.
 - [ ] Every control, filter, tab, copy button, and link works. No empty controls. Empty pages say so.
@@ -150,8 +152,9 @@ Run this on the output before showing it. Check desktop and phone width.
 - [ ] Same header on every page, with the primary action.
 - [ ] Dark mode is tuned, not inverted, with no glow.
 - [ ] Demos look like the real product.
-- [ ] Contrast ≥ 4.5:1, ~44 px targets, no text under 11px, no skipped heading levels.
-- [ ] At 390px: no horizontal scroll. Every popover, menu, and tooltip opens fully on screen and unclipped.
+- [ ] No `px` in CSS. Sizes in rem, em, ch, %, or viewport units.
+- [ ] Contrast ≥ 4.5:1, targets ≥ 2.75rem, no skipped heading levels.
+- [ ] At phone width: no horizontal scroll. Every popover, menu, and tooltip opens fully on screen and unclipped.
 - [ ] Copy and behavior checked by hand, even when a scanner passes.
 - [ ] Public pages have Open Graph tags and a preview image.
 - [ ] A logo has no eyes, no cartoon face, and no sharp chin.
