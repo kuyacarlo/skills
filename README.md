@@ -48,7 +48,7 @@ data or conversation logs.
 | `ef-starter` | Executive-function system builder (upstream submodule) |
 | `feature-plan` | Feature planning and handoff documentation |
 | `idea-generator` | Generate, compare, and evaluate ideas |
-| `karlo-frontend-taste` | Frontend taste rules, rejected UI patterns, and a pre-ship checklist |
+| `anti-slop-design` | Anti-slop UI rules, replacements, and a pre-ship checklist |
 | `specification-pipeline` | Requirements, specifications, plans, tasks, and drift audits |
 
 Detailed guides load only for matching tasks. Credits and submodule policy:

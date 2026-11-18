@@ -14,7 +14,7 @@ Policy:
 | `personal-context` | original | `~/.config/karlo/` |
 | `agent-fleet` | original | — |
 | `engineering-rulebook` | original | — |
-| `karlo-frontend-taste` | original | Two design-session briefs plus collated Claude and Codex UI feedback (Oct–Nov 2026) |
+| `anti-slop-design` | original | Design-session feedback (Oct–Nov 2026) plus the [impeccable slop catalog](https://impeccable.style/slop) |
 | `saas-readiness-audit` | original | Imported audit bundle with runner, scorer, and eval fixture |
 
 ## Retired (2026-08-10)
