@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Type · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:2.5rem 5rem">
+  <h1 class="text-5xl font-semibold">Type</h1>
+  <p class="text-muted mt-2 max-w-[65ch]">Fonts, sizes, and spacing that read as generated.</p>
+  <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+    <a class="prose-link" href="#serif">Italic serif display</a>
+    <a class="prose-link" href="#thin">Ultra-thin weight</a>
+    <a class="prose-link" href="#caps">All-caps body</a>
+    <a class="prose-link" href="#tiny">Tiny grey text</a>
+    <a class="prose-link" href="#stub">Stub last line</a>
+    <a class="prose-link" href="#measure">Long lines</a>
+    <a class="prose-link" href="#justify">Justified text</a>
+    <a class="prose-link" href="#flat">Flat hierarchy</a>
+  </nav>
+
+  <section class="specimen mt-8" id="serif">
+    <h2 class="text-3xl font-semibold">Italic serif display headline</h2>
+    <p class="fix-line">Fix: a workhorse sans that fits the product.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white text-slate-900">
+          <h3 class="text-5xl leading-none" style="font-family:'Instrument Serif',serif">Where <em>builds</em> become <em>art</em>.</h3>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-4xl font-semibold leading-tight">CI runners on hardware you own</h3>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="thin">
+    <h2 class="text-3xl font-semibold">Ultra-thin weight, crushed tracking</h2>
+    <p class="fix-line">Fix: regular or semibold weight, default tracking.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <h3 class="text-5xl font-extralight tracking-[-0.07em]">Elegantly simple.</h3>
+          <p class="mt-2 text-sm font-light tracking-[-0.04em] text-slate-400">Minimal infrastructure for maximal teams.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-4xl font-semibold">One binary per runner</h3>
+          <p class="mt-2 text-muted">No daemon, no database. Updates replace the binary in place.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="caps">
+    <h2 class="text-3xl font-semibold">All-caps body with wide tracking</h2>
+    <p class="fix-line">Fix: sentence case. Uppercase only on short labels.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-[#0b0b1a] text-white/70" style="font-family:Inter,sans-serif">
+          <p class="text-xs uppercase tracking-[0.25em] leading-loose">Quarry gives your team the power to build, test, and deploy with confidence. Our platform scales with you from your first commit to your millionth.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <p class="max-w-[60ch]">Quarry picks up jobs from your forge and runs them on the machines you register. Each job gets a clean workspace and its log stays on the runner's disk.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="tiny">
+    <h2 class="text-3xl font-semibold">Tiny grey text</h2>
+    <p class="fix-line">Fix: body at 1.5rem or larger. Muted text still meets 4.5:1.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white" style="font-family:Inter,sans-serif">
+          <p class="text-sm font-semibold text-slate-800">Runner token</p>
+          <p class="mt-1 text-[10px] text-slate-300">Tokens expire after 30 days. Rotate them from the settings page. Old tokens stop working immediately after rotation.</p>
+          <p class="mt-4 text-[9px] text-slate-300">© 2026 Quarry Inc. All rights reserved. Terms · Privacy · Cookies</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <p class="font-semibold">Runner token</p>
+          <p class="mt-1 text-muted">Tokens expire after 30 days. Rotating a token stops the old one immediately.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="stub">
+    <h2 class="text-3xl font-semibold">Stub last line</h2>
+    <p class="fix-line">Fix: <span class="mono">text-wrap: balance</span> on headings, <span class="mono">pretty</span> on paragraphs.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <h3 class="text-3xl font-extrabold" style="text-wrap:wrap">Run every build on the hardware you already<br>own.</h3>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold" style="text-wrap:balance">Run every build on the hardware you already own.</h3>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="measure">
+    <h2 class="text-3xl font-semibold">Lines too long</h2>
+    <p class="fix-line">Fix: about 65–75 characters per line.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 bg-white text-slate-700" style="font-family:Inter,sans-serif">
+          <p class="text-[12px] leading-tight">Quarry is a self-hosted continuous integration runner that picks up jobs from GitHub, GitLab, Forgejo, and Gitea, runs each job in a clean workspace on the machine you registered, streams the log back to your pull request while it runs, and keeps the full log on the runner's own disk so that nothing about your build leaves your network unless you decide to ship it somewhere else yourself.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5">
+          <p class="max-w-[62ch]">Quarry picks up jobs from GitHub, GitLab, Forgejo, and Gitea. Each job runs in a clean workspace on a machine you registered.</p>
+          <p class="max-w-[62ch] mt-3">The log streams to your pull request and stays on the runner's disk.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="justify">
+    <h2 class="text-3xl font-semibold">Justified text</h2>
+    <p class="fix-line">Fix: start-aligned body text. No rivers of space.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-white text-slate-800" style="font-family:Inter,sans-serif">
+          <p class="max-w-[24ch] text-justify">Revolutionary infrastructure empowers organizations everywhere to accelerate transformative outcomes seamlessly.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <p class="max-w-[24ch]">Quarry runs your CI jobs on machines you already own.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="flat">
+    <h2 class="text-3xl font-semibold">Flat hierarchy</h2>
+    <p class="fix-line">Fix: vary size, weight, and space before adding a second font.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-white text-slate-700 text-sm space-y-1" style="font-family:Inter,sans-serif">
+          <p>Pricing</p><p>Maker</p><p>For one runner</p><p>Free</p><p>Team</p><p>Up to 10 runners</p><p>$[PRICE] per month</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <h3 class="text-3xl font-semibold">Pricing</h3>
+          <div class="mt-4 flex flex-wrap gap-x-12 gap-y-6">
+            <div><p class="font-semibold">Maker</p><p class="text-muted">One runner</p><p class="mt-2 text-4xl font-semibold">Free</p></div>
+            <div><p class="font-semibold">Team</p><p class="text-muted">Up to 10 runners</p><p class="mt-2 text-4xl font-semibold mono">[PRICE]</p></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Structure · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:2.5rem 5rem">
+  <h1 class="text-5xl font-semibold">Structure</h1>
+  <p class="text-muted mt-2 max-w-[65ch]">Labels, grids, and layouts that carry no information.</p>
+  <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+    <a class="prose-link" href="#eyebrow">Eyebrow label</a>
+    <a class="prose-link" href="#badge">Badge above headline</a>
+    <a class="prose-link" href="#cards">Icon-card grid</a>
+    <a class="prose-link" href="#nested">Nested cards</a>
+    <a class="prose-link" href="#steps">Numbered steps</a>
+    <a class="prose-link" href="#command">Command under CTA</a>
+    <a class="prose-link" href="#metric">Hero metric</a>
+  </nav>
+
+  <!-- Eyebrow -->
+  <section class="specimen mt-8" id="eyebrow">
+    <h2 class="text-3xl font-semibold">Eyebrow label</h2>
+    <p class="fix-line">Fix: delete it. The heading already says it.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 text-center bg-[#0b0b1a] text-white" style="font-family:Inter,sans-serif">
+          <p class="text-[11px] tracking-[0.35em] uppercase text-violet-400 font-semibold">✦ How it works ✦</p>
+          <h3 class="text-3xl font-extrabold mt-3">Supercharge your workflow</h3>
+          <p class="text-slate-500 mt-3 text-sm">Everything you need to build, ship, and scale — all in one place.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">How a deploy runs</h3>
+          <p class="text-muted mt-2 max-w-[48ch]">Push a tag. Quarry builds it on your runner and posts the log to the pull request.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Badge -->
+  <section class="specimen" id="badge">
+    <h2 class="text-3xl font-semibold">Badge above the headline</h2>
+    <p class="fix-line">Fix: remove it. Put real news in the changelog.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 text-center bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <a class="mx-auto inline-flex items-center gap-2 rounded-full border border-violet-300 bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-700 no-underline">🚀 New: Quarry AI 2.0 is here <span aria-hidden="true">→</span></a>
+          <h3 class="text-4xl font-extrabold mt-4 tracking-tight">The future of CI is here</h3>
+          <p class="text-slate-500 mt-3">Build smarter. Ship faster. Scale infinitely.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">CI runners on hardware you own</h3>
+          <p class="text-muted mt-2 max-w-[48ch]">Quarry runs GitHub and GitLab jobs on your machines and keeps every log on your disk.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Icon cards -->
+  <section class="specimen" id="cards">
+    <h2 class="text-3xl font-semibold">Equal icon-card grid</h2>
+    <p class="fix-line">Fix: show the product. A real table beats three emoji tiles.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 bg-slate-50 text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="grid grid-cols-3 gap-3">
+            <div class="rounded-2xl bg-white p-4 shadow-lg shadow-slate-200 text-center">
+              <div class="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-amber-100">⚡</div>
+              <p class="mt-3 text-sm font-bold">Lightning fast</p>
+              <p class="mt-1 text-[11px] text-slate-400">Blazing performance for modern teams.</p>
+              <p class="mt-2 text-[11px] font-semibold text-violet-600">Learn more →</p>
+            </div>
+            <div class="rounded-2xl bg-white p-4 shadow-lg shadow-slate-200 text-center">
+              <div class="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-emerald-100">🔒</div>
+              <p class="mt-3 text-sm font-bold">Secure by default</p>
+              <p class="mt-1 text-[11px] text-slate-400">Enterprise-grade security you can trust.</p>
+              <p class="mt-2 text-[11px] font-semibold text-violet-600">Learn more →</p>
+            </div>
+            <div class="rounded-2xl bg-white p-4 shadow-lg shadow-slate-200 text-center">
+              <div class="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-sky-100">🚀</div>
+              <p class="mt-3 text-sm font-bold">Infinitely scalable</p>
+              <p class="mt-1 text-[11px] text-slate-400">Grows with you from day one.</p>
+              <p class="mt-2 text-[11px] font-semibold text-violet-600">Learn more →</p>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5">
+          <h3 class="text-3xl font-semibold">Runner fleet</h3>
+          <div class="mt-3 overflow-x-auto">
+            <table class="w-full" style="font-variant-numeric:tabular-nums">
+              <thead class="text-muted text-left"><tr class="border-b border-line"><th class="py-2 pr-3 font-medium">Runner</th><th class="py-2 pr-3 font-medium">Arch</th><th class="py-2 pr-3 font-medium">Status</th><th class="py-2 text-right font-medium">Jobs today</th></tr></thead>
+              <tbody class="mono">
+                <tr class="border-b border-line"><td class="py-2 pr-3">rack-01</td><td class="pr-3">x86_64</td><td class="pr-3">Running</td><td class="text-right">142</td></tr>
+                <tr class="border-b border-line"><td class="py-2 pr-3">rack-02</td><td class="pr-3">x86_64</td><td class="pr-3">Idle</td><td class="text-right">97</td></tr>
+                <tr class="border-b border-line"><td class="py-2 pr-3">mac-mini-a</td><td class="pr-3">arm64</td><td class="pr-3">Running</td><td class="text-right">38</td></tr>
+                <tr><td class="py-2 pr-3">pi-cluster</td><td class="pr-3">arm64</td><td class="pr-3 text-bad">Offline</td><td class="text-right">0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Nested -->
+  <section class="specimen" id="nested">
+    <h2 class="text-3xl font-semibold">Nested cards</h2>
+    <p class="fix-line">Fix: flatten. One surface, dividers between rows.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 bg-slate-100 text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="rounded-3xl bg-white p-4 shadow-xl">
+            <p class="font-bold">Settings</p>
+            <div class="mt-3 rounded-2xl bg-slate-50 p-3 shadow-md">
+              <p class="text-sm font-semibold">Notifications</p>
+              <div class="mt-2 rounded-xl bg-white p-3 shadow">
+                <p class="text-xs font-semibold">Email</p>
+                <div class="mt-2 rounded-lg bg-violet-50 p-2 shadow-sm text-[11px] text-violet-700">Send me build failures ✅</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5">
+          <h3 class="text-3xl font-semibold">Notifications</h3>
+          <ul class="mt-2 divide-y divide-line border-y border-line">
+            <li class="flex items-center justify-between py-3"><label for="n1">Email me failed builds</label><input id="n1" type="checkbox" checked class="h-5 w-5 accent-[var(--accent)]"></li>
+            <li class="flex items-center justify-between py-3"><label for="n2">Email me fixed builds</label><input id="n2" type="checkbox" class="h-5 w-5 accent-[var(--accent)]"></li>
+            <li class="flex items-center justify-between py-3"><label for="n3">Weekly runner report</label><input id="n3" type="checkbox" checked class="h-5 w-5 accent-[var(--accent)]"></li>
+          </ul>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="specimen" id="steps">
+    <h2 class="text-3xl font-semibold">Numbered equal-column steps</h2>
+    <p class="fix-line">Fix: a plain step list beside a panel that shows the step for real. Click a step.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 bg-[#0b0b1a] text-white" style="font-family:Inter,sans-serif">
+          <div class="grid grid-cols-3 gap-3 text-center">
+            <div><p class="text-[10px] tracking-[0.3em] text-violet-400">01 — CONNECT</p><p class="mt-2 text-3xl font-extrabold bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-transparent">01</p><p class="mt-2 text-xs font-semibold">Connect</p><p class="mt-1 text-[10px] text-slate-500">Seamlessly integrate your stack.</p></div>
+            <div><p class="text-[10px] tracking-[0.3em] text-violet-400">02 — CONFIGURE</p><p class="mt-2 text-3xl font-extrabold bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-transparent">02</p><p class="mt-2 text-xs font-semibold">Configure</p><p class="mt-1 text-[10px] text-slate-500">Tailor it to your needs.</p></div>
+            <div><p class="text-[10px] tracking-[0.3em] text-violet-400">03 — DEPLOY</p><p class="mt-2 text-3xl font-extrabold bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-transparent">03</p><p class="mt-2 text-xs font-semibold">Deploy</p><p class="mt-1 text-[10px] text-slate-500">Go live in seconds.</p></div>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5">
+          <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 items-start">
+            <ol class="space-y-1" id="step-list">
+              <li><button type="button" data-step="0" class="w-full text-left rounded px-2 py-2 min-h-11 bg-codebg font-semibold">Register a runner</button></li>
+              <li><button type="button" data-step="1" class="w-full text-left rounded px-2 py-2 min-h-11">Push a tag</button></li>
+              <li><button type="button" data-step="2" class="w-full text-left rounded px-2 py-2 min-h-11">Read the log in the PR</button></li>
+            </ol>
+            <pre id="step-panel" class="mono leading-relaxed bg-codebg rounded p-3 h-52 overflow-auto whitespace-pre"></pre>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Command -->
+  <section class="specimen" id="command">
+    <h2 class="text-3xl font-semibold">Install command under the CTA</h2>
+    <p class="fix-line">Fix: hide it in a popover on the install button, with Copy. Hover or focus it.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 text-center bg-[#0b0b1a] text-white" style="font-family:Inter,sans-serif">
+          <div class="flex justify-center gap-3">
+            <span class="rounded-full bg-gradient-to-r from-violet-500 to-sky-500 px-5 py-2 text-sm font-semibold">Get Started Free 🚀</span>
+            <span class="rounded-full border border-white/20 px-5 py-2 text-sm">Book a demo</span>
+          </div>
+          <p class="mt-5 mx-auto w-fit rounded-lg border border-white/10 bg-white/5 px-4 py-2 font-mono text-xs text-emerald-300">$ curl -fsSL https://example.com/install.sh | sudo sh</p>
+          <p class="mt-2 text-[11px] text-slate-500">No credit card required · Free forever · Cancel anytime</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <div class="flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="#command">Get started</a>
+            <span class="pop-wrap">
+              <button type="button" class="btn">Install on your server</button>
+              <span class="pop" role="tooltip">
+                <span class="block text-muted mb-2">Run on the runner host:</span>
+                <code>curl -fsSL https://example.com/install.sh | sh</code>
+                <button type="button" class="btn mt-2 w-full" data-copy="curl -fsSL https://example.com/install.sh | sh">Copy</button>
+              </span>
+            </span>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Metric -->
+  <section class="specimen" id="metric">
+    <h2 class="text-3xl font-semibold">Hero metric</h2>
+    <p class="fix-line">Fix: lead with a number only when it explains the product, with its context.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 text-center bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <p class="text-7xl font-extrabold bg-gradient-to-br from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">10x</p>
+          <p class="text-lg font-bold">faster builds*</p>
+          <div class="mt-4 grid grid-cols-3 gap-2 text-xs">
+            <div class="rounded-xl bg-slate-50 p-2"><p class="text-xl font-extrabold">99.99%</p>uptime</div>
+            <div class="rounded-xl bg-slate-50 p-2"><p class="text-xl font-extrabold">10k+</p>teams</div>
+            <div class="rounded-xl bg-slate-50 p-2"><p class="text-xl font-extrabold">∞</p>scale</div>
+          </div>
+          <p class="mt-2 text-[10px] text-slate-300">*compared to doing nothing</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <h3 class="text-3xl font-semibold">Last run on rack-01</h3>
+          <dl class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3" style="font-variant-numeric:tabular-nums">
+            <div><dt class="text-muted">Job</dt><dd class="mono">build #4812</dd></div>
+            <div><dt class="text-muted">Duration</dt><dd class="mono">3m 12s</dd></div>
+            <div><dt class="text-muted">Result</dt><dd>Passed</dd></div>
+          </dl>
+          <p class="mt-3 text-muted">Benchmarks against hosted runners: <span class="mono">[BENCHMARK URL]</span></p>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>
+
+<script>
+  // Steps demo: fixed-height panel, click selects a step.
+  const STEPS = [
+    "$ quarry runner register \\\n    --token $QUARRY_TOKEN --name rack-01\n14:02:11 registered rack-01 (x86_64, 16 cores)\n14:02:11 waiting for jobs",
+    "$ git tag v2.4.0 && git push --tags\n14:05:40 job build #4812 queued\n14:05:41 rack-01 picked up build #4812\n14:05:44 step 1/4 checkout",
+    "PR #318 · checks\n  build #4812 ........ passed  3m 12s\n  test  #4813 ........ passed  5m 47s\n  lint  #4814 ........ passed  0m 41s",
+  ];
+  const panel = document.getElementById("step-panel");
+  const btns = document.querySelectorAll("#step-list button");
+  function show(i) {
+    panel.textContent = STEPS[i];
+    btns.forEach((b, j) => { b.classList.toggle("bg-codebg", i === j); b.classList.toggle("font-semibold", i === j); });
+  }
+  btns.forEach((b) => b.addEventListener("click", () => show(+b.dataset.step)));
+  show(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Gallery chrome: plain lab bench. Ink on cool white, one blue for links/primary, red/green only beside the words Slop/Fixed.
+   Every size is relative (rem/em/ch) and no clean text goes under 1.5rem. Slop regions carry [data-slop] and keep their own sizes. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #15171c;
+  --muted: #555c68;
+  --line: #d6d9df;
+  --accent: #1f5fd6;
+  --accent-ink: #ffffff;
+  --bad: #b42318;
+  --good: #17703a;
+  --code-bg: #f0f2f5;
+  --hair: 0.0625rem;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111318; --surface: #181b21; --ink: #e6e8ec; --muted: #9ba2ae; --line: #2c313a;
+    --accent: #7ea8ff; --accent-ink: #0d1420; --bad: #ff8b7b; --good: #6fd28d; --code-bg: #1f232b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111318; --surface: #181b21; --ink: #e6e8ec; --muted: #9ba2ae; --line: #2c313a;
+  --accent: #7ea8ff; --accent-ink: #0d1420; --bad: #ff8b7b; --good: #6fd28d; --code-bg: #1f232b;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 1.5rem; line-height: 1.5; }
+.wrap { max-width: 90rem; margin-inline: auto; padding-left: max(1rem, env(safe-area-inset-left, 0rem)); padding-right: max(1rem, env(safe-area-inset-right, 0rem)); }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; }
+p { text-wrap: pretty; }
+a { color: inherit; }
+.prose-link { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+:focus-visible { outline: 0.125rem solid var(--accent); outline-offset: 0.125rem; }
+.mono { font-family: var(--mono); }
+pre, code, input, select, textarea, button { font-size: 1.5rem; }
+
+/* Header */
+.site-header { position: sticky; top: env(safe-area-inset-top, 0rem); z-index: 20; background: var(--surface); border-bottom: var(--hair) solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0rem); z-index: 30; background: var(--surface); }
+.nav-link { padding: 0.5rem 0.625rem; min-height: 2.75rem; display: inline-flex; align-items: center; white-space: nowrap; text-decoration: none; color: var(--muted); }
+.nav-link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+.nav-link[aria-current="page"] { color: var(--ink); font-weight: 600; box-shadow: inset 0 -0.125rem 0 var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; text-decoration: none; border: var(--hair) solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; line-height: 1.2; }
+.btn:hover { border-color: var(--ink); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-primary:hover { filter: brightness(1.08); border-color: var(--accent); }
+
+/* Specimen pairs: stacked until both panels can hold 1.5rem text comfortably */
+.specimen { border-top: var(--hair) solid var(--line); padding-block: 2.5rem; }
+.pair { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 80rem) { .pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.panel { border: var(--hair) solid var(--line); border-radius: 0.5rem; overflow: hidden; background: var(--surface); min-width: 0; display: flex; flex-direction: column; }
+.panel-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.5rem 0.75rem; border-bottom: var(--hair) solid var(--line); font-family: var(--mono); color: var(--muted); }
+.verdict { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+.verdict::before { content: ""; width: 0.625em; height: 0.625em; border-radius: 0.125rem; background: currentColor; }
+.verdict.bad { color: var(--bad); }
+.verdict.good { color: var(--good); }
+.stage { position: relative; min-height: 18rem; overflow: hidden; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 0; }
+.fix-line { color: var(--muted); margin-top: 0.25rem; max-width: 60ch; }
+
+/* Popover used by "Install" buttons */
+.pop-wrap { position: relative; display: inline-block; }
+.pop { position: absolute; left: 0; top: calc(100% + 0.5rem); z-index: 15; width: min(32rem, calc(100vw - 2rem)); padding: 0.75rem; border: var(--hair) solid var(--line); border-radius: 0.5rem; background: var(--surface); color: var(--ink); box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.12); display: none; text-align: left; }
+.pop-wrap:hover .pop, .pop-wrap:focus-within .pop { display: block; }
+.panel:has(.pop-wrap), .stage:has(.pop-wrap) { overflow: visible; }
+.pop code { display: block; font-family: var(--mono); background: var(--code-bg); padding: 0.5rem; border-radius: 0.25rem; overflow-x: auto; white-space: pre; }
+
+/* Pins on the slop landing page */
+.pin { position: absolute; z-index: 40; min-width: 2.5rem; height: 2.5rem; padding-inline: 0.25rem; border-radius: 999rem; background: #c81e24; color: #fff; font: 700 1.5rem/2.5rem var(--mono); text-align: center; border: 0.125rem solid #fff; box-shadow: 0 0 0 var(--hair) #0006; cursor: help; }
+.pin .tip { position: absolute; left: 0; top: 2.75rem; width: max-content; max-width: min(20rem, calc(100vw - 2rem)); white-space: normal; text-align: left; background: #111; color: #fff; font: 500 1.5rem/1.3 var(--sans); padding: 0.5rem 0.75rem; border-radius: 0.25rem; display: none; }
+.pin:hover .tip, .pin:focus .tip { display: block; }
+.pins-off .pin { display: none; }

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Surfaces · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/slop-motion.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:2.5rem 5rem">
+  <h1 class="text-5xl font-semibold">Surfaces</h1>
+  <p class="text-muted mt-2 max-w-[65ch]">Gradients, glows, glass, and shadows used as decoration.</p>
+  <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+    <a class="prose-link" href="#gradient">AI gradient hero</a>
+    <a class="prose-link" href="#gradtext">Gradient text</a>
+    <a class="prose-link" href="#glass">Glassmorphism</a>
+    <a class="prose-link" href="#shadow">Shadow tricks</a>
+    <a class="prose-link" href="#stripe">Side-stripe card</a>
+    <a class="prose-link" href="#neon">Neon dark mode</a>
+    <a class="prose-link" href="#grid">Grid backdrop and huge radius</a>
+    <a class="prose-link" href="#cream">Cream and terracotta</a>
+  </nav>
+
+  <section class="specimen mt-8" id="gradient">
+    <h2 class="text-3xl font-semibold">Purple-to-blue gradient hero with halo</h2>
+    <p class="fix-line">Fix: a plain ground from the product palette. Let the content carry the page.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 text-center text-white bg-gradient-to-br from-[#1e1b4b] via-[#4c1d95] to-[#0c4a6e]" style="font-family:Inter,sans-serif">
+          <div class="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500/40 blur-3xl"></div>
+          <div class="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-sky-400/40 blur-2xl a-blob"></div>
+          <h3 class="relative text-3xl font-extrabold">Build the future, today.</h3>
+          <p class="relative mt-2 text-sm text-white/60">AI-powered everything for everyone, everywhere.</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">CI runners on hardware you own</h3>
+          <p class="mt-2 text-muted max-w-[46ch]">Run GitHub and GitLab jobs on your machines. Logs stay on your disk.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="gradtext">
+    <h2 class="text-3xl font-semibold">Gradient text</h2>
+    <p class="fix-line">Fix: one solid color. Use size or weight for emphasis.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white" style="font-family:Inter,sans-serif">
+          <h3 class="text-4xl font-extrabold tracking-tight text-slate-900">Ship <span class="bg-gradient-to-r from-pink-500 via-violet-500 to-sky-500 bg-clip-text text-transparent a-shimmer">10x faster</span> with AI</h3>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-4xl font-semibold">Builds start in under <span class="font-bold">[TIME]</span> on a warm runner</h3>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="glass">
+    <h2 class="text-3xl font-semibold">Glassmorphism over blobs</h2>
+    <p class="fix-line">Fix: a border or a background. Blur only for a real layering problem.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-[#0f0c29]" style="font-family:Inter,sans-serif">
+          <div class="absolute left-6 top-6 h-32 w-32 rounded-full bg-pink-500 blur-xl a-blob"></div>
+          <div class="absolute right-8 bottom-4 h-36 w-36 rounded-full bg-cyan-400 blur-xl a-blob"></div>
+          <div class="relative mx-auto w-full max-w-xs rounded-3xl border border-white/30 bg-white/10 p-5 text-white shadow-2xl backdrop-blur-xl">
+            <p class="text-xs text-white/60">Total builds</p>
+            <p class="text-3xl font-extrabold">12,408 ✨</p>
+            <p class="mt-1 text-xs text-emerald-300">↑ 284% this week</p>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <div class="w-full max-w-xs rounded-md border border-line p-4" style="font-variant-numeric:tabular-nums">
+            <p class="text-muted">Builds this week</p>
+            <p class="text-3xl font-semibold">2.41K</p>
+            <p class="mt-1 text-muted">Last week: 2.18K</p>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="shadow">
+    <h2 class="text-3xl font-semibold">Hairline plus wide shadow, hard offset shadow</h2>
+    <p class="fix-line">Fix: pick an edge or a shadow, not both. Offset shadows only as a deliberate style.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-[#fafafa] gap-5" style="font-family:Inter,sans-serif">
+          <div class="rounded-2xl border border-black/5 bg-white p-4 shadow-[0_30px_80px_-10px_rgba(80,60,200,0.35)]"><p class="font-semibold text-slate-900">Usage</p><p class="text-xs text-slate-400">You're doing amazing 🎉</p></div>
+          <div class="rounded-md border-2 border-black bg-yellow-300 p-4 shadow-[6px_6px_0_0_#000] text-black"><p class="font-black uppercase">Pricing!!</p><p class="text-xs">Simple. Transparent. Fair.</p></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6 gap-3">
+          <div class="rounded-md border border-line p-4"><p class="font-semibold">Usage</p><p class="text-muted">1,920 of 3,000 runner minutes used</p></div>
+          <div class="rounded-md border border-line p-4"><p class="font-semibold">Pricing</p><p class="text-muted">Free for one runner. <span class="mono">[PRICE]</span> per extra runner.</p></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="stripe">
+    <h2 class="text-3xl font-semibold">Side-stripe accent card</h2>
+    <p class="fix-line">Fix: remove the stripe unless it marks a status. Then say the status in words.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 gap-3 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="rounded-xl border-l-4 border-violet-500 bg-violet-50/60 p-4 shadow-sm"><p class="font-semibold">💡 Pro tip</p><p class="text-sm text-slate-500">Runners can run jobs!</p></div>
+          <div class="rounded-xl border-l-4 border-sky-500 bg-sky-50/60 p-4 shadow-sm"><p class="font-semibold">✨ Did you know?</p><p class="text-sm text-slate-500">Logs are stored in logs.</p></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <ul class="divide-y divide-line border-y border-line">
+            <li class="flex justify-between py-3"><span class="mono">build #4812</span><span>Passed</span></li>
+            <li class="flex justify-between py-3 border-l-4 border-bad pl-3"><span class="mono">test #4815</span><span class="text-bad font-semibold">Failed</span></li>
+            <li class="flex justify-between py-3"><span class="mono">lint #4816</span><span>Passed</span></li>
+          </ul>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="neon">
+    <h2 class="text-3xl font-semibold">Neon dark mode</h2>
+    <p class="fix-line">Fix: keep dark, drop the glow. Soft contrast, status as words.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-black" style="font-family:Inter,sans-serif">
+          <div class="rounded-xl border border-cyan-400 p-4 shadow-[0_0_30px_rgba(34,211,238,0.6)]">
+            <p class="font-bold text-cyan-300 [text-shadow:0_0_12px_#22d3ee]">SYSTEM ONLINE</p>
+            <p class="mt-1 text-xs text-fuchsia-400 [text-shadow:0_0_10px_#e879f9]">All nodes synced ⚡</p>
+            <button type="button" class="mt-3 rounded-lg border border-lime-400 px-3 py-1 text-xs text-lime-300 shadow-[0_0_16px_#a3e635]">ENTER THE GRID</button>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6 bg-[#15171c] text-[#e3e6eb]">
+          <div class="rounded-md border border-[#2e333c] bg-[#1b1e24] p-4">
+            <p class="font-semibold">rack-01</p>
+            <p class="mt-1 text-[#a2a9b4]">Running · build #4812 · 1m 40s</p>
+            <button type="button" class="mt-3 min-h-11 rounded-md bg-[#7ea8ff] px-3 font-semibold text-[#0d1420]">Open log</button>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="grid">
+    <h2 class="text-3xl font-semibold">Decorative grid backdrop and extreme radius</h2>
+    <p class="fix-line">Fix: grids only where something gets measured. Scale the radius to the element.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-6 bg-[#09090b] text-white" style="font-family:Inter,sans-serif;background-image:linear-gradient(#ffffff14 1px,transparent 1px),linear-gradient(90deg,#ffffff14 1px,transparent 1px);background-size:28px 28px">
+          <div class="mx-auto w-full max-w-xs rounded-[40px] border border-white/10 bg-white/5 p-6 text-center">
+            <p class="text-lg font-bold">Join the waitlist</p>
+            <span class="mt-3 inline-block rounded-full bg-white px-5 py-2 text-sm font-semibold text-black">Get early access</span>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <form class="w-full max-w-xs" onsubmit="event.preventDefault(); this.querySelector('output').textContent='Added. Check your inbox to confirm.'">
+            <label for="wl-email" class="font-semibold">Email for release notes</label>
+            <div class="mt-2 flex gap-2">
+              <input id="wl-email" type="email" required placeholder="you@company.com" class="min-w-0 flex-1 rounded-md border border-line bg-surface px-3 min-h-11">
+              <button class="btn btn-primary">Subscribe</button>
+            </div>
+            <output class="mt-2 block text-muted" aria-live="polite"></output>
+          </form>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="cream">
+    <h2 class="text-3xl font-semibold">Cream, serif, terracotta</h2>
+    <p class="fix-line">Fix: build the palette from the product's identity. Cream only if it is the brand.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-[#f4f1ea] text-[#2b2620]">
+          <h3 class="text-4xl italic" style="font-family:'Instrument Serif',serif">Thoughtfully crafted <span class="text-[#c4623a]">infrastructure</span>.</h3>
+          <p class="mt-3 text-sm text-[#8a8175]">For teams who care about the details.</p>
+          <span class="mt-4 inline-block w-fit rounded-full bg-[#c4623a] px-5 py-2 text-sm text-white">Begin your journey</span>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">Self-hosted CI for teams with their own racks</h3>
+          <p class="mt-2 text-muted">Install the runner, point your forge at it, keep your logs.</p>
+          <a class="btn btn-primary mt-4 w-fit" href="#cream">Get started</a>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>
+</body>
+</html>

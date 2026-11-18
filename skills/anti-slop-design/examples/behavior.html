@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Behavior · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+<style>
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .ink-card:hover .ink-title { text-decoration: underline; text-underline-offset: 0.2em; }
+</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:2.5rem 5rem">
+  <h1 class="text-5xl font-semibold">Behavior</h1>
+  <p class="text-muted mt-2 max-w-[65ch]">Controls that lie, layouts that jump, and states that hide. Click everything.</p>
+  <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+    <a class="prose-link" href="#shift">Layout shift</a>
+    <a class="prose-link" href="#filter">Dead filter</a>
+    <a class="prose-link" href="#copy">Copy buttons</a>
+    <a class="prose-link" href="#empty">Empty controls</a>
+    <a class="prose-link" href="#links">Link color spill</a>
+    <a class="prose-link" href="#icons">Blank icon tiles</a>
+    <a class="prose-link" href="#phone">Lost phone emphasis</a>
+  </nav>
+
+  <section class="specimen mt-8" id="shift">
+    <h2 class="text-3xl font-semibold">Layout shift on interaction</h2>
+    <p class="fix-line">Fix: one fixed panel height. Watch the bar under each panel as you switch tabs.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 justify-start bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex gap-2" id="s-tabs">
+            <button type="button" data-t="0" class="rounded-full bg-violet-600 px-3 py-1 text-xs font-semibold text-white">Build</button>
+            <button type="button" data-t="1" class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">Test</button>
+            <button type="button" data-t="2" class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">Deploy</button>
+          </div>
+          <div id="s-panel" class="mt-3 text-sm text-slate-600"></div>
+          <div class="mt-3 rounded-lg bg-amber-200 px-3 py-2 text-xs font-semibold text-amber-900">Next section ↓ (watch me jump)</div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 justify-start">
+          <div class="flex border-b border-line" role="tablist" id="f-tabs">
+            <button type="button" role="tab" data-t="0" class="px-3 min-h-[2.75rem]">Build</button>
+            <button type="button" role="tab" data-t="1" class="px-3 min-h-[2.75rem]">Test</button>
+            <button type="button" role="tab" data-t="2" class="px-3 min-h-[2.75rem]">Deploy</button>
+          </div>
+          <div id="f-panel" role="tabpanel" class="mt-3 h-[15rem] overflow-auto"></div>
+          <div class="mt-3 rounded-md border border-line px-3 py-2 text-muted">Next section stays put</div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="filter">
+    <h2 class="text-3xl font-semibold">Dead filter</h2>
+    <p class="fix-line">Fix: every filter filters, with counts. Try both.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 justify-start bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex flex-wrap gap-2" id="dead-chips">
+            <button type="button" class="dchip rounded-full bg-violet-600 px-3 py-1 text-xs font-semibold text-white">All</button>
+            <button type="button" class="dchip rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">Passed</button>
+            <button type="button" class="dchip rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">Failed</button>
+          </div>
+          <ul class="mt-3 space-y-1 text-sm"><li>build #4812 ✅</li><li>test #4815 ❌</li><li>lint #4816 ✅</li><li>build #4817 ❌</li></ul>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 justify-start">
+          <div class="flex flex-wrap gap-2" id="live-chips"></div>
+          <ul id="live-list" class="mt-3 divide-y divide-line border-y border-line"></ul>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="copy">
+    <h2 class="text-3xl font-semibold">Copy buttons</h2>
+    <p class="fix-line">Fix: copy on the first click. Only the clicked button says Copied.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 gap-2 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 font-mono text-xs"><span>quarry runner start</span><button type="button" class="scopy rounded bg-slate-900 px-2 py-1 text-white">Copy</button></div>
+          <div class="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 font-mono text-xs"><span>quarry runner stop</span><button type="button" class="scopy rounded bg-slate-900 px-2 py-1 text-white">Copy</button></div>
+          <div class="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 font-mono text-xs"><span>quarry runner logs</span><button type="button" class="scopy rounded bg-slate-900 px-2 py-1 text-white">Copy</button></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 gap-2">
+          <div class="copy-row flex flex-wrap items-center justify-between gap-2 rounded-md border border-line px-3 py-1"><code class="mono min-w-0">quarry runner start</code><button type="button" class="btn" data-copy="quarry runner start">Copy</button></div>
+          <div class="copy-row flex flex-wrap items-center justify-between gap-2 rounded-md border border-line px-3 py-1"><code class="mono min-w-0">quarry runner stop</code><button type="button" class="btn" data-copy="quarry runner stop">Copy</button></div>
+          <div class="copy-row flex flex-wrap items-center justify-between gap-2 rounded-md border border-line px-3 py-1"><code class="mono min-w-0">quarry runner logs</code><button type="button" class="btn" data-copy="quarry runner logs">Copy</button></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="empty">
+    <h2 class="text-3xl font-semibold">Empty controls</h2>
+    <p class="fix-line">Fix: drop controls with nothing under them. Say when a page is empty.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 justify-start bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex flex-wrap gap-2 text-xs"><span class="rounded-full border px-3 py-1">macOS (0)</span><span class="rounded-full border px-3 py-1">Windows (0)</span><span class="rounded-full bg-slate-900 px-3 py-1 text-white">Linux (1)</span></div>
+          <ul class="mt-3 text-sm"><li>rack-01</li></ul>
+          <span class="mt-3 inline-block w-fit rounded-lg border px-3 py-1 text-xs">Show more ↓</span>
+          <div class="mt-4 h-16 rounded-xl border-2 border-dashed border-slate-200"></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 justify-start">
+          <h3 class="text-3xl font-semibold">Runners</h3>
+          <ul class="mt-2 border-y border-line"><li class="py-2 mono">rack-01</li></ul>
+          <h3 class="mt-4 text-3xl font-semibold">Archived runners</h3>
+          <p class="mt-1 text-muted">No archived runners yet.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="links">
+    <h2 class="text-3xl font-semibold">Link color spilled everywhere</h2>
+    <p class="fix-line">Fix: link color on inline links only. Card titles underline on hover.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 justify-start bg-white" style="font-family:Inter,sans-serif">
+          <a href="#links" class="block rounded-xl border p-4 text-[#0000ee] underline">
+            <p class="font-bold">Runner setup guide</p>
+            <p class="text-sm">Everything you need to register your first runner.</p>
+            <ul class="mt-1 list-disc pl-5 text-sm"><li>Install</li><li>Register</li></ul>
+          </a>
+          <p class="mt-3 text-sm"><a href="#links" class="text-[#0000ee] underline">Docs</a> › <a href="#links" class="text-[#0000ee] underline">Runners</a> › <a href="#links" class="text-[#0000ee] underline">Setup</a></p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 justify-start">
+          <a href="#links" class="ink-card block rounded-md border border-line p-4 no-underline">
+            <p class="ink-title font-semibold">Runner setup guide</p>
+            <p class="text-muted">Install the binary, then register it with a token.</p>
+          </a>
+          <p class="mt-3 text-muted"><a href="#links" class="no-underline hover:underline">Docs</a> › <a href="#links" class="no-underline hover:underline">Runners</a> › Setup</p>
+          <p class="mt-2">Tokens are created on the <a class="prose-link" href="#links">settings page</a>.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="icons">
+    <h2 class="text-3xl font-semibold">Blank and tiled icons</h2>
+    <p class="fix-line">Fix: plain stroke icons beside the text. Check that they render.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 gap-3 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex items-center gap-3"><span class="h-10 w-10 rounded-xl bg-violet-100"></span><span class="font-semibold">Register runner</span></div>
+          <div class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-xl bg-sky-100">🔧</span><span class="font-semibold">Configure jobs</span></div>
+          <div class="flex items-center gap-3"><span class="h-10 w-10 rounded-xl bg-emerald-100"></span><span class="font-semibold">Read logs</span></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 gap-3">
+          <p class="flex items-center gap-3"><svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="1"/><rect x="3" y="13" width="18" height="7" rx="1"/><path d="M7 7.5h.01M7 16.5h.01"/></svg>Register runner</p>
+          <p class="flex items-center gap-3"><svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="17" cy="6" r="2"/><circle cx="14" cy="18" r="2"/></svg>Configure jobs</p>
+          <p class="flex items-center gap-3"><svg class="h-8 w-8 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 19h4"/></svg>Read logs</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="phone">
+    <h2 class="text-3xl font-semibold">Emphasis lost on phone</h2>
+    <p class="fix-line">Fix: the phone is the desktop transposed. Same order, same highlight.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-5 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <div class="flex items-end gap-4">
+            <div class="flex-1 min-w-0">
+              <div class="rounded border p-2 text-xs space-y-1"><p class="bg-black px-2 py-1 text-white">rack-01 · failing</p><p class="px-2">rack-02 · idle</p><p class="px-2">mac-mini-a · running</p></div>
+              <p class="mt-1 text-[11px] text-slate-500">Desktop</p>
+            </div>
+            <div class="w-28">
+              <div class="rounded border p-1 text-[10px] grid grid-cols-2 gap-1"><p>mac-mini-a</p><p>rack-02</p><p>rack-01</p></div>
+              <p class="mt-1 text-[11px] text-slate-500">Phone</p>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-5 gap-4 justify-start">
+          <div>
+            <p class="text-muted">Desktop</p>
+            <div class="mt-1 rounded-md border border-line">
+              <p class="border-b border-line px-3 py-1 font-semibold">Runners</p>
+              <div class="space-y-1 p-2"><p class="flex flex-wrap justify-between gap-x-4 bg-[var(--ink)] text-[var(--bg)] px-2 py-1"><span>rack-01</span><span>failing</span></p><p class="flex flex-wrap justify-between gap-x-4 px-2"><span>rack-02</span><span>idle</span></p><p class="flex flex-wrap justify-between gap-x-4 px-2"><span>mac-mini-a</span><span>running</span></p></div>
+            </div>
+          </div>
+          <div class="w-full max-w-[17rem]">
+            <p class="text-muted">Phone</p>
+            <div class="mt-1 rounded-[1.5rem] border-2 border-line px-2 pt-3 pb-5 space-y-1"><p class="bg-[var(--ink)] text-[var(--bg)] px-2 py-1">rack-01 · failing</p><p class="px-2">rack-02 · idle</p><p class="px-2">mac-mini-a</p></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>
+
+<script>
+  // Tabs: slop panel changes height per tab; fixed panel keeps one height.
+  const TABS = [
+    ["Compile with cached deps."],
+    ["Unit tests across 4 shards.", "Integration tests against Postgres 16.", "Browser tests in 2 viewports.", "Coverage report uploaded to the PR."],
+    ["Push image.", "Roll out to staging."],
+  ];
+  const sPanel = document.getElementById("s-panel");
+  document.querySelectorAll("#s-tabs button").forEach((b) => b.addEventListener("click", () => {
+    const t = +b.dataset.t;
+    document.querySelectorAll("#s-tabs button").forEach((x, j) => { x.className = "rounded-full px-3 py-1 text-xs font-semibold " + (j === t ? "bg-violet-600 text-white" : "bg-slate-100"); });
+    sPanel.innerHTML = TABS[t].map((l) => `<p class="py-1">${l}</p>`).join("") + (t === 1 ? '<div class="mt-2 h-1 rounded bg-violet-500"></div>' : "");
+  }));
+  sPanel.innerHTML = `<p class="py-1">${TABS[0][0]}</p>`;
+
+  const fPanel = document.getElementById("f-panel");
+  const fTabs = document.querySelectorAll("#f-tabs button");
+  function fShow(t) {
+    fTabs.forEach((x, j) => { x.setAttribute("aria-selected", j === t); x.style.boxShadow = j === t ? "inset 0 -0.125rem 0 var(--ink)" : "none"; x.style.fontWeight = j === t ? "600" : "400"; });
+    fPanel.innerHTML = '<ul class="space-y-1">' + TABS[t].map((l) => `<li>${l}</li>`).join("") + "</ul>";
+  }
+  fTabs.forEach((b) => b.addEventListener("click", () => fShow(+b.dataset.t)));
+  fShow(0);
+
+  // Dead filter: chips change style, list never changes.
+  document.querySelectorAll(".dchip").forEach((c) => c.addEventListener("click", () => {
+    document.querySelectorAll(".dchip").forEach((x) => { x.className = "dchip rounded-full px-3 py-1 text-xs font-semibold " + (x === c ? "bg-violet-600 text-white" : "bg-slate-100"); });
+  }));
+
+  // Working filter with counts.
+  const JOBS = [["build #4812", "Passed"], ["test #4815", "Failed"], ["lint #4816", "Passed"], ["build #4817", "Failed"]];
+  const chips = document.getElementById("live-chips"), list = document.getElementById("live-list");
+  let filter = "All";
+  function renderJobs() {
+    const opts = ["All", "Passed", "Failed"];
+    chips.innerHTML = opts.map((o) => {
+      const n = o === "All" ? JOBS.length : JOBS.filter((j) => j[1] === o).length;
+      return `<button type="button" class="chip btn" aria-pressed="${o === filter}" data-f="${o}">${o} (${n})</button>`;
+    }).join("");
+    list.innerHTML = JOBS.filter((j) => filter === "All" || j[1] === filter)
+      .map((j) => `<li class="flex justify-between py-2"><span class="mono">${j[0]}</span><span${j[1] === "Failed" ? ' style="color:var(--bad)"' : ""}>${j[1]}</span></li>`).join("");
+    chips.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { filter = b.dataset.f; renderJobs(); }));
+  }
+  renderJobs();
+
+  // Slop copy: copies nothing, flips every button.
+  document.querySelectorAll(".scopy").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".scopy").forEach((x) => { x.textContent = "Copied! ✅"; });
+  }));
+</script>
+</body>
+</html>

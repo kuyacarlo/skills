@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Landing, slop · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/slop-motion.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+<style>
+  /* This page is a deliberate specimen: one dark slop look, fixed colors. */
+  :root { color-scheme: dark; }
+  body { background: #07061a; color: #fff; font-family: Inter, system-ui, sans-serif; }
+  .toolbar { position: fixed; z-index: 50; left: 50%; transform: translateX(-50%); bottom: calc(0.75rem + env(safe-area-inset-bottom, 0rem)); display: flex; gap: 0.375rem; align-items: center; padding: 0.375rem; border: var(--hair) solid #d6d9df; border-radius: 0.5rem; background: #fff; color: #15171c; font-family: var(--sans); box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / .35); width: max-content; max-width: calc(100vw - 2rem); flex-wrap: wrap; justify-content: center; }
+  .toolbar a, .toolbar button { min-height: 2.75rem; padding: 0 0.625rem; display: inline-flex; align-items: center; border-radius: 0.375rem; font-size: 1.5rem; font-weight: 600; text-decoration: none; color: #15171c; background: transparent; border: var(--hair) solid transparent; cursor: pointer; }
+  .toolbar .on { background: #15171c; color: #fff; }
+  .toolbar button { border-color: #d6d9df; }
+  /* Keep the page scrollable past the toolbar, which wraps to two rows on phones. */
+  body { padding-bottom: 4rem; }
+</style>
+</head>
+<body>
+<div id="page" data-slop class="relative overflow-hidden">
+  <!-- Background glow blobs -->
+  <div class="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-700/50 via-fuchsia-600/40 to-sky-500/40 blur-3xl"></div>
+  <div class="pointer-events-none absolute top-[900px] -left-40 h-96 w-96 rounded-full bg-fuchsia-600/30 blur-3xl a-blob"></div>
+
+  <!-- Nav -->
+  <header class="wrap relative flex items-center justify-between" style="padding-block:20px">
+    <span class="text-xl font-extrabold bg-gradient-to-r from-violet-300 to-sky-300 bg-clip-text text-transparent">quarry.ai ✦</span>
+    <nav class="hidden md:flex gap-8 text-sm text-white/50"><span>Features</span><span>Solutions</span><span>Resources</span><span>Pricing</span></nav>
+    <span class="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold">Get Started 🚀</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="wrap relative text-center" style="padding-block:72px 40px">
+    <div class="relative inline-block">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.875rem">1<span class="tip">Announcement badge above the headline</span></span>
+      <span class="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-violet-500/10 px-4 py-1 text-xs font-semibold text-violet-200">🚀 Introducing Quarry AI 2.0 — now with Agents <span aria-hidden="true">→</span></span>
+    </div>
+    <div class="relative mx-auto mt-6 max-w-4xl">
+      <span class="pin" tabindex="0" style="top:-0.375rem;left:0">2<span class="tip">Italic serif display + gradient text</span></span>
+      <h1 class="text-5xl md:text-7xl leading-[1.02]" style="font-family:'Instrument Serif',serif">Ship <em class="bg-gradient-to-r from-pink-400 via-violet-400 to-sky-400 bg-clip-text text-transparent a-shimmer">10x faster</em> than ever before</h1>
+    </div>
+    <div class="relative mx-auto mt-6 max-w-2xl">
+      <span class="pin" tabindex="0" style="top:-0.5rem;left:-0.625rem">3<span class="tip">"Not X — Y" with em dashes</span></span>
+      <p class="text-lg text-white/50">Not just CI — a teammate. Quarry is the AI-native platform that empowers forward-thinking teams to build, test, and deploy at the speed of thought.</p>
+    </div>
+    <div class="relative mt-4">
+      <span class="pin" tabindex="0" style="top:-0.5rem;left:max(0rem, calc(50% - 8.125rem))">4<span class="tip">Slogan triplet</span></span>
+      <p class="text-sm font-semibold tracking-[0.3em] uppercase text-violet-300">Fast. Simple. Secure.</p>
+    </div>
+    <div class="relative mt-8 flex flex-wrap justify-center gap-3">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:max(0rem, calc(50% - 11.875rem))">5<span class="tip">Emoji button copy, gradient pills</span></span>
+      <span class="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-7 py-3 font-semibold shadow-[0_0_40px_rgba(168,85,247,.6)] bounce-ease hover:scale-110">Unleash the magic ✨</span>
+      <span class="rounded-full border border-white/20 bg-white/5 px-7 py-3 font-semibold backdrop-blur">Watch demo ▶</span>
+    </div>
+    <div class="relative mx-auto mt-6 w-fit">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.875rem">6<span class="tip">Install command under the CTA</span></span>
+      <p class="rounded-lg border border-white/10 bg-white/5 px-4 py-2 font-mono text-sm text-emerald-300">$ curl -fsSL https://example.com/install.sh | sudo sh</p>
+    </div>
+    <div class="relative mt-3">
+      <span class="pin" tabindex="0" style="top:-0.5rem;left:max(0rem, calc(50% - 10.625rem))">7<span class="tip">Tiny low-contrast microcopy</span></span>
+      <p class="text-[11px] text-white/25">No credit card required · Free forever · Cancel anytime · SOC2 coming soon</p>
+    </div>
+
+    <!-- Floating product shot -->
+    <div class="relative mx-auto mt-16 max-w-4xl">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.375rem">8<span class="tip">Floating mock with fake browser chrome</span></span>
+      <div class="a-float rounded-3xl border border-white/15 bg-white/5 p-3 shadow-[0_40px_120px_-20px_rgba(139,92,246,.7)] backdrop-blur-xl">
+        <div class="flex gap-1.5 px-2 pb-3"><span class="h-3 w-3 rounded-full bg-red-400"></span><span class="h-3 w-3 rounded-full bg-yellow-400"></span><span class="h-3 w-3 rounded-full bg-green-400"></span></div>
+        <div class="grid grid-cols-3 gap-3 rounded-2xl bg-[#0d0b24] p-4 text-left">
+          <div class="col-span-1 space-y-2"><div class="h-3 w-3/4 rounded bg-white/10"></div><div class="h-3 w-1/2 rounded bg-white/10"></div><div class="h-3 w-2/3 rounded bg-white/10"></div><div class="h-3 w-1/3 rounded bg-white/10"></div></div>
+          <div class="col-span-2 rounded-xl bg-gradient-to-br from-violet-500/30 to-sky-500/20 p-4"><p class="text-3xl font-extrabold">98.7%</p><p class="text-xs text-white/50">AI confidence ✨</p><div class="mt-4 h-20 rounded-lg bg-white/5"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="relative mt-8 inline-flex items-center gap-2 text-sm text-white/60">
+      <span class="pin" tabindex="0" style="top:-0.875rem;left:-1.875rem">9<span class="tip">Pulsing status dot, nothing is happening</span></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-green-400 a-pulse"></span>All systems operational
+    </div>
+  </section>
+
+  <!-- Logos -->
+  <section class="relative" style="padding-block:40px">
+    <div class="wrap relative">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:0.5rem">10<span class="tip">Invented count and logos, marquee with no pause</span></span>
+      <p class="text-center text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Trusted by 10,000+ teams worldwide</p>
+    </div>
+    <div class="mt-6 overflow-hidden">
+      <div class="flex w-max a-marquee gap-16 text-3xl font-extrabold italic text-white/20 whitespace-nowrap">
+        <span>ACME</span><span>Globex</span><span>Initech</span><span>Hooli</span><span>Umbrella</span><span>Stark Ind.</span><span>Wayne</span><span>Cyberdyne</span>
+        <span>ACME</span><span>Globex</span><span>Initech</span><span>Hooli</span><span>Umbrella</span><span>Stark Ind.</span><span>Wayne</span><span>Cyberdyne</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="wrap relative text-center" style="padding-block:80px">
+    <div class="relative inline-block">
+      <span class="pin" tabindex="0" style="top:-0.875rem;left:-1.875rem">11<span class="tip">Eyebrow label above the heading</span></span>
+      <p class="text-xs font-semibold uppercase tracking-[0.35em] text-violet-300">✦ Features ✦</p>
+    </div>
+    <div class="relative">
+      <span class="pin" tabindex="0" style="top:0;left:max(0rem, calc(50% - 16.25rem))">12<span class="tip">Competitor trademark in the headline</span></span>
+      <h2 class="mt-3 text-4xl md:text-5xl font-extrabold">GitHub Actions, but 10x faster.</h2>
+    </div>
+    <p class="mx-auto mt-3 max-w-xl text-white/40">Everything you need. Nothing you don't. Built for builders, by builders.</p>
+    <div class="relative mt-12 grid gap-6 md:grid-cols-3 text-left">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.75rem">13<span class="tip">Equal emoji icon-card grid</span></span>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"><div class="grid h-12 w-12 place-items-center rounded-2xl bg-amber-400/20 text-xl">⚡</div><h3 class="mt-4 text-lg font-bold">Lightning fast</h3><p class="mt-2 text-sm text-white/40">Blazing-fast builds powered by cutting-edge AI.</p><p class="mt-4 text-sm font-semibold text-violet-300">Learn more →</p></div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"><div class="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-400/20 text-xl">🔒</div><h3 class="mt-4 text-lg font-bold">Enterprise security</h3><p class="mt-2 text-sm text-white/40">Bank-grade security you can trust, out of the box.</p><p class="mt-4 text-sm font-semibold text-violet-300">Learn more →</p></div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"><div class="grid h-12 w-12 place-items-center rounded-2xl bg-sky-400/20 text-xl">🚀</div><h3 class="mt-4 text-lg font-bold">Infinite scale</h3><p class="mt-2 text-sm text-white/40">From side project to Fortune 500 in one click.</p><p class="mt-4 text-sm font-semibold text-violet-300">Learn more →</p></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="wrap relative text-center" style="padding-block:40px 80px">
+    <div class="relative mt-2 grid gap-8 md:grid-cols-3">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.75rem">14<span class="tip">Numbered equal-column steps</span></span>
+      <div><p class="text-xs tracking-[0.3em] text-violet-300">01 — CONNECT</p><p class="mt-2 text-6xl font-extrabold bg-gradient-to-b from-white to-white/10 bg-clip-text text-transparent">01</p><h3 class="mt-2 font-bold">Connect</h3><p class="mt-1 text-sm text-white/40">Seamlessly integrate your entire stack.</p></div>
+      <div><p class="text-xs tracking-[0.3em] text-violet-300">02 — CONFIGURE</p><p class="mt-2 text-6xl font-extrabold bg-gradient-to-b from-white to-white/10 bg-clip-text text-transparent">02</p><h3 class="mt-2 font-bold">Configure</h3><p class="mt-1 text-sm text-white/40">Tailor every detail to your workflow.</p></div>
+      <div><p class="text-xs tracking-[0.3em] text-violet-300">03 — DEPLOY</p><p class="mt-2 text-6xl font-extrabold bg-gradient-to-b from-white to-white/10 bg-clip-text text-transparent">03</p><h3 class="mt-2 font-bold">Deploy</h3><p class="mt-1 text-sm text-white/40">Go live in seconds, not hours.</p></div>
+    </div>
+  </section>
+
+  <!-- Stats + testimonial -->
+  <section class="wrap relative" style="padding-block:40px 80px">
+    <div class="relative grid gap-6 md:grid-cols-3 text-center">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.75rem">15<span class="tip">Glass stat tiles with invented metrics</span></span>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl"><p class="text-5xl font-extrabold bg-gradient-to-r from-violet-300 to-sky-300 bg-clip-text text-transparent">10x</p><p class="mt-2 text-sm text-white/40">faster builds</p></div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl"><p class="text-5xl font-extrabold bg-gradient-to-r from-violet-300 to-sky-300 bg-clip-text text-transparent">99.99%</p><p class="mt-2 text-sm text-white/40">uptime SLA</p></div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl"><p class="text-5xl font-extrabold bg-gradient-to-r from-violet-300 to-sky-300 bg-clip-text text-transparent">∞</p><p class="mt-2 text-sm text-white/40">possibilities</p></div>
+    </div>
+    <div class="relative mx-auto mt-16 max-w-2xl text-center">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.75rem">16<span class="tip">Fake five-star testimonial</span></span>
+      <p class="text-amber-300 text-xl">★★★★★</p>
+      <p class="mt-4 text-2xl" style="font-family:'Instrument Serif',serif"><em>"Quarry didn't just change our CI — it changed our lives. We can't imagine going back."</em></p>
+      <p class="mt-4 text-sm text-white/40">Jane Doe, CTO at ACME</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="wrap relative text-center" style="padding-block:40px 80px">
+    <div class="relative">
+      <span class="pin" tabindex="0" style="top:-0.375rem;left:max(0rem, calc(50% - 13.75rem))">17<span class="tip">Clever pricing slogan, stacked conditions</span></span>
+      <h2 class="text-4xl md:text-5xl font-extrabold">Free to run. Pay for help.</h2>
+      <p class="mx-auto mt-3 max-w-xl text-white/40">Free forever for open source. Pay when your code is private, your team needs to share, or your company needs SSO.</p>
+    </div>
+    <div class="relative mt-12 grid gap-6 md:grid-cols-3 text-left">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:max(0rem, calc(33% + 0.625rem))">18<span class="tip">"Most popular ✨" badge on a glowing card</span></span>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6"><p class="font-bold">Starter</p><p class="mt-2 text-4xl font-extrabold">$0</p><p class="mt-2 text-sm text-white/40">For dreamers ✨</p></div>
+      <div class="relative rounded-3xl border-2 border-violet-400 bg-gradient-to-b from-violet-500/20 to-transparent p-6 shadow-[0_0_60px_rgba(139,92,246,.5)]"><span class="absolute -top-3 left-6 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-3 py-0.5 text-xs font-bold">Most popular ✨</span><p class="font-bold">Pro</p><p class="mt-2 text-4xl font-extrabold">$49</p><p class="mt-2 text-sm text-white/40">For doers 🚀</p></div>
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-6"><p class="font-bold">Enterprise</p><p class="mt-2 text-4xl font-extrabold">Let's talk</p><p class="mt-2 text-sm text-white/40">For visionaries 🦄</p></div>
+    </div>
+    <div class="relative mx-auto mt-10 max-w-xl text-left">
+      <span class="pin" tabindex="0" style="top:-0.75rem;left:-0.75rem">19<span class="tip">Side-stripe callout with emoji</span></span>
+      <div class="rounded-2xl border-l-4 border-violet-400 bg-violet-500/10 p-4"><p class="font-semibold">💡 Pro tip</p><p class="text-sm text-white/50">Upgrading to Pro unlocks even more possibilities!</p></div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="relative text-center" style="padding-block:100px;background-image:linear-gradient(#ffffff10 1px,transparent 1px),linear-gradient(90deg,#ffffff10 1px,transparent 1px);background-size:40px 40px">
+    <div class="wrap relative">
+      <span class="pin" tabindex="0" style="top:-1.875rem;left:max(0rem, calc(50% - 12.5rem))">20<span class="tip">Grid backdrop, neon glow CTA</span></span>
+      <h2 class="text-4xl md:text-6xl font-extrabold">Ready to join the <span class="text-cyan-300 [text-shadow:0_0_24px_#22d3ee]">revolution</span>?</h2>
+      <span class="mt-8 inline-block rounded-full border border-cyan-300 px-8 py-3 font-bold text-cyan-200 shadow-[0_0_30px_#22d3ee]">Start building the future →</span>
+    </div>
+  </section>
+
+  <footer class="wrap relative" style="padding-block:40px 120px">
+    <span class="pin" tabindex="0" style="top:1.25rem;left:0">21<span class="tip">All-caps tracked footer, low contrast</span></span>
+    <p class="text-center text-[10px] uppercase tracking-[0.3em] text-white/20">© 2026 Quarry AI Inc. · Made with 💜 by dreamers · All rights reserved · Built different</p>
+  </footer>
+</div>
+
+<div class="toolbar" role="toolbar" aria-label="Demo controls">
+  <a href="index.html">Gallery</a>
+  <a href="landing-slop.html" class="on" aria-current="page">Slop</a>
+  <a href="landing-fixed.html">Fixed</a>
+  <button type="button" id="pins-btn" aria-pressed="true">Hide tells</button>
+</div>
+
+<script>
+  // Toggle the numbered pins.
+  const pinsBtn = document.getElementById("pins-btn"), page = document.getElementById("page");
+  pinsBtn.addEventListener("click", () => {
+    const off = page.classList.toggle("pins-off");
+    pinsBtn.textContent = off ? "Show tells" : "Hide tells";
+    pinsBtn.setAttribute("aria-pressed", String(!off));
+  });
+</script>
+</body>
+</html>

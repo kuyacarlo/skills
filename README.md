@@ -27,6 +27,9 @@ installer does not replace or synchronize `~/.config/karlo`.
 - Run `FORCE_ALL=1 ./scripts/package_skills.sh` to rebuild every skill package.
 - Run `./scripts/check_readme_skills.sh` to compare the list below with skill
   folders.
+- Run `./scripts/check_slop_examples.sh` after changing `anti-slop-design/examples`.
+  Slop pages must fail impeccable; clean regions must pass the browser probe
+  (set `PUPPETEER_MODULE` and `PUPPETEER_EXECUTABLE_PATH`).
 - Keep examples synthetic. Never include private context or secrets.
 - Keep source and retirement notes in [ORIGINS.md](ORIGINS.md).
 

@@ -1,0 +1,57 @@
+<title>Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:3rem 5rem">
+  <h1 class="text-5xl md:text-6xl font-semibold max-w-[22ch]">Slop Specimens</h1>
+  <p class="mt-3 text-muted max-w-[60ch]">UI patterns that make a page look generated, each shown broken and fixed.</p>
+
+  <!-- Landing demo: same product built both ways -->
+  <section class="mt-10">
+    <h2 class="text-3xl md:text-4xl font-semibold">One landing page, built both ways</h2>
+    <div class="pair mt-4">
+      <a href="landing-slop.html" class="panel no-underline group">
+        <div class="panel-bar"><span class="verdict bad">Slop</span><span>21 tells pinned</span></div>
+        <div data-slop class="stage p-6 text-center text-white bg-gradient-to-br from-[#1e1b4b] via-[#3b0f6b] to-[#07061a]" style="font-family:Inter,sans-serif;min-height:240px">
+          <div class="pointer-events-none absolute left-1/2 top-1/3 h-40 w-72 -translate-x-1/2 rounded-full bg-fuchsia-500/40 blur-3xl"></div>
+          <span class="relative mx-auto inline-flex rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-0.5 text-[10px] font-semibold text-violet-200">🚀 Introducing Quarry AI 2.0 →</span>
+          <p class="relative mt-3 text-3xl leading-none" style="font-family:'Instrument Serif',serif">Ship <em class="bg-gradient-to-r from-pink-400 to-sky-400 bg-clip-text text-transparent">10x faster</em> than ever</p>
+          <p class="relative mt-2 text-xs text-white/40">Not just CI — a teammate.</p>
+          <span class="relative mx-auto mt-3 inline-block rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-1 text-xs font-semibold">Unleash the magic ✨</span>
+        </div>
+        <p class="px-4 py-3 border-t border-line font-semibold group-hover:underline">Open the slop version</p>
+      </a>
+      <a href="landing-fixed.html" class="panel no-underline group">
+        <div class="panel-bar"><span class="verdict good">Fixed</span><span>same product</span></div>
+        <div class="stage p-6" style="min-height:15rem">
+          <p class="text-3xl font-semibold leading-tight max-w-[18ch]">CI runners on hardware you own</p>
+          <p class="mt-2 text-muted max-w-[40ch]">Quarry runs GitHub and GitLab jobs on your machines. Every log stays on your disk.</p>
+          <div class="mt-3 flex flex-wrap gap-2"><span class="btn btn-primary">Get started</span><span class="btn">Install on your server</span></div>
+          <pre class="mono mt-3 leading-snug rounded border border-line bg-codebg p-2 overflow-x-auto">14:05:41 rack-01 picked up build #4812
+14:08:53 build #4812 passed in 3m 12s</pre>
+        </div>
+        <p class="px-4 py-3 border-t border-line font-semibold group-hover:underline">Open the fixed version</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Category index -->
+  <section class="mt-14">
+    <h2 class="text-3xl md:text-4xl font-semibold">Specimens by area</h2>
+    <ul class="mt-4 border-t border-line">
+      <li class="border-b border-line"><a href="structure.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Structure</span><span class="text-muted">Eyebrows, hero badges, icon-card grids, nested cards, numbered steps, commands under CTAs, hero metrics</span><span class="mono text-muted">7</span></a></li>
+      <li class="border-b border-line"><a href="surfaces.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Surfaces</span><span class="text-muted">AI gradients, gradient text, glass, shadow tricks, side stripes, neon dark mode, grid backdrops, cream and serif</span><span class="mono text-muted">8</span></a></li>
+      <li class="border-b border-line"><a href="type.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Type</span><span class="text-muted">Italic serif display, thin weights, all-caps body, tiny grey text, stubs, long lines, justified text, flat hierarchy</span><span class="mono text-muted">8</span></a></li>
+      <li class="border-b border-line"><a href="copy.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Copy</span><span class="text-muted">Slogan triplets, "not X, Y", stacked conditions, fake social proof, explained design, trademarks, button copy, repeats</span><span class="mono text-muted">8</span></a></li>
+      <li class="border-b border-line"><a href="motion.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Motion</span><span class="text-muted">Pulsing dots, decorative cursors, bounce easing, marquees without pause, floating shots, hidden content</span><span class="mono text-muted">6</span></a></li>
+      <li class="border-b border-line"><a href="behavior.html" class="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)_auto] items-baseline py-4 no-underline group"><span class="font-semibold group-hover:underline">Behavior</span><span class="text-muted">Layout shift, dead filters, copy buttons, empty controls, link color spill, blank icons, lost phone emphasis</span><span class="mono text-muted">7</span></a></li>
+    </ul>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>

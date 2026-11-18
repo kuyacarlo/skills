@@ -18,7 +18,28 @@ Two kinds of rule:
 - **Hard rules**: hold on every surface. Only the user can override one. A project design file cannot.
 - **Defaults**: bend when the brief, the design file, or the surface profile asks.
 
-Before/after pairs live in [patterns](references/patterns.md). The full slop catalog lives in [slop catalog](references/slop-catalog.md). Surface profiles live in [profiles](references/profiles.md). Timing lives in [motion](references/motion.md). Mark sheets live in [logo](references/logo.md).
+Before/after pairs live in [patterns](references/patterns.md). The full slop catalog lives in [slop catalog](references/slop-catalog.md). Surface profiles live in [profiles](references/profiles.md). Timing lives in [motion](references/motion.md). Mark sheets live in [logo](references/logo.md). Live slop and fixed pairs live in [examples](examples/index.html).
+
+## Examples
+
+`examples/` holds working HTML for each rule. Every specimen is a Slop panel next to a Fixed panel. Open one section by its id instead of loading whole pages. Copy from Fixed panels only. Never copy markup from inside a `[data-slop]` region.
+
+| Rule | Example |
+| --- | --- |
+| Eyebrows, hero badges | `structure.html#eyebrow`, `#badge` |
+| Explained design | `copy.html#explain` |
+| Invented claims, hero metrics | `copy.html#proof`, `structure.html#metric` |
+| Slogan copy | `copy.html#triplet`, `#notx`, `#stacked`, `#buttons` |
+| Trademarks | `copy.html#trademark` |
+| Code under a CTA | `structure.html#command` |
+| Icon-card grids, nested cards, steps | `structure.html#cards`, `#nested`, `#steps` |
+| Surface effects | `surfaces.html` |
+| Type | `type.html` |
+| Link color, icons | `behavior.html#links`, `#icons` |
+| Layout shift, dead controls, empty states | `behavior.html#shift`, `#filter`, `#copy`, `#empty` |
+| Phone emphasis | `behavior.html#phone` |
+| Motion, hidden content | `motion.html` |
+| A whole page | `landing-slop.html` against `landing-fixed.html` |
 
 ## Precedence
 

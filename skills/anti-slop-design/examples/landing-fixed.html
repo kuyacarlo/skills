@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Landing, fixed · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+<style>
+  .toolbar { position: fixed; z-index: 50; left: 50%; transform: translateX(-50%); bottom: calc(0.75rem + env(safe-area-inset-bottom, 0rem)); display: flex; gap: 0.375rem; align-items: center; padding: 0.375rem; border: var(--hair) solid var(--line); border-radius: 0.5rem; background: var(--surface); box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / .18); width: max-content; max-width: calc(100vw - 2rem); flex-wrap: wrap; justify-content: center; }
+  .toolbar a { min-height: 2.75rem; padding: 0 0.75rem; display: inline-flex; align-items: center; border-radius: 0.375rem; font-size: 1.5rem; font-weight: 600; text-decoration: none; }
+  .toolbar .on { background: var(--ink); color: var(--bg); }
+  .tok-k { color: #b4381e; } .tok-s { color: #17703a; } .tok-c { color: var(--muted); }
+  :root[data-theme="dark"] .tok-k { color: #ff9f86; } :root[data-theme="dark"] .tok-s { color: #8fdc9f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tok-k { color: #ff9f86; } :root:not([data-theme="light"]) .tok-s { color: #8fdc9f; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap flex flex-wrap items-center gap-x-2 gap-y-1" style="min-height:3.75rem;padding-block:0.5rem">
+    <a href="#top" class="font-semibold no-underline mr-auto lg:mr-4">Quarry</a>
+    <nav aria-label="Main" class="order-last w-full min-w-0 flex flex-wrap lg:order-none lg:w-auto lg:flex-1">
+      <a class="nav-link" href="#features">Product</a>
+      <a class="nav-link" href="#how">Docs</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+    </nav>
+    <a class="nav-link" href="#top">Sign in</a>
+    <a class="btn btn-primary" href="#start">Get started</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero: claim on the left, the product doing its job on the right -->
+  <section class="wrap grid gap-10 2xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center" style="padding-block:4rem 3rem">
+    <div class="min-w-0">
+      <h1 class="text-5xl md:text-6xl font-semibold leading-tight max-w-[20ch]">CI runners on hardware you own</h1>
+      <p class="mt-4 text-muted max-w-[46ch]">Quarry runs GitHub and GitLab jobs on your machines. Every log stays on your disk.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="#start">Get started</a>
+        <span class="pop-wrap">
+          <button type="button" class="btn">Install on your server</button>
+          <span class="pop" role="tooltip">
+            <span class="block text-muted mb-2">Run on the runner host:</span>
+            <code>curl -fsSL https://example.com/install.sh | sh</code>
+            <button type="button" class="btn mt-2 w-full" data-copy="curl -fsSL https://example.com/install.sh | sh">Copy</button>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="min-w-0 rounded-md border border-line bg-surface overflow-hidden">
+      <div class="flex flex-wrap items-center justify-between gap-x-4 border-b border-line px-3 py-2"><span class="mono">acme/api · build #4812</span><span>Passed · 3m 12s</span></div>
+      <div class="grid md:grid-cols-[max-content_minmax(0,1fr)]">
+        <ul class="border-b md:border-b-0 md:border-r border-line">
+          <li class="px-3 py-2 border-b border-line bg-codebg font-semibold">checkout</li>
+          <li class="px-3 py-2 border-b border-line">restore cache</li>
+          <li class="px-3 py-2 border-b border-line">cargo build</li>
+          <li class="px-3 py-2">upload artifact</li>
+        </ul>
+        <pre class="mono leading-relaxed p-3 overflow-x-auto whitespace-pre min-w-0">14:05:41 rack-01 picked up build #4812
+14:05:44 checkout acme/api@9f2c1e7 (0.8s)
+14:05:52 cache hit target/ (412 MB)
+14:07:10 Compiling api v2.4.0
+14:08:51 Finished release [optimized]
+14:08:53 uploaded api-x86_64.tar.gz (38 MB)
+14:08:53 build #4812 passed</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-block:0 3rem">
+    <p class="text-muted">Works with GitHub, GitLab, Forgejo, and Gitea.</p>
+  </section>
+
+  <!-- Features as alternating rows, each with a real visual -->
+  <section id="features" class="border-t border-line">
+    <div class="wrap grid gap-8 lg:grid-cols-2 items-center" style="padding-block:3.5rem">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold">Jobs run where your code builds best</h2>
+        <p class="mt-3 text-muted max-w-[52ch]">Register any Linux or macOS machine as a runner. Quarry routes each job to an idle runner with the right architecture.</p>
+      </div>
+      <div class="overflow-x-auto rounded-md border border-line">
+        <table class="w-full whitespace-nowrap" style="font-variant-numeric:tabular-nums">
+          <thead class="text-left text-muted"><tr class="border-b border-line"><th class="px-3 py-2 font-medium">Runner</th><th class="px-3 py-2 font-medium">Arch</th><th class="px-3 py-2 font-medium">Status</th><th class="px-3 py-2 text-right font-medium">Jobs today</th></tr></thead>
+          <tbody class="mono">
+            <tr class="border-b border-line"><td class="px-3 py-2">rack-01</td><td class="px-3">x86_64</td><td class="px-3">Running</td><td class="px-3 text-right">142</td></tr>
+            <tr class="border-b border-line"><td class="px-3 py-2">rack-02</td><td class="px-3">x86_64</td><td class="px-3">Idle</td><td class="px-3 text-right">97</td></tr>
+            <tr class="border-b border-line"><td class="px-3 py-2">mac-mini-a</td><td class="px-3">arm64</td><td class="px-3">Running</td><td class="px-3 text-right">38</td></tr>
+            <tr><td class="px-3 py-2">pi-cluster</td><td class="px-3">arm64</td><td class="px-3" style="color:var(--bad)">Offline</td><td class="px-3 text-right">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="wrap grid gap-8 lg:grid-cols-2 items-center border-t border-line" style="padding-block:3.5rem">
+      <div class="lg:order-2">
+        <h2 class="text-3xl md:text-4xl font-semibold">Your existing workflow file works</h2>
+        <p class="mt-3 text-muted max-w-[52ch]">Point <span class="mono">runs-on</span> at a Quarry label. Nothing else in the job changes.</p>
+      </div>
+      <pre class="lg:order-1 min-w-0 mono leading-relaxed rounded-md border border-line bg-codebg p-4 overflow-x-auto"><span class="tok-c"># .github/workflows/build.yml</span>
+<span class="tok-k">jobs</span>:
+  <span class="tok-k">build</span>:
+    <span class="tok-k">runs-on</span>: <span class="tok-s">[quarry, x86_64]</span>
+    <span class="tok-k">steps</span>:
+      - <span class="tok-k">uses</span>: <span class="tok-s">actions/checkout@v4</span>
+      - <span class="tok-k">run</span>: <span class="tok-s">cargo build --release</span></pre>
+    </div>
+    <div class="wrap grid gap-8 lg:grid-cols-2 items-center border-t border-line" style="padding-block:3.5rem">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold">Logs stay on the runner</h2>
+        <p class="mt-3 text-muted max-w-[52ch]">The pull request gets a live stream. The full log is written to the runner's disk and kept for 30 days by default.</p>
+      </div>
+      <pre class="min-w-0 mono leading-relaxed rounded-md border border-line bg-codebg p-4 overflow-x-auto">$ ls /var/lib/quarry/logs/2026-11-18/
+build-4812.log   test-4813.log   lint-4814.log
+$ du -sh /var/lib/quarry/logs
+1.9G    /var/lib/quarry/logs</pre>
+    </div>
+  </section>
+
+  <!-- How it works: steps left, fixed-height panel right -->
+  <section id="how" class="border-t border-line">
+    <div class="wrap" style="padding-block:3.5rem">
+      <h2 class="text-3xl md:text-4xl font-semibold">Set up a runner</h2>
+      <div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <ol class="space-y-2" id="how-list">
+          <li><button type="button" data-step="0" class="w-full text-left rounded-md border border-line px-4 py-3"><span class="font-semibold block">Install the binary</span><span class="text-muted">One file, no daemon.</span></button></li>
+          <li><button type="button" data-step="1" class="w-full text-left rounded-md border border-line px-4 py-3"><span class="font-semibold block">Register with a token</span><span class="text-muted">Create the token in settings.</span></button></li>
+          <li><button type="button" data-step="2" class="w-full text-left rounded-md border border-line px-4 py-3"><span class="font-semibold block">Push a commit</span><span class="text-muted">The job lands on your runner.</span></button></li>
+        </ol>
+        <pre id="how-panel" class="mono leading-relaxed rounded-md border border-line bg-codebg p-4 h-[14rem] overflow-auto whitespace-pre min-w-0"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="border-t border-line">
+    <div class="wrap" style="padding-block:3.5rem">
+      <h2 class="text-3xl md:text-4xl font-semibold">Pricing</h2>
+      <p class="mt-2 text-muted">One runner is free. Larger fleets pay per runner.</p>
+      <div class="mt-6 grid gap-4 lg:grid-cols-3">
+        <div class="rounded-md border border-line p-5"><h3 class="text-2xl font-semibold">Maker</h3><p class="text-muted">One person, one runner</p><p class="mt-3 text-4xl font-semibold">Free</p><ul class="mt-3 space-y-1"><li>1 runner</li><li>30-day logs</li></ul></div>
+        <div class="rounded-md border-[0.125rem] border-[var(--ink)] p-5"><h3 class="text-2xl font-semibold">Team</h3><p class="text-muted">Up to 10 runners</p><p class="mt-3 text-4xl font-semibold mono">[PRICE]</p><ul class="mt-3 space-y-1"><li>10 runners</li><li>Shared labels</li><li>90-day logs</li></ul><a href="#start" class="btn btn-primary mt-4 w-full">Start Team trial</a></div>
+        <div class="rounded-md border border-line p-5"><h3 class="text-2xl font-semibold">Business</h3><p class="text-muted">Unlimited runners, SSO</p><p class="mt-3 text-4xl font-semibold mono">[PRICE]</p><ul class="mt-3 space-y-1"><li>SSO and audit log</li><li>Custom log retention</li></ul><a href="#start" class="btn mt-4 w-full">Contact sales</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="start" class="border-t border-line">
+    <div class="wrap" style="padding-block:3.5rem 7.5rem">
+      <h2 class="text-3xl md:text-4xl font-semibold">Install your first runner</h2>
+      <p class="mt-2 text-muted">It takes one command on the machine you want to use.</p>
+      <div class="copy-row mt-4 flex flex-wrap items-center gap-3">
+        <code class="mono min-w-0 rounded-md border border-line bg-codebg px-3 py-2 overflow-x-auto max-w-full whitespace-pre">curl -fsSL https://example.com/install.sh | sh</code>
+        <button type="button" class="btn" data-copy="curl -fsSL https://example.com/install.sh | sh">Copy</button>
+      </div>
+      <p class="mt-6 text-muted">Quarry is a sample product on this page. <a class="prose-link" href="index.html">Back to the gallery</a>.</p>
+    </div>
+  </section>
+</main>
+
+<div class="toolbar" role="toolbar" aria-label="Demo controls">
+  <a href="index.html">Gallery</a>
+  <a href="landing-slop.html">Slop</a>
+  <a href="landing-fixed.html" class="on" aria-current="page">Fixed</a>
+</div>
+
+<script>
+  // How-it-works panel: click selects a step; panel height never changes.
+  const HOW = [
+    "$ curl -fsSL https://example.com/install.sh | sh\ninstalled quarry 2.4.0 to /usr/local/bin/quarry",
+    "$ quarry runner register --token $QUARRY_TOKEN \\\n    --name rack-01 --labels quarry,x86_64\n14:02:11 registered rack-01 (x86_64, 16 cores)\n14:02:11 waiting for jobs",
+    "$ git push origin main\n14:05:40 job build #4812 queued\n14:05:41 rack-01 picked up build #4812\n14:08:53 build #4812 passed in 3m 12s",
+  ];
+  const howPanel = document.getElementById("how-panel"), howBtns = document.querySelectorAll("#how-list button");
+  function how(i) {
+    howPanel.textContent = HOW[i];
+    howBtns.forEach((b, j) => { b.style.borderColor = i === j ? "var(--ink)" : ""; b.setAttribute("aria-pressed", String(i === j)); });
+  }
+  howBtns.forEach((b) => b.addEventListener("click", () => how(+b.dataset.step)));
+  how(0);
+</script>
+</body>
+</html>

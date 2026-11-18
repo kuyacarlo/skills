@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motion · Slop Specimens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/slop-motion.css">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="assets/site.js"></script>
+<style>
+  .dlg-slop { transform: scale(.3) translateY(60px) rotate(-6deg); opacity: 0; }
+  .dlg-slop.open { transform: none; opacity: 1; pointer-events: auto; }
+  .dlg-slop { pointer-events: none; }
+  .dlg-fix { opacity: 0; transition: opacity .12s ease-out; }
+  .dlg-fix.open { opacity: 1; }
+  .deploy-fill { transform-origin: left; transform: scaleX(0); }
+</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="wrap" style="padding-block:2.5rem 5rem">
+  <h1 class="text-5xl font-semibold">Motion</h1>
+  <p class="text-muted mt-2 max-w-[65ch]">Movement that shows nothing happening. Animate real activity only.</p>
+  <p id="rm-note" class="mt-2" hidden>Your system asks for reduced motion, so the slop animations are stopped here.</p>
+  <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+    <a class="prose-link" href="#pulse">Pulsing status dot</a>
+    <a class="prose-link" href="#cursor">Decorative cursor</a>
+    <a class="prose-link" href="#bounce">Bounce easing</a>
+    <a class="prose-link" href="#marquee">Marquee without pause</a>
+    <a class="prose-link" href="#float">Floating hero shot</a>
+    <a class="prose-link" href="#hidden">Content waiting to appear</a>
+  </nav>
+
+  <section class="specimen mt-8" id="pulse">
+    <h2 class="text-3xl font-semibold">Pulsing status dot</h2>
+    <p class="fix-line">Fix: a still dot with a word. Move only while something runs. Press Deploy.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white text-slate-900" style="font-family:Inter,sans-serif">
+          <p class="flex items-center gap-3 text-lg font-semibold"><span class="h-3 w-3 rounded-full bg-green-500 a-pulse"></span>All systems operational</p>
+          <p class="mt-2 text-sm text-slate-400">Last incident: never 🎉</p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <p class="flex items-center gap-3"><span class="h-3 w-3 rounded-full bg-good"></span><span id="dep-status">Idle · last deploy 14:05</span></p>
+          <div class="mt-3 h-2 w-full max-w-xs rounded bg-codebg overflow-hidden"><div id="dep-fill" class="deploy-fill h-full bg-accent"></div></div>
+          <button type="button" id="dep-btn" class="btn mt-4 w-fit">Deploy</button>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="cursor">
+    <h2 class="text-3xl font-semibold">Decorative blinking cursor</h2>
+    <p class="fix-line">Fix: cursors belong where someone types.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-[#0b0b1a] text-white" style="font-family:Inter,sans-serif">
+          <h3 class="text-3xl font-extrabold">Build anything<span class="a-blink text-violet-400">|</span></h3>
+          <p class="mt-2 font-mono text-sm text-emerald-400">&gt; initializing the future<span class="a-blink">_</span></p>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">Search jobs</h3>
+          <label for="job-q" class="sr-only">Job name or number</label>
+          <input id="job-q" type="search" placeholder="build #4812" class="mt-3 w-full max-w-xs rounded-md border border-line bg-surface px-3 min-h-[2.75rem] mono">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="bounce">
+    <h2 class="text-3xl font-semibold">Bounce and elastic easing</h2>
+    <p class="fix-line">Fix: routine UI settles fast. Press both buttons.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-white text-slate-900 items-start" style="font-family:Inter,sans-serif">
+          <button type="button" id="slop-open" class="rounded-full bg-violet-600 px-5 py-2 text-sm font-bold text-white bounce-ease hover:scale-110 active:scale-90">Delete runner 🗑️</button>
+          <div id="slop-dlg" class="dlg-slop bounce-ease absolute left-1/2 top-1/2 w-60 -ml-[120px] -mt-12 rounded-3xl bg-white p-4 text-center shadow-2xl" role="dialog" aria-label="Confirm">
+            <p class="font-bold">Are you sure?? 😱</p>
+            <button type="button" id="slop-close" class="mt-3 rounded-full bg-slate-900 px-4 py-1 text-sm text-white">Yes, do it!</button>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8 items-start">
+          <button type="button" id="fix-open" class="btn">Delete runner</button>
+          <div id="fix-dlg" class="dlg-fix absolute inset-x-4 top-1/2 -translate-y-1/2 mx-auto max-w-[24rem] rounded-md border border-line bg-surface p-4 shadow-lg" role="dialog" aria-label="Confirm delete" hidden>
+            <p class="font-semibold">Delete rack-02?</p>
+            <p class="mt-1 text-muted">Queued jobs move to other runners.</p>
+            <div class="mt-3 flex flex-wrap gap-2"><button type="button" id="fix-close" class="btn">Cancel</button><button type="button" id="fix-confirm" class="btn" style="color:var(--bad)">Delete</button></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="marquee">
+    <h2 class="text-3xl font-semibold">Marquee without a pause control</h2>
+    <p class="fix-line">Fix: slow it down and give it a real pause button. No list, no marquee.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage bg-white text-slate-300" style="font-family:Inter,sans-serif">
+          <div class="flex w-max a-marquee gap-10 text-2xl font-extrabold italic whitespace-nowrap">
+            <span>ACME</span><span>Globex</span><span>Initech</span><span>Hooli</span><span>Umbrella</span><span>Stark</span>
+            <span>ACME</span><span>Globex</span><span>Initech</span><span>Hooli</span><span>Umbrella</span><span>Stark</span>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span><button type="button" id="mq-btn" class="btn">Pause</button></div>
+        <div class="stage">
+          <div class="marquee-mask overflow-hidden">
+            <div id="mq" class="flex w-max fix-marquee gap-10 text-muted whitespace-nowrap">
+              <span>GitHub</span><span>GitLab</span><span>Forgejo</span><span>Gitea</span><span>Bitbucket</span>
+              <span>GitHub</span><span>GitLab</span><span>Forgejo</span><span>Gitea</span><span>Bitbucket</span>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="float">
+    <h2 class="text-3xl font-semibold">Floating hero shot</h2>
+    <p class="fix-line">Fix: the screenshot sits still. Motion inside it shows real work.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span></div>
+        <div data-slop class="stage p-8 bg-gradient-to-b from-indigo-50 to-white" style="font-family:Inter,sans-serif">
+          <div class="a-float mx-auto w-full max-w-xs rounded-2xl bg-white p-3 shadow-2xl ring-1 ring-black/5">
+            <div class="flex gap-1"><span class="h-2 w-2 rounded-full bg-red-400"></span><span class="h-2 w-2 rounded-full bg-yellow-400"></span><span class="h-2 w-2 rounded-full bg-green-400"></span></div>
+            <div class="mt-3 h-3 w-2/3 rounded bg-slate-200"></div><div class="mt-2 h-3 w-1/2 rounded bg-slate-100"></div><div class="mt-2 h-16 rounded-lg bg-gradient-to-r from-violet-200 to-sky-200"></div>
+          </div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-6">
+          <pre id="live-log" class="mono leading-normal bg-codebg rounded p-3 h-[20rem] overflow-auto whitespace-pre-wrap"></pre>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="specimen" id="hidden">
+    <h2 class="text-3xl font-semibold">Content waiting to appear</h2>
+    <p class="fix-line">Fix: visible by default. Animation is a bonus, never a gate.</p>
+    <div class="pair mt-4">
+      <figure class="panel"><div class="panel-bar"><span class="verdict bad">Slop</span><span>opacity: 0, observer never fired</span></div>
+        <div data-slop class="stage p-8 bg-white" style="font-family:Inter,sans-serif">
+          <h3 class="text-3xl font-extrabold text-slate-900 opacity-0 translate-y-6">Pricing that scales</h3>
+          <p class="mt-2 text-slate-500 opacity-0">Three plans for every team.</p>
+          <div class="mt-4 h-12 rounded-xl bg-slate-100 opacity-0"></div>
+        </div>
+      </figure>
+      <figure class="panel"><div class="panel-bar"><span class="verdict good">Fixed</span></div>
+        <div class="stage p-8">
+          <h3 class="text-3xl font-semibold">Pricing</h3>
+          <p class="mt-2 text-muted">One runner is free. Each extra runner is <span class="mono">[PRICE]</span> a month.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+</main>
+<footer class="border-t border-line"><div class="wrap text-muted" style="padding-block:1.5rem">Rules from the anti-slop-design skill. Catalog adapted from <a class="prose-link" href="https://impeccable.style/slop">impeccable.style/slop</a>.</div></footer>
+
+<script>
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) document.getElementById("rm-note").hidden = false;
+
+  // Deploy: the bar moves only while the deploy runs, then stops.
+  const depBtn = document.getElementById("dep-btn"), depFill = document.getElementById("dep-fill"), depStatus = document.getElementById("dep-status");
+  depBtn.addEventListener("click", () => {
+    depBtn.disabled = true; depStatus.textContent = "Deploying build #4812";
+    depFill.style.transition = "none"; depFill.style.transform = "scaleX(0)";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      depFill.style.transition = reduce ? "none" : "transform 3s linear"; depFill.style.transform = "scaleX(1)";
+    }));
+    setTimeout(() => { depStatus.textContent = "Idle · deployed just now"; depBtn.disabled = false; }, reduce ? 300 : 3000);
+  });
+
+  // Dialogs: elastic overshoot versus a quick fade.
+  const sd = document.getElementById("slop-dlg");
+  document.getElementById("slop-open").addEventListener("click", () => sd.classList.add("open"));
+  document.getElementById("slop-close").addEventListener("click", () => sd.classList.remove("open"));
+  const fd = document.getElementById("fix-dlg");
+  document.getElementById("fix-open").addEventListener("click", () => { fd.hidden = false; requestAnimationFrame(() => fd.classList.add("open")); document.getElementById("fix-close").focus(); });
+  const closeFix = () => { fd.classList.remove("open"); fd.hidden = true; document.getElementById("fix-open").focus(); };
+  document.getElementById("fix-close").addEventListener("click", closeFix);
+  document.getElementById("fix-confirm").addEventListener("click", closeFix);
+
+  // Marquee pause control.
+  const mq = document.getElementById("mq"), mqBtn = document.getElementById("mq-btn");
+  mqBtn.addEventListener("click", () => { const p = mq.classList.toggle("paused"); mqBtn.textContent = p ? "Play" : "Pause"; });
+
+  // Live log: lines appear because a job is running, then it stops.
+  const LINES = ["14:05:41 rack-01 picked up build #4812", "14:05:44 step 1/4 checkout (0.8s)", "14:05:52 step 2/4 restore cache (hit, 412 MB)", "14:07:10 step 3/4 cargo build --release", "14:08:53 step 4/4 upload artifact (38 MB)", "14:08:53 build #4812 passed in 3m 12s"];
+  const log = document.getElementById("live-log");
+  let i = 0;
+  function tick() { if (i >= LINES.length) return; log.textContent += (i ? "\n" : "") + LINES[i++]; log.scrollTop = log.scrollHeight; setTimeout(tick, 900); }
+  if (reduce) log.textContent = LINES.join("\n"); else tick();
+</script>
+</body>
+</html>
