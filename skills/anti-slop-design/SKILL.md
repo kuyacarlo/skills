@@ -1,7 +1,7 @@
 ---
 name: anti-slop-design
 author: kaoru
-version: "3.0.0"
+version: "3.1.0"
 description: "Use whenever designing, critiquing, or building UI: landing pages, marketing sites, personal sites, app screens, catalogs, pricing, docs, dashboards, canvases, mockups, and logos. Blocks AI-generated design slop (eyebrow labels, icon-card grids, gradients, glows, glass, explained design, slogan copy, toy demos, layout shift, invented claims) and applies functional, product-first replacements. Ends with a pre-ship checklist."
 ---
 
@@ -9,11 +9,13 @@ description: "Use whenever designing, critiquing, or building UI: landing pages,
 
 Good interfaces look like working products, not templates or pitch decks. Design that is functional first and real holds up. Decoration that carries no information, witty copy, design that explains itself, and anything that looks like a toy reads as generated slop. Borrow structure from category leaders before inventing layouts.
 
+Default model output drifts toward every pattern in this skill. Assume your first draft contains slop. Do not ship any pattern listed here, in any surface, mockup, or demo, unless the user asks for that exact pattern. Find it and remove it before the user sees the work.
+
 This skill is self-contained. It does not depend on another design skill.
 
 Two kinds of rule:
 
-- **Hard rules**: hold on every surface. Only the user or the project design file can override one.
+- **Hard rules**: hold on every surface. Only the user can override one. A project design file cannot.
 - **Defaults**: bend when the brief, the design file, or the surface profile asks.
 
 Before/after pairs live in [patterns](references/patterns.md). The full slop catalog lives in [slop catalog](references/slop-catalog.md). Surface profiles live in [profiles](references/profiles.md). Timing lives in [motion](references/motion.md). Mark sheets live in [logo](references/logo.md).
@@ -21,9 +23,11 @@ Before/after pairs live in [patterns](references/patterns.md). The full slop cat
 ## Precedence
 
 1. The user's comment in this session.
-2. The project's own `DESIGN.md`, handoff, or token file. Its colors, fonts, radius, and motion win.
-3. The hard rules below.
-4. The defaults below, then the surface profile in [profiles](references/profiles.md).
+2. The user's personal design rules, if loaded (for example a personal-context design guide).
+3. The hard rules below. A project file sets tokens but cannot re-enable a banned pattern.
+4. The project's own `DESIGN.md`, handoff, or token file: colors, fonts, radius, motion, and product facts.
+5. The defaults below.
+6. The surface profile in [profiles](references/profiles.md), only when the project has no design file.
 
 Each project has its own visual system. Never carry one project's palette or motion into another.
 
@@ -38,7 +42,7 @@ Each project has its own visual system. Never carry one project's palette or mot
 
 1. **No eyebrow or kicker.** Nothing smaller than the heading sits above an `h1`–`h3` in the same block. That covers uppercase overlines, numbered tags ("01 · gate"), page-name labels, accent chips, availability badges, icon tiles, and announcement pills. Delete it. If the words name a real destination, make them a link beside the content, never above the heading.
 2. **Never explain the design.** No line narrates the layout, the system, or why to trust it. No legends such as "symptom → cause → fix". No "so you don't have to take my word for it". Assume the reader is smart.
-3. **Copy states the real proposition.** Take it from the owner or a stated source. Never infer positioning from a module name. Unconfirmed lines are `TODO(positioning)`. No fake stats, quotes, logos, user counts, or testimonials. Unknowns are `[PRICE]`, `[URL]`, `[DATE]`.
+3. **Copy states the real proposition.** Take it from the owner or a stated source. Never infer positioning from a module name. Unconfirmed lines are `TODO(positioning)`. No fake stats, quotes, logos, user counts, or testimonials. In drafts and mockups, unknowns are `[PRICE]`, `[URL]`, `[DATE]`. A shipped page contains no placeholder: hide the value or say what happens instead.
 4. **No slogan copy.** A subhead is one specific sentence: what it is, or how it is priced. No stacked conditions, no "not X, Y" contrasts, no triplets ("Fast. Simple. Secure."), no puns, no superlatives, no headline questions. Pricing sections are titled "Pricing".
 5. **No competitor trademark in our own claims.** Name the category. A neutral comparison table may name competitors.
 6. **No code or install command in the hero or under a CTA.** Put it in a popover on hover and focus of the install button, with a Copy control.
@@ -52,7 +56,8 @@ Each project has its own visual system. Never carry one project's palette or mot
 14. **Empty means remove or say so.** A filter, row, or control with nothing under it is removed. An empty page says it is empty. No "Show more" for one item. Small collections get no filter chrome.
 15. **Emphasis survives every breakpoint.** The phone layout is the desktop layout transposed: same pieces, same order, same emphasis. Do not invent a new phone structure or split one list into columns to fill width.
 16. **Content is visible by default.** It never waits on an animation or script to appear. No JavaScript errors on load. No placeholder or broken images.
-17. **Accessible as drawn.** Real buttons, links, and labels. Targets about 44 px. Text contrast at least 4.5:1, including muted labels and grey text on colored grounds. Heading levels never skip. No horizontal scroll or clipped text at phone width. Honor `prefers-reduced-motion`.
+17. **Accessible as drawn.** Real buttons, links, and labels. Targets about 44 px. Text contrast at least 4.5:1, including muted labels and grey text on colored grounds. No text under 11px, including inside product mockups. Heading levels never skip. Honor `prefers-reduced-motion`.
+18. **Nothing escapes the viewport.** No horizontal scroll at phone width. Popovers, menus, and tooltips are hidden with `display: none`, not `visibility`, so they never widen the page. They clamp inside the viewport and render outside any `overflow: hidden` parent. Check every layer at 390px.
 
 ## Defaults
 
@@ -94,7 +99,7 @@ Each project has its own visual system. Never carry one project's palette or mot
 - The same header on every page: nav, the current page marked, the primary action at the right end.
 - A project or item name links to its main destination. Extra links go at the row end. No line repeats a visible button.
 - Large stat figures abbreviate to fit, for example `2.71M`, with the exact value in a label or tooltip.
-- Popovers and menus render outside clipping containers. Horizontal scrollers get equal space at both ends.
+- Horizontal scrollers get equal space at both ends.
 - Public pages have Open Graph tags and a designed preview image.
 
 ### Interaction and motion
@@ -116,7 +121,8 @@ Each project has its own visual system. Never carry one project's palette or mot
 
 - Sparse and "breathe" do not conflict. Sparse means too little content. Breathe means padding inside cells.
 - Grids are fine. Splitting one list into columns just to fill width is not.
-- If the `impeccable` CLI is available, `npx impeccable detect <src>` is a useful extra scan. This checklist still runs.
+- If the `impeccable` CLI is available, run `npx impeccable detect` on the files and on the rendered URL at `--viewport 390x844`. Browser scans need puppeteer installed.
+- A clean scan is not a pass. Scanners catch surface CSS. They miss most copy and behavior slop: slogans, "not X, Y" lines, trademarks, fake proof, narration, eyebrows outside the first screen, dead filters, layout shift, lying copy buttons, and empty controls. Check those by hand with the checklist.
 
 ## Pre-ship checklist
 
@@ -127,7 +133,7 @@ Run this on the output before showing it. Check desktop and phone width.
 - [ ] No line explains the design, the layout, or why to trust it.
 - [ ] Headline names the category. The proposition has a source, or is `TODO(positioning)`.
 - [ ] Subheads are one specific sentence. No slogans, "not X, Y", triplets, superlatives, or em-dash chains.
-- [ ] No invented numbers, logos, or testimonials. Unknowns are `[PLACEHOLDERS]`.
+- [ ] No invented numbers, logos, or testimonials. Drafts use `[PLACEHOLDERS]`. Shipped pages have no `[TOKEN]`, `{token}`, or `TODO(positioning)`.
 - [ ] No competitor mark in our own claims.
 - [ ] No code or commands in a hero or under CTAs.
 - [ ] No equal icon-card rows, nested cards, or equal-column step strips.
@@ -144,6 +150,8 @@ Run this on the output before showing it. Check desktop and phone width.
 - [ ] Same header on every page, with the primary action.
 - [ ] Dark mode is tuned, not inverted, with no glow.
 - [ ] Demos look like the real product.
-- [ ] Contrast ≥ 4.5:1, ~44 px targets, no skipped heading levels, no horizontal scroll, no clipped popovers.
+- [ ] Contrast ≥ 4.5:1, ~44 px targets, no text under 11px, no skipped heading levels.
+- [ ] At 390px: no horizontal scroll. Every popover, menu, and tooltip opens fully on screen and unclipped.
+- [ ] Copy and behavior checked by hand, even when a scanner passes.
 - [ ] Public pages have Open Graph tags and a preview image.
 - [ ] A logo has no eyes, no cartoon face, and no sharp chin.
