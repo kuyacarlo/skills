@@ -78,6 +78,7 @@ Cursor agents that load `~/.agents/skills` pick up this pack after `./apply`.
 | `specification-compliance` | SPEC.md drift checks |
 | `specification-pipeline` | specify → clarify → plan → implement |
 | `thorough-code-review` | Citation-style review |
+| `ui-design` | Grill, redesign, and prove UI (process; taste in personal context) |
 
 \* Auto: STE always on; `focus-management` on stuck/low-energy language.
 
