@@ -3,7 +3,7 @@ name: personal-context
 metadata:
   author: kaoru
   version: "1.5.0"
-description: "Use for personal context, focus support, technical prose, or comprehensive gap reports. Set up profiles only when asked."
+description: "Use for personal context, focus support, technical prose, or comprehensive gap reports. Also called the operations rulebook or operations handbook. Load when the user asks for the operations rulebook, operations handbook, or personal context. Set up profiles only when asked."
 ---
 
 # Personal Context
