@@ -147,6 +147,16 @@ Each project has its own visual system. Never carry one project's palette or mot
 - Every scanner finding gets fixed, or written down as a false positive with its reason. "Mostly clean" is not done.
 - A clean scan is not a pass. Scanners catch surface CSS. They miss most copy and behavior slop: slogans, "not X, Y" lines, trademarks, fake proof, narration, eyebrows outside the first screen, dead filters, layout shift, lying copy buttons, and empty controls. Check those by hand with the checklist.
 
+## Pairs with
+
+- `ui-design` — the working process: grill the live app, show directions,
+  prove the result. This skill supplies the slop rules it checks against.
+- `impeccable` — craft-level detectors (`impeccable detect`) and visual polish.
+  This skill owns the pattern catalog; impeccable owns the technique.
+- `personal-context` → design route — the user's personal hard constraints and
+  review preferences. They outrank this skill (see Precedence).
+- `saas-readiness-audit` — hands UI polish findings here; it does not grade visuals.
+
 ## Pre-ship checklist
 
 Run this on the output before showing it. Check desktop and phone width.

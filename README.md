@@ -53,6 +53,7 @@ data or conversation logs.
 | `idea-generator` | Generate, compare, and evaluate ideas |
 | `anti-slop-design` | Anti-slop UI rules, replacements, and a pre-ship checklist |
 | `specification-pipeline` | Requirements, specifications, plans, tasks, and drift audits |
+| `ui-design` | Grill, redesign, and prove UI (process; taste in personal context) |
 
 Detailed guides load only for matching tasks. Credits and submodule policy:
 [ORIGINS.md](ORIGINS.md).

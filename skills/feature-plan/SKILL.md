@@ -41,3 +41,11 @@ specific enough for another contributor to continue without repeating discovery.
 
 Do not treat a handoff as a replacement for living product documentation. Keep
 roadmaps, onboarding, architecture, and runbooks accurate at their source.
+
+## Pairs with
+
+- `specification-pipeline` — when the feature needs a SPEC.md contract first.
+- `agent-fleet` — when the work splits across agents or worktrees; claim files
+  are assertions, the handoff records intent.
+- `engineering-rulebook` → [handoff guide](../engineering-rulebook/references/handoff.md)
+  — the surviving-work protocol this skill's handoff feeds.

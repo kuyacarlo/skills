@@ -8,7 +8,8 @@ description: "Spec-driven, evidence-backed launch-readiness audit for SaaS apps:
 # SaaS Readiness Audit
 
 Decides whether a SaaS product is safe and complete to launch, and fixes what it safely can.
-Not a visual critique. Hand UI polish to [anti-slop-design](../anti-slop-design/SKILL.md). Do not treat this audit as an accessibility review.
+Not a visual critique. Hand UI polish to `anti-slop-design` (slop rules) and
+`ui-design` (redesign process). Do not treat this audit as an accessibility review.
 
 **Core principle:** every claim this skill makes must be reproducible by someone who did not watch the run. A status with no evidence is not a status. A rule that only exists in prose is a suggestion; every hard "never" below must map to a hook or to code.
 

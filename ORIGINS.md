@@ -16,6 +16,7 @@ Policy:
 | `engineering-rulebook` | original | — |
 | `anti-slop-design` | original | Design-session feedback (Oct–Nov 2026) plus the [impeccable slop catalog](https://impeccable.style/slop) |
 | `saas-readiness-audit` | original | Imported audit bundle with runner, scorer, and eval fixture |
+| `ui-design` | original | Collated from elecinventory / Stellar Print & Parts UI sessions |
 
 ## Retired (2026-08-10)
 
