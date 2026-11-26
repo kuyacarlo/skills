@@ -31,7 +31,7 @@ These guidelines apply to all project scoping, roadmaps, and code generation wit
 ---
 
 ## 🧭 Specification Pipeline & Automations Flow
-*   **Personal context first**: Before stack or tooling choices, read `personal-context` (`~/.config/karlo/CONTEXT.md` or `$PERSONAL_CONTEXT_PATH`).
+*   **Personal context first**: Before stack or tooling choices, read `personal-context` (`~/.config/karlo/INDEX.md` — it routes to the right files; `CONTEXT.md` no longer exists).
 *   **Automatic Workflow Chaining**: When executing any specification pipeline phase or related workspace task planning:
     1.  **Constitution Check**: Check for `.specify/memory/constitution.md` (or the templates) first. Read it, present a 1-2 sentence gist of it to the user, ask for any overrides/improvements, and ensure the task conforms to it.
     2.  **Task Context & Outline**: Outlines the task/problem context before writing any files.
